@@ -1,0 +1,31 @@
+{
+	"pluginName": "vocabularies killer",
+	"description": "vocabularies killer",
+	"version": "0.0.1",
+	"logo": "logo.png",
+	"preload":"preload.js",
+	"features": [
+		{
+			"code": "add_vocabulary",
+			"explain": "add vocabulary",
+			"cmds": [
+				{
+					"type": "over",
+					"label": "加入单词簿",
+					"exclude": "/xxx/i",
+					"minLength": 1
+			}
+			]
+		},
+		{
+			"code": "kill",
+			"explain": "开始记单词",
+			"cmds": [
+				{
+					"type": "window",
+					"label": "kill vocabularies"
+				}
+			]
+		}		
+	]
+}

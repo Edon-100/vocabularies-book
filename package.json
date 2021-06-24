@@ -1,0 +1,37 @@
+{
+  "name": "vocabularies_killer",
+  "version": "1.0.0",
+  "productName": "记单词",
+  "scripts": {
+    "dev": "rm -rf dist && webpack -w",
+    "build": "webpack --mode production"
+  },
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-decorators": "^7.13.5",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.8",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-import": "^1.13.3",
+    "copy-webpack-plugin": "^6.4.1",
+    "css-loader": "^5.0.1",
+    "html-webpack-plugin": "^5.3.2",
+    "less": "^3.13.1",
+    "less-loader": "^7.1.0",
+    "style-loader": "^2.0.0",
+    "ts-loader": "^9.2.3",
+    "typescript": "^4.3.4",
+    "utools-api-types": "^2.0.4",
+    "webpack": "^5.11.0",
+    "webpack-cli": "^4.2.0"
+  }
+}

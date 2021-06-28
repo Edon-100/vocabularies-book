@@ -20,7 +20,7 @@ class Review extends React.Component {
   }
 
   updateWordsListToPage = () => {
-    const list = utools?.db?.get('ReviewDbName')?.list
+    const list = utools?.db?.get('ReviewDbName')?.list || []
     const total = list?.length
     this.setState({
       total,

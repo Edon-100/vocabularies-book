@@ -8,7 +8,8 @@ window.services = {
   add_vocabulary: async () => {
     try {
       const { clipboard } = require('electron')
-      const text = clipboard.readText()
+      let text = clipboard.readText()
+      text = text.slice(0,text.indexOf('摘')) // 兼容苹果book
       const {
         data: { content }
       } = await searchWords(text)

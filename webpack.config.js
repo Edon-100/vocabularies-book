@@ -13,7 +13,7 @@ module.exports = {
     path: outputPath
   },
   plugins: [
-    new CopyWebpackPlugin({ patterns: [{ from: 'public', to: outputPath }] }),
+    // new CopyWebpackPlugin({ patterns: [{ from: 'public', to: outputPath }] }),
     new CopyWebpackPlugin({ patterns: [{ from: 'utools', to: outputPath }] })
   ],
   performance: {

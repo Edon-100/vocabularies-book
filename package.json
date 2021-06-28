@@ -4,20 +4,16 @@
   "productName": "记单词",
   "scripts": {
     "dev": "rm -rf dist && webpack -w",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "start": "webpack serve --open"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "dayjs": "^1.10.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.12.10",
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/plugin-proposal-decorators": "^7.13.5",
-    "@babel/plugin-transform-runtime": "^7.12.10",
-    "@babel/preset-env": "^7.12.11",
-    "@babel/preset-react": "^7.12.10",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.8",
     "babel-loader": "^8.2.2",
@@ -32,6 +28,7 @@
     "typescript": "^4.3.4",
     "utools-api-types": "^2.0.4",
     "webpack": "^5.11.0",
-    "webpack-cli": "^4.2.0"
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.2"
   }
 }

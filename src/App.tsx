@@ -1,26 +1,25 @@
 import React from 'react'
+import Review from './pages/review'
+import ErrorBoundary from './components/ErrorBoundaries'
 
 export default class App extends React.Component {
   state = {
-    code: '',
-    theme: 'light',
     data: {}
   }
 
-  componentDidMount () {
-    const db = utools.db.get('to_be_kill') as any
-    const {data} = db
-    this.setState({
-      data
-    })
+  componentDidMount() {
+    // const db = utools.db.get('to_be_kill') as any
+    // const {data} = db
+    // this.setState({
+    //   data
+    // })
   }
 
-  render () {
-    return(
-      <div>
-        App22233122
-        <div>{ Object.keys(this.state.data).length}</div>
-      </div>
+  render() {
+    return (
+      <ErrorBoundary>
+        <Review></Review>
+      </ErrorBoundary>
     )
   }
 }

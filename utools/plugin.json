@@ -3,6 +3,7 @@
 	"description": "vocabularies killer",
 	"version": "0.0.1",
 	"logo": "logo.png",
+	"main": "index.html",
 	"preload":"preload.js",
 	"features": [
 		{

@@ -6,7 +6,7 @@ module.exports = {
   target: 'web',
   mode: 'development',
   entry: {
-    index: './src/index.tsx'
+    index: './src/index.tsx',
   },
   output: {
     filename: '[name].js',
@@ -21,6 +21,11 @@ module.exports = {
   },
   resolve: {
     extensions: [ '.tsx', '.ts', '.js' ]
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 9000,
   },
   module: {
     rules: [

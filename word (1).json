@@ -1,0 +1,977 @@
+[
+	{
+		"addFrom": "https://ai.youdao.com/DOCSIRMA/html/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E7%BF%BB%E8%AF%91/API%E6%96%87%E6%A1%A3/%E6%9C%89%E9%81%93%E8%AF%8D%E5%85%B8%E6%9C%8D%E5%8A%A1/%E6%9C%89%E9%81%93%E8%AF%8D%E5%85%B8%E6%9C%8D%E5%8A%A1-API%E6%96%87%E6%A1%A3.html",
+		"ctime": "2021-06-25 11:18:30",
+		"learn": {
+			"learnDate": "2021-06-25 11:23:30",
+			"level": 0
+		},
+		"statistics": {
+			"2021-06-25": {
+				"https://ai.youdao.com/DOCSIRMA/html/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E7%BF%BB%E8%AF%91/API%E6%96%87%E6%A1%A3/%E6%9C%89%E9%81%93%E8%AF%8D%E5%85%B8%E6%9C%8D%E5%8A%A1/%E6%9C%89%E9%81%93%E8%AF%8D%E5%85%B8%E6%9C%8D%E5%8A%A1-API%E6%96%87%E6%A1%A3.html": 1
+			}
+		},
+		"text": "langtype",
+		"textExts": [],
+		"translation": "langtype",
+		"youdao": {
+			"dict": {
+				"url": "yddict://m.youdao.com/dict?le=eng&q=langtype"
+			},
+			"errorCode": "0",
+			"isWord": false,
+			"l": "en2zh-CHS",
+			"query": "langtype",
+			"requestId": "198cfa18-d444-4847-8c68-ff2c8fe7df9d",
+			"speakUrl": "https://openapi.youdao.com/ttsapi?q=langtype&langType=en&sign=221F1FD3D337B9D522DF31889164D04D&salt=1624538752125&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"tSpeakUrl": "https://openapi.youdao.com/ttsapi?q=langtype&langType=zh-CHS&sign=221F1FD3D337B9D522DF31889164D04D&salt=1624538752125&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"translation": [
+				"langtype"
+			],
+			"webdict": {
+				"url": "http://mobile.youdao.com/dict?le=eng&q=langtype"
+			}
+		}
+	},
+	{
+		"addFrom": "https://dev.to/defifarms/don-t-be-a-coder-become-a-millionaire-simpler-than-you-think-4d8e",
+		"ctime": "2021-06-24 13:48:53",
+		"learn": {
+			"learnDate": "2021-06-24 13:53:53",
+			"level": 0
+		},
+		"statistics": {
+			"2021-06-24": {
+				"https://dev.to/defifarms/don-t-be-a-coder-become-a-millionaire-simpler-than-you-think-4d8e": 1
+			}
+		},
+		"text": "discipline",
+		"textExts": [],
+		"translation": "纪律",
+		"youdao": {
+			"basic": {
+				"exam_type": [
+					"高中",
+					"CET4",
+					"CET6",
+					"考研",
+					"IELTS",
+					"TOEFL",
+					"GRE",
+					"GMAT",
+					"SAT",
+					"商务英语"
+				],
+				"explains": [
+					"n. 学科；纪律；训练；惩罚",
+					"vt. 训练，训导；惩戒"
+				],
+				"phonetic": "ˈdɪsəplɪn",
+				"uk-phonetic": "ˈdɪsəplɪn",
+				"uk-speech": "http://openapi.youdao.com/ttsapi?q=discipline&langType=en&sign=E1468041EF49A89344BF572D6EBEFD06&salt=1609401105498&voice=5&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+				"us-phonetic": "ˈdɪsəplɪn",
+				"us-speech": "http://openapi.youdao.com/ttsapi?q=discipline&langType=en&sign=E1468041EF49A89344BF572D6EBEFD06&salt=1609401105498&voice=6&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+				"wfs": [
+					{
+						"wf": {
+							"name": "过去式",
+							"value": "disciplined"
+						}
+					},
+					{
+						"wf": {
+							"name": "过去分词",
+							"value": "disciplined"
+						}
+					},
+					{
+						"wf": {
+							"name": "现在分词",
+							"value": "disciplining"
+						}
+					},
+					{
+						"wf": {
+							"name": "复数",
+							"value": "disciplines"
+						}
+					},
+					{
+						"wf": {
+							"name": "第三人称单数",
+							"value": "disciplines"
+						}
+					}
+				]
+			},
+			"dict": {
+				"url": "yddict://m.youdao.com/dict?le=eng&q=discipline"
+			},
+			"errorCode": "0",
+			"isWord": true,
+			"l": "en2zh-CHS",
+			"query": "discipline",
+			"requestId": "ab4ed9a0-93ff-434b-a367-a39c5289da55",
+			"returnPhrase": [
+				"discipline"
+			],
+			"speakUrl": "http://openapi.youdao.com/ttsapi?q=discipline&langType=en&sign=E1468041EF49A89344BF572D6EBEFD06&salt=1609401105498&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"tSpeakUrl": "http://openapi.youdao.com/ttsapi?q=%E7%BA%AA%E5%BE%8B&langType=zh-CHS&sign=330FD3E7C0868C53BACA0E6EFCA5C6B3&salt=1609401105498&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"translation": [
+				"纪律"
+			],
+			"web": [
+				{
+					"key": "Discipline",
+					"value": [
+						"纪律",
+						"学科",
+						"惩罚",
+						"训练"
+					]
+				},
+				{
+					"key": "Self-discipline",
+					"value": [
+						"自律",
+						"常自律",
+						"自我约束",
+						"自律性"
+					]
+				},
+				{
+					"key": "academic discipline",
+					"value": [
+						"学科",
+						"学科建设",
+						"学术科目",
+						"学术领域"
+					]
+				}
+			],
+			"webdict": {
+				"url": "http://m.youdao.com/dict?le=eng&q=discipline"
+			}
+		}
+	},
+	{
+		"addFrom": "https://dev.to/defifarms/don-t-be-a-coder-become-a-millionaire-simpler-than-you-think-4d8e",
+		"ctime": "2021-06-24 13:48:51",
+		"learn": {
+			"learnDate": "2021-06-24 13:53:51",
+			"level": 0
+		},
+		"statistics": {
+			"2021-06-24": {
+				"https://dev.to/defifarms/don-t-be-a-coder-become-a-millionaire-simpler-than-you-think-4d8e": 1
+			}
+		},
+		"text": "intentionality",
+		"textExts": [],
+		"translation": "意向性",
+		"youdao": {
+			"basic": {
+				"explains": [
+					"n. 意向性，意图性"
+				],
+				"phonetic": "ɪnˌtenʃəˈnæləti",
+				"uk-phonetic": "ɪnˌtenʃəˈnæləti",
+				"uk-speech": "https://openapi.youdao.com/ttsapi?q=intentionality&langType=en&sign=100157AA06D607185B5574B774121AB4&salt=1624513727167&voice=5&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+				"us-speech": "https://openapi.youdao.com/ttsapi?q=intentionality&langType=en&sign=100157AA06D607185B5574B774121AB4&salt=1624513727167&voice=6&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false"
+			},
+			"dict": {
+				"url": "yddict://m.youdao.com/dict?le=eng&q=intentionality"
+			},
+			"errorCode": "0",
+			"isWord": true,
+			"l": "en2zh-CHS",
+			"query": "intentionality",
+			"requestId": "86b8096c-5006-411a-b736-f0cd5d17279a",
+			"returnPhrase": [
+				"intentionality"
+			],
+			"speakUrl": "https://openapi.youdao.com/ttsapi?q=intentionality&langType=en&sign=100157AA06D607185B5574B774121AB4&salt=1624513727167&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"tSpeakUrl": "https://openapi.youdao.com/ttsapi?q=%E6%84%8F%E5%90%91%E6%80%A7&langType=zh-CHS&sign=9C4886880E3CD9BC496E505308842C8E&salt=1624513727167&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"translation": [
+				"意向性"
+			],
+			"web": [
+				{
+					"key": "intentionality",
+					"value": [
+						"意向性",
+						"意图性",
+						"意图",
+						"目的性"
+					]
+				},
+				{
+					"key": "collective intentionality",
+					"value": [
+						"集体意向性",
+						"体意向"
+					]
+				},
+				{
+					"key": "unconscious intentionality",
+					"value": [
+						"无意识意向性"
+					]
+				}
+			],
+			"webdict": {
+				"url": "http://mobile.youdao.com/dict?le=eng&q=intentionality"
+			}
+		}
+	},
+	{
+		"addFrom": "https://dev.to/defifarms/don-t-be-a-coder-become-a-millionaire-simpler-than-you-think-4d8e",
+		"ctime": "2021-06-24 13:48:35",
+		"learn": {
+			"learnDate": "2021-06-24 13:53:35",
+			"level": 0
+		},
+		"statistics": {
+			"2021-06-24": {
+				"https://dev.to/defifarms/don-t-be-a-coder-become-a-millionaire-simpler-than-you-think-4d8e": 1
+			}
+		},
+		"text": "consumerism",
+		"textExts": [],
+		"translation": "消费主义",
+		"youdao": {
+			"basic": {
+				"explains": [
+					"n. 保护消费者利益运动；用户至上主义"
+				],
+				"phonetic": "kənˈsjuːmərɪzəm",
+				"uk-phonetic": "kənˈsjuːmərɪzəm",
+				"uk-speech": "https://openapi.youdao.com/ttsapi?q=consumerism&langType=en&sign=EDAD3DAFDD88365D709F8831E67BE80C&salt=1624513711412&voice=5&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+				"us-phonetic": "kənˈsuːmərɪzəm",
+				"us-speech": "https://openapi.youdao.com/ttsapi?q=consumerism&langType=en&sign=EDAD3DAFDD88365D709F8831E67BE80C&salt=1624513711412&voice=6&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false"
+			},
+			"dict": {
+				"url": "yddict://m.youdao.com/dict?le=eng&q=consumerism"
+			},
+			"errorCode": "0",
+			"isWord": true,
+			"l": "en2zh-CHS",
+			"query": "consumerism",
+			"requestId": "bf7a2d05-eff3-4e32-8541-dee63f2ae387",
+			"returnPhrase": [
+				"consumerism"
+			],
+			"speakUrl": "https://openapi.youdao.com/ttsapi?q=consumerism&langType=en&sign=EDAD3DAFDD88365D709F8831E67BE80C&salt=1624513711412&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"tSpeakUrl": "https://openapi.youdao.com/ttsapi?q=%E6%B6%88%E8%B4%B9%E4%B8%BB%E4%B9%89&langType=zh-CHS&sign=38AEC154563537312CAA423F88767936&salt=1624513711412&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"translation": [
+				"消费主义"
+			],
+			"web": [
+				{
+					"key": "consumerism",
+					"value": [
+						"消费者保护主义",
+						"消费者主义",
+						"保护消费者利益主义",
+						"消费主义"
+					]
+				},
+				{
+					"key": "TV consumerism",
+					"value": [
+						"电视传媒消费主义"
+					]
+				},
+				{
+					"key": "consumerism age",
+					"value": [
+						"消费主义时代"
+					]
+				}
+			],
+			"webdict": {
+				"url": "http://mobile.youdao.com/dict?le=eng&q=consumerism"
+			}
+		}
+	},
+	{
+		"addFrom": "https://dev.to/defifarms/don-t-be-a-coder-become-a-millionaire-simpler-than-you-think-4d8e",
+		"ctime": "2021-06-24 13:48:17",
+		"learn": {
+			"learnDate": "2021-06-24 13:53:17",
+			"level": 0
+		},
+		"statistics": {
+			"2021-06-24": {
+				"https://dev.to/defifarms/don-t-be-a-coder-become-a-millionaire-simpler-than-you-think-4d8e": 1
+			}
+		},
+		"text": "perception",
+		"textExts": [],
+		"translation": "感知",
+		"youdao": {
+			"basic": {
+				"exam_type": [
+					"高中",
+					"CET4",
+					"CET6",
+					"IELTS",
+					"TOEFL",
+					"GRE",
+					"GMAT",
+					"SAT",
+					"商务英语"
+				],
+				"explains": [
+					"n. 认识能力；知觉，感觉；洞察力；看法；获取"
+				],
+				"phonetic": "pəˈsepʃn",
+				"uk-phonetic": "pəˈsepʃn",
+				"uk-speech": "http://openapi.youdao.com/ttsapi?q=perception&langType=en&sign=97EE34762ABE836AAD35B0B2D97ADD5E&salt=1609330644186&voice=5&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+				"us-phonetic": "pərˈsepʃn",
+				"us-speech": "http://openapi.youdao.com/ttsapi?q=perception&langType=en&sign=97EE34762ABE836AAD35B0B2D97ADD5E&salt=1609330644186&voice=6&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+				"wfs": [
+					{
+						"wf": {
+							"name": "复数",
+							"value": "perceptions"
+						}
+					}
+				]
+			},
+			"dict": {
+				"url": "yddict://m.youdao.com/dict?le=eng&q=perception"
+			},
+			"errorCode": "0",
+			"isWord": true,
+			"l": "en2zh-CHS",
+			"query": "perception",
+			"requestId": "7c298cc1-9a2c-4580-8270-034c8c076483",
+			"returnPhrase": [
+				"perception"
+			],
+			"speakUrl": "http://openapi.youdao.com/ttsapi?q=perception&langType=en&sign=97EE34762ABE836AAD35B0B2D97ADD5E&salt=1609330644186&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"tSpeakUrl": "http://openapi.youdao.com/ttsapi?q=%E6%84%9F%E7%9F%A5&langType=zh-CHS&sign=245787F391DB5C78B6F7EAEF0F87D5B5&salt=1609330644186&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"translation": [
+				"感知"
+			],
+			"web": [
+				{
+					"key": "Perception",
+					"value": [
+						"感知",
+						"感觉",
+						"悟性"
+					]
+				},
+				{
+					"key": "extrasensory perception",
+					"value": [
+						"超感知觉",
+						"超感觉的知觉",
+						"超感知"
+					]
+				},
+				{
+					"key": "time perception",
+					"value": [
+						"时间知觉",
+						"时间辨别力",
+						"时间感知",
+						"感觉反应时间"
+					]
+				}
+			],
+			"webdict": {
+				"url": "http://m.youdao.com/dict?le=eng&q=perception"
+			}
+		}
+	},
+	{
+		"addFrom": "https://dev.to/defifarms/don-t-be-a-coder-become-a-millionaire-simpler-than-you-think-4d8e",
+		"ctime": "2021-06-24 13:48:09",
+		"learn": {
+			"learnDate": "2021-06-24 13:53:09",
+			"level": 0
+		},
+		"statistics": {
+			"2021-06-24": {
+				"https://dev.to/defifarms/don-t-be-a-coder-become-a-millionaire-simpler-than-you-think-4d8e": 1
+			}
+		},
+		"text": "paycheck",
+		"textExts": [],
+		"translation": "薪水",
+		"youdao": {
+			"basic": {
+				"explains": [
+					"n. 付薪水的支票，薪水"
+				],
+				"phonetic": "'peɪtʃek",
+				"uk-phonetic": "'peɪtʃek",
+				"uk-speech": "http://openapi.youdao.com/ttsapi?q=paycheck&langType=en&sign=80FD282E8E1710D30A76EA36C31DB8CB&salt=1608567254414&voice=5&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+				"us-phonetic": "ˈpeɪtʃek",
+				"us-speech": "http://openapi.youdao.com/ttsapi?q=paycheck&langType=en&sign=80FD282E8E1710D30A76EA36C31DB8CB&salt=1608567254414&voice=6&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false"
+			},
+			"dict": {
+				"url": "yddict://m.youdao.com/dict?le=eng&q=paycheck"
+			},
+			"errorCode": "0",
+			"isWord": true,
+			"l": "en2zh-CHS",
+			"query": "paycheck",
+			"requestId": "af70173a-c613-4952-86b1-ca524df65136",
+			"returnPhrase": [
+				"paycheck"
+			],
+			"speakUrl": "http://openapi.youdao.com/ttsapi?q=paycheck&langType=en&sign=80FD282E8E1710D30A76EA36C31DB8CB&salt=1608567254414&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"tSpeakUrl": "http://openapi.youdao.com/ttsapi?q=%E8%96%AA%E6%B0%B4&langType=zh-CHS&sign=3EF8DC028466FC95EBE4D082945C9AF9&salt=1608567254414&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"translation": [
+				"薪水"
+			],
+			"web": [
+				{
+					"key": "Paycheck",
+					"value": [
+						"记忆裂痕",
+						"致命报酬",
+						"片酬",
+						"片"
+					]
+				},
+				{
+					"key": "employee paycheck",
+					"value": [
+						"工资支票"
+					]
+				},
+				{
+					"key": "paycheck stub",
+					"value": [
+						"工资单"
+					]
+				}
+			],
+			"webdict": {
+				"url": "http://m.youdao.com/dict?le=eng&q=paycheck"
+			}
+		}
+	},
+	{
+		"addFrom": "https://dev.to/defifarms/don-t-be-a-coder-become-a-millionaire-simpler-than-you-think-4d8e",
+		"ctime": "2021-06-24 13:47:40",
+		"learn": {
+			"learnDate": "2021-06-24 13:52:40",
+			"level": 0
+		},
+		"statistics": {
+			"2021-06-24": {
+				"https://dev.to/defifarms/don-t-be-a-coder-become-a-millionaire-simpler-than-you-think-4d8e": 1
+			}
+		},
+		"text": "butler",
+		"textExts": [
+			"butlers"
+		],
+		"translation": "管家",
+		"youdao": {
+			"basic": {
+				"explains": [
+					"n. 男管家；仆役长",
+					"n. （Butler）（英、西）巴特勒；（俄、德、瑞典）布特勒（人名）"
+				],
+				"phonetic": "ˈbʌtlə(r)",
+				"uk-phonetic": "ˈbʌtlə(r)",
+				"uk-speech": "https://openapi.youdao.com/ttsapi?q=butlers&langType=en&sign=0CE0E04375C9374D5FB3D2A810D6BA71&salt=1624513646535&voice=5&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+				"us-phonetic": "ˈbʌtlər",
+				"us-speech": "https://openapi.youdao.com/ttsapi?q=butlers&langType=en&sign=0CE0E04375C9374D5FB3D2A810D6BA71&salt=1624513646535&voice=6&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+				"wfs": [
+					{
+						"wf": {
+							"name": "复数",
+							"value": "butlers"
+						}
+					}
+				]
+			},
+			"dict": {
+				"url": "yddict://m.youdao.com/dict?le=eng&q=butlers"
+			},
+			"errorCode": "0",
+			"isWord": true,
+			"l": "en2zh-CHS",
+			"query": "butlers",
+			"requestId": "05450a73-83d4-475e-8a10-ee9620ff5bec",
+			"returnPhrase": [
+				"butler"
+			],
+			"speakUrl": "https://openapi.youdao.com/ttsapi?q=butlers&langType=en&sign=0CE0E04375C9374D5FB3D2A810D6BA71&salt=1624513646535&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"tSpeakUrl": "https://openapi.youdao.com/ttsapi?q=%E7%AE%A1%E5%AE%B6&langType=zh-CHS&sign=1C9E936E2549147621F15CB19DE1359D&salt=1624513646535&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"translation": [
+				"管家"
+			],
+			"web": [
+				{
+					"key": "Butlers",
+					"value": [
+						"管家酒店",
+						"巴特勒",
+						"街道地址",
+						"巧克力"
+					]
+				},
+				{
+					"key": "Bullet Butlers",
+					"value": [
+						"枪弹管家",
+						"东出佑一郎"
+					]
+				},
+				{
+					"key": "Butlers in the Buff",
+					"value": [
+						"黄衫男管家"
+					]
+				}
+			],
+			"webdict": {
+				"url": "http://mobile.youdao.com/dict?le=eng&q=butlers"
+			}
+		}
+	},
+	{
+		"addFrom": "https://dev.to/defifarms/don-t-be-a-coder-become-a-millionaire-simpler-than-you-think-4d8e",
+		"ctime": "2021-06-24 13:47:13",
+		"learn": {
+			"learnDate": "2021-06-24 13:52:13",
+			"level": 0
+		},
+		"statistics": {
+			"2021-06-24": {
+				"https://dev.to/defifarms/don-t-be-a-coder-become-a-millionaire-simpler-than-you-think-4d8e": 1
+			}
+		},
+		"text": "unobtainable",
+		"textExts": [],
+		"translation": "不能得到的",
+		"youdao": {
+			"basic": {
+				"explains": [
+					"adj. 难获得的；不能得到的"
+				],
+				"phonetic": "ˌʌnəbˈteɪnəbl",
+				"uk-phonetic": "ˌʌnəbˈteɪnəbl",
+				"uk-speech": "https://openapi.youdao.com/ttsapi?q=unobtainable&langType=en&sign=7FF7F638DD42E07E4BCF55D2346221B2&salt=1624513632133&voice=5&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+				"us-phonetic": "ˌʌnəbˈteɪnəbl",
+				"us-speech": "https://openapi.youdao.com/ttsapi?q=unobtainable&langType=en&sign=EE18F67F9A644F58D7BAAB07DA5C2C2B&salt=1624513632134&voice=6&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false"
+			},
+			"dict": {
+				"url": "yddict://m.youdao.com/dict?le=eng&q=unobtainable"
+			},
+			"errorCode": "0",
+			"isWord": true,
+			"l": "en2zh-CHS",
+			"query": "unobtainable",
+			"requestId": "4cf8b6f5-0f69-4cc9-8096-415022ca8c66",
+			"returnPhrase": [
+				"unobtainable"
+			],
+			"speakUrl": "https://openapi.youdao.com/ttsapi?q=unobtainable&langType=en&sign=EE18F67F9A644F58D7BAAB07DA5C2C2B&salt=1624513632134&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"tSpeakUrl": "https://openapi.youdao.com/ttsapi?q=%E4%B8%8D%E8%83%BD%E5%BE%97%E5%88%B0%E7%9A%84&langType=zh-CHS&sign=9EEC5631AE69100C59467E9ED63911A3&salt=1624513632134&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"translation": [
+				"不能得到的"
+			],
+			"web": [
+				{
+					"key": "unobtainable",
+					"value": [
+						"无法获得",
+						"无法得到的",
+						"不可得"
+					]
+				},
+				{
+					"key": "Number Unobtainable Tone",
+					"value": [
+						"空号音"
+					]
+				},
+				{
+					"key": "Number unobtainable",
+					"value": [
+						"空号",
+						"难获得的数字",
+						"电话不能接通"
+					]
+				}
+			],
+			"webdict": {
+				"url": "http://mobile.youdao.com/dict?le=eng&q=unobtainable"
+			}
+		}
+	},
+	{
+		"addFrom": "https://dev.to/ayabouchiha/merge-sort-algorithm-1l55",
+		"ctime": "2021-06-24 13:46:05",
+		"learn": {
+			"learnDate": "2021-06-24 13:51:05",
+			"level": 0
+		},
+		"statistics": {
+			"2021-06-24": {
+				"https://dev.to/ayabouchiha/merge-sort-algorithm-1l55": 1
+			}
+		},
+		"text": "halves",
+		"textExts": [],
+		"translation": "半",
+		"youdao": {
+			"basic": {
+				"exam_type": [
+					"初中",
+					"高中",
+					"CET4",
+					"CET6",
+					"考研",
+					"IELTS",
+					"GRE",
+					"SAT",
+					"商务英语"
+				],
+				"explains": [
+					"n. 一学期；两等份（half的复数形式）"
+				],
+				"phonetic": "hɑːvz",
+				"uk-phonetic": "hɑːvz",
+				"uk-speech": "http://openapi.youdao.com/ttsapi?q=halves&langType=en&sign=F6472718041DA9B9042274E53C17D5D3&salt=1608530112187&voice=5&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+				"us-phonetic": "hævz",
+				"us-speech": "http://openapi.youdao.com/ttsapi?q=halves&langType=en&sign=F6472718041DA9B9042274E53C17D5D3&salt=1608530112187&voice=6&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false"
+			},
+			"dict": {
+				"url": "yddict://m.youdao.com/dict?le=eng&q=halves"
+			},
+			"errorCode": "0",
+			"isWord": true,
+			"l": "en2zh-CHS",
+			"query": "halves",
+			"requestId": "8827f952-9ff0-4bb7-9302-a13856fe28dd",
+			"returnPhrase": [
+				"halves"
+			],
+			"speakUrl": "http://openapi.youdao.com/ttsapi?q=halves&langType=en&sign=F6472718041DA9B9042274E53C17D5D3&salt=1608530112187&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"tSpeakUrl": "http://openapi.youdao.com/ttsapi?q=%E5%8D%8A&langType=zh-CHS&sign=17E1EFD4FB21356AE69022F7D65F219C&salt=1608530112187&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"translation": [
+				"半"
+			],
+			"web": [
+				{
+					"key": "halves",
+					"value": [
+						"一学期",
+						"草桃片",
+						"一半",
+						"二分之一"
+					]
+				},
+				{
+					"key": "gone halves",
+					"value": [
+						"分摊"
+					]
+				},
+				{
+					"key": "half halves",
+					"value": [
+						"等"
+					]
+				}
+			],
+			"webdict": {
+				"url": "http://m.youdao.com/dict?le=eng&q=halves"
+			}
+		}
+	},
+	{
+		"addFrom": "https://dev.to/ayabouchiha/merge-sort-algorithm-1l55",
+		"ctime": "2021-06-24 13:45:59",
+		"learn": {
+			"learnDate": "2021-06-24 13:50:59",
+			"level": 0
+		},
+		"statistics": {
+			"2021-06-24": {
+				"https://dev.to/ayabouchiha/merge-sort-algorithm-1l55": 1
+			}
+		},
+		"text": "conquer",
+		"textExts": [],
+		"translation": "征服",
+		"youdao": {
+			"basic": {
+				"exam_type": [
+					"高中",
+					"CET4",
+					"CET6",
+					"考研",
+					"IELTS",
+					"TOEFL",
+					"GRE"
+				],
+				"explains": [
+					"vt. 战胜，征服；攻克，攻取",
+					"vi. 胜利；得胜"
+				],
+				"phonetic": "ˈkɒŋkər",
+				"uk-phonetic": "ˈkɒŋkər",
+				"uk-speech": "http://openapi.youdao.com/ttsapi?q=conquer&langType=en&sign=F2A2C8E0C29091A48E15A274869E6F43&salt=1608553728250&voice=5&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+				"us-phonetic": "ˈkɑːŋkər",
+				"us-speech": "http://openapi.youdao.com/ttsapi?q=conquer&langType=en&sign=F2A2C8E0C29091A48E15A274869E6F43&salt=1608553728250&voice=6&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+				"wfs": [
+					{
+						"wf": {
+							"name": "过去式",
+							"value": "conquered"
+						}
+					},
+					{
+						"wf": {
+							"name": "过去分词",
+							"value": "conquered"
+						}
+					},
+					{
+						"wf": {
+							"name": "现在分词",
+							"value": "conquering"
+						}
+					},
+					{
+						"wf": {
+							"name": "第三人称单数",
+							"value": "conquers"
+						}
+					}
+				]
+			},
+			"dict": {
+				"url": "yddict://m.youdao.com/dict?le=eng&q=conquer"
+			},
+			"errorCode": "0",
+			"isWord": true,
+			"l": "en2zh-CHS",
+			"query": "conquer",
+			"requestId": "3b6b3517-64f3-40f4-b9d8-6481875ef785",
+			"returnPhrase": [
+				"conquer"
+			],
+			"speakUrl": "http://openapi.youdao.com/ttsapi?q=conquer&langType=en&sign=F2A2C8E0C29091A48E15A274869E6F43&salt=1608553728250&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"tSpeakUrl": "http://openapi.youdao.com/ttsapi?q=%E5%BE%81%E6%9C%8D&langType=zh-CHS&sign=4DB0BB3A465451F7D2CB794D677A34AB&salt=1608553728250&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"translation": [
+				"征服"
+			],
+			"web": [
+				{
+					"key": "conquer",
+					"value": [
+						"征服",
+						"战胜",
+						"克服",
+						"破除"
+					]
+				},
+				{
+					"key": "I conquer",
+					"value": [
+						"我来了",
+						"我看到了",
+						"我过关斩将"
+					]
+				},
+				{
+					"key": "Conquer Antarctica",
+					"value": [
+						"征服南极洲",
+						"企鹅征服南极",
+						"打企鹅世界大战",
+						"小企鹅征服南极洲"
+					]
+				}
+			],
+			"webdict": {
+				"url": "http://m.youdao.com/dict?le=eng&q=conquer"
+			}
+		}
+	},
+	{
+		"addFrom": "https://medium.com/the-virago/my-terrible-triad-and-two-firsts-for-me-at-the-age-of-62-e61f3fbc4584",
+		"ctime": "2021-06-24 13:43:29",
+		"learn": {
+			"learnDate": "2021-06-24 13:48:29",
+			"level": 0
+		},
+		"statistics": {
+			"2021-06-24": {
+				"https://medium.com/the-virago/my-terrible-triad-and-two-firsts-for-me-at-the-age-of-62-e61f3fbc4584": 1
+			}
+		},
+		"text": "illustrator",
+		"textExts": [],
+		"translation": "插画家",
+		"youdao": {
+			"basic": {
+				"explains": [
+					"n. 插图画家；说明者；图解者"
+				],
+				"phonetic": "ˈɪləstreɪtə(r)",
+				"uk-phonetic": "ˈɪləstreɪtə(r)",
+				"uk-speech": "http://openapi.youdao.com/ttsapi?q=illustrator&langType=en&sign=4E5249D6C0DF705ED5B6D1045E80D35B&salt=1620704284801&voice=5&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+				"us-phonetic": "ˈɪləstreɪtər",
+				"us-speech": "http://openapi.youdao.com/ttsapi?q=illustrator&langType=en&sign=4E5249D6C0DF705ED5B6D1045E80D35B&salt=1620704284801&voice=6&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+				"wfs": [
+					{
+						"wf": {
+							"name": "复数",
+							"value": "illustrators"
+						}
+					}
+				]
+			},
+			"dict": {
+				"url": "yddict://m.youdao.com/dict?le=eng&q=illustrator"
+			},
+			"errorCode": "0",
+			"isWord": true,
+			"l": "en2zh-CHS",
+			"query": "illustrator",
+			"requestId": "6d0efa09-85c0-4a1a-b6f4-a9a6f5a25ded",
+			"returnPhrase": [
+				"illustrator"
+			],
+			"speakUrl": "http://openapi.youdao.com/ttsapi?q=illustrator&langType=en&sign=4E5249D6C0DF705ED5B6D1045E80D35B&salt=1620704284801&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"tSpeakUrl": "http://openapi.youdao.com/ttsapi?q=%E6%8F%92%E7%94%BB%E5%AE%B6&langType=zh-CHS&sign=72203D8E3E20C8A6172248914EEA05B0&salt=1620704284802&voice=4&format=mp3&appKey=298b254664acdfd2&ttsVoiceStrict=false",
+			"translation": [
+				"插画家"
+			],
+			"web": [
+				{
+					"key": "illustrator",
+					"value": [
+						"插画家",
+						"汇稿员",
+						"软件",
+						"设计"
+					]
+				},
+				{
+					"key": "ILLUSTRATOR CS",
+					"value": [
+						"计算机广告设计与制作",
+						"的工作界面",
+						"格式",
+						"显示方式"
+					]
+				},
+				{
+					"key": "Medical Illustrator",
+					"value": [
+						"医学绘图员",
+						"医学插画",
+						"医学插图绘制员"
+					]
+				}
+			],
+			"webdict": {
+				"url": "http://mobile.youdao.com/dict?le=eng&q=illustrator"
+			}
+		}
+	},
+	{
+		"addFrom": "https://translate.google.cn/?sl=zh-CN&tl=en&text=jurisdiction&op=translate",
+		"ctime": "2021-06-21 14:43:55",
+		"learn": {
+			"learnDate": "2021-06-21 14:48:55",
+			"level": 0
+		},
+		"statistics": {
+			"2021-06-21": {
+				"https://translate.google.cn/?sl=zh-CN&tl=en&text=jurisdiction&op=translate": 18
+			}
+		},
+		"text": "jurisdiction",
+		"textExts": [],
+		"translation": "管辖范围内",
+		"youdao": {
+			"basic": {
+				"exam_type": [
+					"CET6",
+					"GRE",
+					"GMAT",
+					"商务英语"
+				],
+				"explains": [
+					"n. 司法权，审判权，管辖权；权限，权力"
+				],
+				"phonetic": "ˌdʒʊərɪsˈdɪkʃn",
+				"uk-phonetic": "ˌdʒʊərɪsˈdɪkʃn",
+				"uk-speech": "http://openapi.youdao.com/ttsapi?q=jurisdiction&langType=en&sign=8EA0B5F2023B5B7D703AE4874093DD0F&salt=1619171702703&voice=5&format=mp3&appKey=30de680bdf52b4b8&ttsVoiceStrict=false",
+				"us-phonetic": "ˌdʒʊrɪsˈdɪkʃn",
+				"us-speech": "http://openapi.youdao.com/ttsapi?q=jurisdiction&langType=en&sign=8EA0B5F2023B5B7D703AE4874093DD0F&salt=1619171702703&voice=6&format=mp3&appKey=30de680bdf52b4b8&ttsVoiceStrict=false",
+				"wfs": [
+					{
+						"wf": {
+							"name": "复数",
+							"value": "jurisdictions"
+						}
+					}
+				]
+			},
+			"dict": {
+				"url": "yddict://m.youdao.com/dict?le=eng&q=jurisdiction"
+			},
+			"errorCode": "0",
+			"isWord": true,
+			"l": "en2zh-CHS",
+			"query": "jurisdiction",
+			"requestId": "af038139-cee9-4f91-83d3-068d9140ff22",
+			"returnPhrase": [
+				"jurisdiction"
+			],
+			"speakUrl": "http://openapi.youdao.com/ttsapi?q=jurisdiction&langType=en&sign=8EA0B5F2023B5B7D703AE4874093DD0F&salt=1619171702703&voice=4&format=mp3&appKey=30de680bdf52b4b8&ttsVoiceStrict=false",
+			"tSpeakUrl": "http://openapi.youdao.com/ttsapi?q=%E7%AE%A1%E8%BE%96%E8%8C%83%E5%9B%B4%E5%86%85&langType=zh-CHS&sign=CB04A963036A35E833AB9F20D961859B&salt=1619171702703&voice=4&format=mp3&appKey=30de680bdf52b4b8&ttsVoiceStrict=false",
+			"translation": [
+				"管辖范围内"
+			],
+			"web": [
+				{
+					"key": "jurisdiction",
+					"value": [
+						"司法管辖权",
+						"管辖权",
+						"管辖",
+						"司法权"
+					]
+				},
+				{
+					"key": "universal jurisdiction",
+					"value": [
+						"普遍管辖权",
+						"管辖权",
+						"普遍管辖"
+					]
+				},
+				{
+					"key": "territorial jurisdiction",
+					"value": [
+						"领土管辖权",
+						"地区管辖",
+						"地域管辖",
+						"属地管辖权"
+					]
+				}
+			],
+			"webdict": {
+				"url": "http://mobile.youdao.com/dict?le=eng&q=jurisdiction"
+			}
+		}
+	}
+]

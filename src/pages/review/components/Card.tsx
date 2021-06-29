@@ -31,11 +31,11 @@ export default function Card({ word, updateList }: CardProps) {
           Play
         </button>
       </div>
+      {showTranslate && <div className="translation">{word.translation}</div>}
       <button onClick={hanleShowTranslate}>toggle Translation</button>
       <button className="delete_btn" onClick={() => handleDelete(word.text)}>
         Del
       </button>
-      {showTranslate && <div>{word.translation}</div>}
     </div>
   )
 }

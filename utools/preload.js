@@ -9,7 +9,8 @@ window.services = {
     try {
       const { clipboard } = require('electron')
       let text = clipboard.readText()
-      text = text.slice(0,text.indexOf('摘')) // 兼容苹果book
+      const index = text.indexOf('摘');
+      text = index > 0 ? text.slice(0,text.indexOf('摘')): text // 兼容苹果book
       const {
         data: { content }
       } = await searchWords(text)
@@ -17,6 +18,7 @@ window.services = {
       WordsDB.addMaterialObj(material)
       return true;
     } catch (error) {
+      alert(error)
       console.log(error)
     }
   }

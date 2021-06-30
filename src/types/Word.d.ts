@@ -17,7 +17,7 @@ interface YoudaoBasic {
   ['us-speech']: string
   isWord: boolean
   speakUrl: string
-  phonetic:string;
+  phonetic: string
 }
 
 interface Youdao {
@@ -43,8 +43,8 @@ interface Word {
   youdao: Youdao
 }
 
-
 interface CardProps {
-	word: Word;
-  updateList: () => void;
+  word: Word
+  updateList: () => void
+  changeWord: (type: 'prev' | 'next') => void
 }

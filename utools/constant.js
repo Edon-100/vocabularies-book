@@ -9,5 +9,8 @@ module.exports = {
     7 * 24 * 60,
     15 * 24 * 60,
     30 * 24 * 60
-  ]
+  ],
+  tableNames: {
+    word: 'word'
+  }
 }

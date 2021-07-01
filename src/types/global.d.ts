@@ -1,11 +1,15 @@
 interface Window {
   utools: UToolsApi
   services: {
-    add_vocabulary: () => Promise<boolean>
-    WordsDB: {
-      addMaterialObj: () => void
+    wordModel: {
+      addVocabulary: () => Promise<boolean>
+      staticaddMaterialObj: () => void
       setMaterials: () => void
       deleteMaterialObj: (text: string) => Promise<DbReturn>
+      getMaterials: () => Word[]
+      getNeedLearnList: () => Word[]
+      addWordToNextLevel: () => void
+      addWordBackPreviousLevel: () => void
     }
   }
 }

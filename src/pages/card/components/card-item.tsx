@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
-import './Card.less'
+import './card-item.less'
 
 const Card = (props: CardProps) => {
-  console.log('card update')
-  const { word, changeWord } = props
+  const { word, changeWord = () => {} } = props
+  console.log('card update', word)
 
   const audioRef = useRef<HTMLAudioElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const [showInput, setShowInput] = useState(false)
 
   useEffect(() => {
-    const keyEvent = (e) => {
+    const keyEvent = (e: any) => {
       if (80 == e.keyCode && e.shiftKey) {
         changeWord('prev')
         // audioRef?.current?.play()
@@ -39,9 +39,9 @@ const Card = (props: CardProps) => {
     audioRef?.current?.play()
   }, [word])
 
-  const handleInputSubmit = (e) => {
+  const handleInputSubmit = (e: any) => {
     if (e.keyCode === 13) {
-      if (inputRef?.current?.value === word.text) {
+      if (inputRef?.current?.value === word?.text) {
         utools.showNotification('拼写正确')
       } else {
         utools.showNotification('拼写错误')
@@ -52,7 +52,7 @@ const Card = (props: CardProps) => {
   return (
     <div className="single_card_wrapper">
       <audio
-        src={`https://dict.youdao.com/dictvoice?audio=${word.text}`}
+        src={`https://dict.youdao.com/dictvoice?audio=${word?.text}`}
         ref={audioRef}
       ></audio>
       {showInput && (
@@ -63,7 +63,7 @@ const Card = (props: CardProps) => {
           onKeyDown={(e) => handleInputSubmit(e)}
         />
       )}
-      <div className="card">{word.text}</div>
+      <div className="card">{word?.text}</div>
     </div>
   )
 }
@@ -135,4 +135,3 @@ export default React.memo(Card)
 //       <div className="card">{word.text}</div>
 //     </div>
 //   )
-// }

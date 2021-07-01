@@ -1,20 +1,20 @@
-// const { ReviewDbName } = reuqire('./constant')
+class DB {
+  constructor(tableName) {
+    this.tableName = tableName
+  }
 
-class WordsDB {
-  constructor() {}
-
-  static addMaterialObj(material) {
-    const db = utools.db.get('ReviewDbName') || {}
+  addMaterialObj(material) {
+    const db = utools.db.get(this.tableName) || {}
     const list = db.list || []
     const existMaterial = list.find((it) => it.text === material.text)
     if (existMaterial) return
-    WordsDB.setMaterials([...list, material], db)
+    this.setMaterials([...list, material], db)
   }
 
-  static setMaterials(materialList, db) {
+  setMaterials(materialList, db) {
     try {
       window.utools.db.put({
-        _id: 'ReviewDbName',
+        _id: this.tableName,
         list: materialList,
         _rev: db._rev
       })
@@ -24,14 +24,19 @@ class WordsDB {
     }
   }
 
-  static async deleteMaterialObj(text) {
-    const db = utools.db.get('ReviewDbName') || {}
+  async deleteMaterialObj(text) {
+    const db = utools.db.get(this.tableName) || {}
     const list = db.list || []
     if (!list.length) return
     const newList = list.filter((item) => item.text !== text)
-    WordsDB.setMaterials(newList, db)
+    this.setMaterials(newList, db)
     return db
+  }
+
+  getMaterials() {
+    const db = utools.db.get(this.tableName) || {}
+    return db.list || []
   }
 }
 
-module.exports = { WordsDB }
+module.exports = { DB }

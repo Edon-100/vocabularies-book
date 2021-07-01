@@ -1,10 +1,10 @@
 import React from 'react'
-import WordList from './pages/WordList'
-import WordCard from './pages/WordCard'
+import WordList from './pages/list'
+import WordCard from './pages/card'
 import './index.less'
 import ErrorBoundary from './components/ErrorBoundaries'
 
-export default class App extends React.Component<null, HomeState> {
+export default class App extends React.Component<any, HomeState> {
   state = {
     total: 0,
     list: [],
@@ -20,22 +20,21 @@ export default class App extends React.Component<null, HomeState> {
   componentDidMount() {
     utools.onPluginEnter((action) => {
       if (action.code === 'add_vocabulary') {
-        window.services.add_vocabulary().then((res) => {
-          this.updateWordsListToState(action)
+        window.services.wordModel.addVocabulary().then((res) => {
+          this.updateWordsListToState()
         })
       } else {
-        this.updateWordsListToState(action)
+        this.updateWordsListToState()
       }
     })
   }
 
-  updateWordsListToState = (action: UtoolsAction) => {
-    const list = utools?.db?.get('ReviewDbName')?.list || []
+  updateWordsListToState = () => {
+    const list = window.services.wordModel.getMaterials()
     const total = list?.length
     this.setState({
       total,
-      list,
-      action
+      list
     })
   }
 
@@ -46,7 +45,7 @@ export default class App extends React.Component<null, HomeState> {
   }
 
   render() {
-    const { action, wordType } = this.state
+    const { wordType } = this.state
     return (
       <ErrorBoundary>
         <div className="switch_btn">

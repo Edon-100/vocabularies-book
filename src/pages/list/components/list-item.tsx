@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
-import './card.less'
+import './list-item.less'
 
-export default function Card({ word, updateList }: CardProps) {
+export default function Card({ word, updateList = () => {} }: CardProps) {
   const [showTranslate, setShowTranslate] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
@@ -14,16 +14,16 @@ export default function Card({ word, updateList }: CardProps) {
   }
 
   const handleDelete = async (text: string) => {
-    await window.services.WordsDB.deleteMaterialObj(text);
-    updateList();
+    await window.services.wordModel.deleteMaterialObj(text)
+    updateList()
   }
 
   return (
-    <div className="card">
+    <div className="list-card">
       <div className="header">
-        <h3>{word.text}</h3>
+        <h3>{word?.text}</h3>
         <audio
-          src={`https://dict.youdao.com/dictvoice?audio=${word.text}`}
+          src={`https://dict.youdao.com/dictvoice?audio=${word?.text}`}
           ref={audioRef}
         ></audio>
         <span>{word?.youdao?.basic?.phonetic}</span>
@@ -31,9 +31,9 @@ export default function Card({ word, updateList }: CardProps) {
           Play
         </button>
       </div>
-      {showTranslate && <div className="translation">{word.translation}</div>}
+      {showTranslate && <div className="translation">{word?.translation}</div>}
       <button onClick={hanleShowTranslate}>toggle Translation</button>
-      <button className="delete_btn" onClick={() => handleDelete(word.text)}>
+      <button className="delete_btn" onClick={() => handleDelete(word!.text)}>
         Del
       </button>
     </div>

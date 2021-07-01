@@ -44,7 +44,7 @@ interface Word {
 }
 
 interface CardProps {
-  word: Word
-  updateList: () => void
-  changeWord: (type: 'prev' | 'next') => void
+  word: Word | undefined
+  updateList?: (action?: UtoolsAction) => void
+  changeWord?: (type: 'prev' | 'next') => void
 }

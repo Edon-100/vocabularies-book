@@ -12,5 +12,6 @@ module.exports = {
   ],
   tableNames: {
     word: 'word'
-  }
+  },
+  baseUrl: 'https://service-pnrys8g3-1254074572.bj.apigw.tencentcs.com/release'
 }

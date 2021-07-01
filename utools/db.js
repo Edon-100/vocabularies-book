@@ -4,11 +4,15 @@ class DB {
   }
 
   addMaterialObj(material) {
-    const db = utools.db.get(this.tableName) || {}
-    const list = db.list || []
-    const existMaterial = list.find((it) => it.text === material.text)
-    if (existMaterial) return
-    this.setMaterials([...list, material], db)
+    try {
+      const db = utools.db.get(this.tableName) || {}
+      const list = db.list || []
+      const existMaterial = list.find((it) => it.text === material.text)
+      if (existMaterial) return
+      this.setMaterials([...list, material], db)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   setMaterials(materialList, db) {
@@ -20,22 +24,30 @@ class DB {
       })
       utools.shellBeep()
     } catch (error) {
-      utools.showNotification('added failed', error)
+      console.log(error)
     }
   }
 
   async deleteMaterialObj(text) {
-    const db = utools.db.get(this.tableName) || {}
-    const list = db.list || []
-    if (!list.length) return
-    const newList = list.filter((item) => item.text !== text)
-    this.setMaterials(newList, db)
-    return db
+    try {
+      const db = utools.db.get(this.tableName) || {}
+      const list = db.list || []
+      if (!list.length) return
+      const newList = list.filter((item) => item.text !== text)
+      this.setMaterials(newList, db)
+      return db
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   getMaterials() {
-    const db = utools.db.get(this.tableName) || {}
-    return db.list || []
+    try {
+      const db = utools.db.get(this.tableName) || {}
+      return db.list || []
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 

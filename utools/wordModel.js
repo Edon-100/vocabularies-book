@@ -62,7 +62,6 @@ class WordModel {
       this.db.addMaterialObj(material)
       return true
     } catch (error) {
-      alert(error)
       console.log(error)
     }
   }

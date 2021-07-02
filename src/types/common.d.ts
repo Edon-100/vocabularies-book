@@ -10,3 +10,10 @@ interface WordProps {
   total: number
   updateList?: (action?: UtoolsAction) => void
 }
+
+type LetterState = 'normal' | 'correct' | 'wrong'
+
+interface LetterProps {
+  letter: string
+  visible: boolean
+}

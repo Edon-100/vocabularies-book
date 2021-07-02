@@ -8,7 +8,7 @@ export default class App extends React.Component<any, HomeState> {
   state = {
     total: 0,
     list: [],
-    wordType: 'list',
+    wordType: 'card',
     action: {
       code: '',
       type: '',
@@ -30,14 +30,14 @@ export default class App extends React.Component<any, HomeState> {
   }
 
   updateWordsListToState = () => {
-    const list = window.services.wordModel.getMaterials()
+    const list = window.services.wordModel.getNeedLearnList()
+    console.log('updateWordsListToState', list)
     const total = list?.length
     this.setState({
       total,
       list
     })
   }
-
   switchWordType = (wordType: string) => {
     this.setState({
       wordType

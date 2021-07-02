@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from './components/list-item'
+import useSounds from 'src/hooks/useSounds'
 import './index.less'
 
 class WordList extends React.Component<WordProps> {

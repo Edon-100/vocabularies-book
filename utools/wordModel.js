@@ -70,7 +70,7 @@ class WordModel {
    * @description 返回需要复习的单词列表
    * @returns {Array} materialList
    */
-  async getNeedLearnList() {
+  getNeedLearnList() {
     const materialList = this.getMaterials()
     const l2 = materialList.filter(({ learn }) => {
       return dayjs().format() > learn.learnDate
@@ -113,6 +113,10 @@ class WordModel {
       learnDate: dayjs().add(forgettingCurve[0], 'm').format()
     }
     this.db.setMaterials(materialList)
+  }
+
+  deleteMaterialObj(text) {
+    this.db.deleteMaterialObj(text)
   }
 }
 

@@ -13,14 +13,16 @@ module.exports = {
     path: outputPath
   },
   plugins: [
-    // new CopyWebpackPlugin({ patterns: [{ from: 'public', to: outputPath }] }),
     new CopyWebpackPlugin({ patterns: [{ from: 'utools', to: outputPath }] })
   ],
   performance: {
     hints: false
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ]
+    extensions: [ '.tsx', '.ts', '.js' ],
+    alias: {
+      src: path.resolve(__dirname, './src')
+    }
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
@@ -29,6 +31,14 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.(png|jpg|gif|wav|mp3)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+          },
+        ],
+      },      
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,

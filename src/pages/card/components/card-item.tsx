@@ -30,7 +30,7 @@ import './card-item.less'
 */
 
 const Card = (props: CardProps) => {
-  const { word, changeWord = () => {} } = props
+  const { word, changeWord = () => { } } = props
   const { playKeySound, playBeepSound, playSuccessSound } = useKeySound()
 
   const audioRef = useRef<HTMLAudioElement>(null)
@@ -44,6 +44,12 @@ const Card = (props: CardProps) => {
       const char = e.key
       if (isLegal(char) && !e.altKey && !e.ctrlKey && !e.metaKey) {
         setInputWord((value) => (value += char))
+        playKeySound()
+      }
+      if (e.keyCode === 8) {
+        setInputWord((value) => {
+          return value.substr(0, value.length - 1)
+        })
         playKeySound()
       }
     }
@@ -117,6 +123,7 @@ const Card = (props: CardProps) => {
           ></Letter>
         ))}
       </div>
+      <div>111</div>
     </div>
   )
 }

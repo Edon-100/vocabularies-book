@@ -30,7 +30,7 @@ import './card-item.less'
 */
 
 const Card = (props: CardProps) => {
-  const { word, changeWord = () => { } } = props
+  const { word, changeWord = () => {} } = props
   const { playKeySound, playBeepSound, playSuccessSound } = useKeySound()
 
   const audioRef = useRef<HTMLAudioElement>(null)
@@ -38,21 +38,26 @@ const Card = (props: CardProps) => {
   const [hasWrong, setHasWrong] = useState(false)
   const [isFinish, setIsFinish] = useState(false)
   const [statesList, setStatesList] = useState<LetterState[]>([])
+  const keyEvent = (e: any) => {
+    const char = e.key
+    if (isLegal(char) && !e.altKey && !e.ctrlKey && !e.metaKey) {
+      console.log(inputWord)
+      // setInputWord((value) => (value += char))
+      // let inputWord += (char as any)
+      let new2 = inputWord
+      setInputWord((new2 += char))
+      playKeySound()
+    }
+    if (e.keyCode === 8) {
+      setInputWord((value) => {
+        return value.substr(0, value.length - 1)
+      })
+      playKeySound()
+    }
+  }
 
   useEffect(() => {
-    const keyEvent = (e: any) => {
-      const char = e.key
-      if (isLegal(char) && !e.altKey && !e.ctrlKey && !e.metaKey) {
-        setInputWord((value) => (value += char))
-        playKeySound()
-      }
-      if (e.keyCode === 8) {
-        setInputWord((value) => {
-          return value.substr(0, value.length - 1)
-        })
-        playKeySound()
-      }
-    }
+    ;(window as any).word = word
     document.addEventListener('keydown', keyEvent)
     return () => {
       document.removeEventListener('keydown', keyEvent)
@@ -115,83 +120,22 @@ const Card = (props: CardProps) => {
         src={`https://dict.youdao.com/dictvoice?audio=${word?.text}`}
         ref={audioRef}
       ></audio>
-      <div className={`'card' ${hasWrong ? 'wrong' : ''}`}>
-        {word?.text.split('').map((l, index) => (
-          <Letter
-            letter={l}
-            visible={statesList[index] === 'correct' ? true : false}
-          ></Letter>
-        ))}
+      <div className="card">
+        <div className={` letter_wrapper ${hasWrong ? 'wrong' : ''}`}>
+          {word?.text.split('').map((l, index) => (
+            <Letter
+              letter={l}
+              visible={statesList[index] === 'correct' ? true : false}
+            ></Letter>
+          ))}
+        </div>
+        <div
+          className="desc">
+          {word?.youdao.web[0].value.join('; ')}
+        </div>
       </div>
-      <div>111</div>
     </div>
   )
 }
 
 export default React.memo(Card)
-
-// export default function Card(props: CardProps) {
-// 	console.log('card update')
-//   const { word, changeWord } = props
-
-//   const audioRef = useRef<HTMLAudioElement>(null)
-//   const inputRef = useRef<HTMLInputElement>(null)
-//   const [showInput, setShowInput] = useState(false)
-
-//   useEffect(() => {
-//     const keyEvent = (e) => {
-//       if (80 == e.keyCode && e.shiftKey) {
-//         changeWord('prev')
-//         // audioRef?.current?.play()
-//       }
-//       if (78 == e.keyCode && e.shiftKey) {
-//         changeWord('next')
-//         // audioRef?.current?.play()
-//       }
-//       if (82 == e.keyCode && e.shiftKey) {
-//         audioRef?.current?.play()
-//       }
-//       if (73 == e.keyCode && e.shiftKey) {
-//         setShowInput(!showInput)
-//         setTimeout(() => {
-//           inputRef?.current?.focus()
-//         }, 0)
-//       }
-//     }
-//     document.addEventListener('keydown', keyEvent)
-//     return () => {
-//       document.removeEventListener('keydown', keyEvent)
-//     }
-//   }, [])
-
-// 	useEffect(() => {
-// 		audioRef?.current?.play()
-// 	}, [word])
-
-//   const handleInputSubmit = (e) => {
-//     if (e.keyCode === 13) {
-//       if (inputRef?.current?.value === word.text) {
-//         utools.showNotification('拼写正确')
-//       } else {
-//         utools.showNotification('拼写错误')
-//       }
-//     }
-//   }
-
-//   return (
-//     <div className="single_card_wrapper">
-//       <audio
-//         src={`https://dict.youdao.com/dictvoice?audio=${word.text}`}
-//         ref={audioRef}
-//       ></audio>
-//       {showInput && (
-//         <input
-//           type="text"
-//           className="dictation"
-//           ref={inputRef}
-//           onKeyDown={(e) => handleInputSubmit(e)}
-//         />
-//       )}
-//       <div className="card">{word.text}</div>
-//     </div>
-//   )

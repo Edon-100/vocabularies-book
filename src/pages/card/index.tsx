@@ -34,7 +34,12 @@ export default function WordCard(props: WordProps) {
 
   return (
     <div className="card-page">
-      <div className="setting">开始</div>
+      <div className="setting">
+        <div className="setting-item translation">中</div>
+        <i className="iconfont icon-headset"></i>
+        <i className="iconfont icon-next"></i>
+        <i className="iconfont icon-previous"></i>
+      </div>
       <Card word={word} changeWord={handleWordIndexChange}></Card>
       {/* <div onClick={handleWordIndexChange}>Option + N 下一个</div> */}
     </div>

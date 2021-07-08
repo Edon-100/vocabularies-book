@@ -25,6 +25,8 @@ declare module '*.jpeg'
 declare module '*.gif'
 declare module '*.mp3'
 declare module '*.tiff'
+declare var require: any
+
 
 interface UtoolsAction {
   code: 'add_vocabulary' | 'kill' | string

@@ -13,7 +13,8 @@ module.exports = {
     path: outputPath
   },
   plugins: [
-    new CopyWebpackPlugin({ patterns: [{ from: 'utools', to: outputPath }] })
+    new CopyWebpackPlugin({ patterns: [{ from: 'utools', to: outputPath }] }),
+    new CopyWebpackPlugin({ patterns: [{ from: 'public', to: outputPath }] })
   ],
   performance: {
     hints: false
@@ -32,7 +33,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(png|jpg|gif|wav|mp3)$/i,
+        test: /\.(ttf|woff|png|jpg|gif|wav|mp3)$/i,
         use: [
           {
             loader: 'url-loader',

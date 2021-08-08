@@ -41,11 +41,7 @@ const Card = (props: CardProps) => {
   const keyEvent = (e: any) => {
     const char = e.key
     if (isLegal(char) && !e.altKey && !e.ctrlKey && !e.metaKey) {
-      console.log(inputWord)
-      // setInputWord((value) => (value += char))
-      // let inputWord += (char as any)
-      let new2 = inputWord
-      setInputWord((new2 += char))
+      setInputWord(inputWord => inputWord+=char)
       playKeySound()
     }
     if (e.keyCode === 8) {
@@ -54,10 +50,18 @@ const Card = (props: CardProps) => {
       })
       playKeySound()
     }
+    if (80 == e.keyCode && e.shiftKey) {
+      changeWord('prev')
+    }
+    if (78 == e.keyCode && e.shiftKey) {
+      changeWord('next')
+    }
+    if (82 == e.keyCode && e.shiftKey) {
+      audioRef?.current?.play()
+    }
   }
 
   useEffect(() => {
-    ;(window as any).word = word
     document.addEventListener('keydown', keyEvent)
     return () => {
       document.removeEventListener('keydown', keyEvent)
@@ -94,12 +98,16 @@ const Card = (props: CardProps) => {
 
   useEffect(() => {
     if (isFinish) {
-      playSuccessSound()
-      changeWord('next')
-      setIsFinish(false)
-      setInputWord('')
+      setTimeout(() => {
+        playSuccessSound()
+        changeWord('next')
+        setIsFinish(false)
+        setInputWord('')
+      }, 1000)
+      
       // 要开启
-      window.services.wordModel.addWordToNextLevel(word!.text)
+      console.log('单词升做下一个等级')
+      // window.services.wordModel.addWordToNextLevel(word!.text)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFinish])
@@ -110,7 +118,7 @@ const Card = (props: CardProps) => {
       setTimeout(() => {
         setInputWord('')
         setHasWrong(false)
-      }, 300)
+      }, 1000)
     }
   }, [hasWrong, isFinish, playBeepSound])
 

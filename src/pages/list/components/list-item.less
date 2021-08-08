@@ -1,20 +1,43 @@
 .list-card {
   position: relative;
-  width: 48%;
-	max-width: 48%;
-	min-width: 48%;
+  padding: 4px 8px;
+  margin-top: 20px;
+  width: 40%;
+	max-width: 40%;
+	min-width: 40%;
 	flex: 1;
-  background: #eee;
+  background: #e6f7ff;
   border: 1px solid #ccc;
-  .header {
+  .operate_btn {
+    cursor: pointer;
+    color: #b37feb;
+    margin-right: 10px;
+  }
+  .card-header {
+    position: relative;
     display: flex;
     align-items: center;
+    height: 45px;
     span {
       margin-left: 12px;
     }
-    .play {
-      margin-left: 10px;
+    .btn_groups {
+      position: absolute;
+      right: 10px;
+      i {
+        margin-left: 4px;
+        cursor: pointer;
+      }
+      .showTranslate {
+        color: #d48806;
+      }
+      .delete {
+        color: #ff7875;
+      }
     }
+    // .play {
+    //   margin-left: 10px;
+    // }
   }
   .delete_btn {
     position: absolute;

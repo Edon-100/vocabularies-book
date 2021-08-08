@@ -1115,7 +1115,7 @@ export default class App extends React.Component<any, HomeState> {
       payload: {},
       optional: []
     } as UtoolsAction
-  }
+  } as HomeState
 
   componentDidMount() {
     // utools.onPluginEnter((action) => {
@@ -1147,9 +1147,9 @@ export default class App extends React.Component<any, HomeState> {
       list
     })
   }
-  switchWordType = (wordType: string) => {
+  switchWordType = () => {
     this.setState({
-      wordType
+      wordType: this.state.wordType === 'list' ? 'card' : 'list'
     })
   }
 
@@ -1157,10 +1157,10 @@ export default class App extends React.Component<any, HomeState> {
     const { wordType } = this.state
     return (
       <ErrorBoundary>
-        {/* <div className="switch_btn">
-          <button onClick={() => this.switchWordType('list')}>List 模式</button>
-          <button onClick={() => this.switchWordType('card')}>Card 模式</button>
-        </div> */}
+        <div className="home_header">
+          <div className="switch_btn" onClick={() => this.switchWordType()}>{wordType === 'list' ? '卡' : '列'}</div>
+          {/* <div onClick={() => this.switchWordType('card')}>卡</div> */}
+        </div>
         {wordType === 'list' ? (
           <WordList
             list={this.state.list}

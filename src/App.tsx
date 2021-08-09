@@ -4,6 +4,9 @@ import WordList from './pages/list'
 import WordCard from './pages/card'
 import './index.less'
 import ErrorBoundary from './components/ErrorBoundaries'
+import dayjs from 'dayjs'
+
+(window as any).dayjs = dayjs;
 
 const mock =
 {
@@ -1108,7 +1111,7 @@ export default class App extends React.Component<any, HomeState> {
   state = {
     total: 0,
     list: [],
-    wordType: 'card',
+    wordType: 'list',
     action: {
       code: '',
       type: '',
@@ -1118,34 +1121,35 @@ export default class App extends React.Component<any, HomeState> {
   } as HomeState
 
   componentDidMount() {
-    // utools.onPluginEnter((action) => {
-    //   if (action.code === 'add_vocabulary') {
-    //     window.services.wordModel.addVocabulary().then((res) => {
+    utools.onPluginEnter((action) => {
+      if (action.code === 'add_vocabulary') {
+        window.services.wordModel.addVocabulary().then((word) => {
+          console.log('then', word);
           this.updateWordsListToState()
-    //     })
-    //   } else {
-    //     this.updateWordsListToState()
-    //   }
-    // })
+        })
+      } else {
+        this.updateWordsListToState()
+      }
+    })
   }
 
   updateWordsListToState = () => {
-    // const list = window.services.wordModel.getNeedLearnList()
-    // console.log('updateWordsListToState', list)
-    // const total = list?.length
-    // this.setState({
-    //   total,
-    //   list
-    // })
-
-
-    const list = mock.list;
+    const list = window.services.wordModel.getNeedLearnList()
+    console.log('updateWordsListToState', list)
     const total = list?.length
     this.setState({
       total,
-      // @ts-ignore
       list
     })
+
+
+    // const list = mock.list;
+    // const total = list?.length
+    // this.setState({
+    //   total,
+    //   // @ts-ignore
+    //   list
+    // })
   }
   switchWordType = () => {
     this.setState({

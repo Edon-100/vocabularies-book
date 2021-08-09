@@ -48,10 +48,10 @@ export default function Card({ word, updateList = () => {} }: CardProps) {
         </div>
       </div>
       {showTranslate && <div className="translation">{word?.translation}</div>}
-      {/* <div>Level: {word?.learn.level} 待删</div> */}
+      <div>Level: {word?.learn.level} 待删</div>
       <div>
-        上次学习时间:{' '}
-        {dayjs(word?.learn.learnDate).format('YYYY-MM-DD')}
+        复习时间:{' '}
+        {dayjs(word?.learn.learnDate).format('YYYY-MM-DD hh:mm:ss')}
       </div>
       <span onClick={() => handleLevelUp(word?.text)} className="operate_btn">
         记得

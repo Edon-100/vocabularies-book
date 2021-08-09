@@ -102,7 +102,11 @@ const Card = (props: CardProps) => {
         playSuccessSound()
         changeWord('next')
         setIsFinish(false)
-        setInputWord('')
+        setInputWord(word => {
+          window.services.wordModel.addWordBackPreviousLevel(word)
+          setStatesList([])
+          return word
+        })
       }, 1000)
       
       // 要开启

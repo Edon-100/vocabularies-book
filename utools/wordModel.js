@@ -60,7 +60,7 @@ class WordModel {
       const { content } = await searchWords(text)
       const material = this._createMaterialObj(text, content)
       this.db.addMaterialObj(material)
-      return true
+      return text
     } catch (error) {
       console.log(error)
     }
@@ -72,8 +72,12 @@ class WordModel {
    */
   getNeedLearnList() {
     const materialList = this.getMaterials()
-    const l2 = materialList.filter(({ learn }) => {
-      return dayjs().format() > learn.learnDate
+    console.log('materialList', materialList)
+    const l2 = materialList.filter(({ learn, ctime }) => {
+      return (
+        (dayjs().format() > learn.learnDate && !learn.done) ||
+        dayjs().unix() - dayjs(ctime).unix() < 5
+      )
     })
     return l2
   }
@@ -86,6 +90,7 @@ class WordModel {
     const materialList = this.getMaterials()
     const material = materialList.find((it) => it.text === text)
     const level = material.learn.level + 1
+    console.log('material', material)
     if (forgettingCurve[level]) {
       const time = dayjs().add(forgettingCurve[level], 'm').format()
       material.learn = {

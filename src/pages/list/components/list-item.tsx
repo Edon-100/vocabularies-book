@@ -47,7 +47,7 @@ export default function Card({ word, updateList = () => {} }: CardProps) {
         <i className="iconfont icon-shanchu delete" onClick={() => handleDelete(word!.text)}></i>
         </div>
       </div>
-      {showTranslate && <div className="translation">{word?.translation}</div>}
+      {showTranslate && <div className="translation">{word?.youdao?.basic?.explains?.map(text => <div>{text}</div>) || word?.translation}</div>}
       <div>Level: {word?.learn.level} 待删</div>
       <div>
         复习时间:{' '}

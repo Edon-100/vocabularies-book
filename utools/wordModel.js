@@ -57,6 +57,9 @@ class WordModel {
       let text = clipboard.readText()
       const index = text.indexOf('摘')
       text = index > 0 ? text.slice(0, text.indexOf('摘')) : text // 兼容苹果book
+      text = text.replaceAll('\n', '')
+      let regRes = text.match(/^\“(.*)\”$/)
+      text = regRes ? regRes[1] : text;
       const { content } = await searchWords(text)
       const material = this._createMaterialObj(text, content)
       this.db.addMaterialObj(material)
@@ -90,7 +93,6 @@ class WordModel {
     const materialList = this.getMaterials()
     const material = materialList.find((it) => it.text === text)
     const level = material.learn.level + 1
-    console.log('material', material)
     if (forgettingCurve[level]) {
       const time = dayjs().add(forgettingCurve[level], 'm').format()
       material.learn = {

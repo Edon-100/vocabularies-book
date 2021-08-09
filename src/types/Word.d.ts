@@ -13,7 +13,7 @@ interface YoudaoBasic {
   ['uk-phonetic']: string
   ['us-phonetic']: string
   ['uk-speech']: string
-  explains: string[]
+  explains?: string[]
   ['us-speech']: string
   isWord: boolean
   speakUrl: string

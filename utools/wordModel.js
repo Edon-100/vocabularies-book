@@ -86,6 +86,25 @@ class WordModel {
   }
 
   /**
+   * @description 一次性返回需要复习的单词，还有库里所有的单词
+   * @return {any}
+   */
+  getAllAndNeedList() {
+    const materialList = this.getMaterials()
+    console.log('materialList', materialList)
+    const l2 = materialList.filter(({ learn, ctime }) => {
+      return (
+        (dayjs().format() > learn.learnDate && !learn.done) ||
+        dayjs().unix() - dayjs(ctime).unix() < 5
+      )
+    })
+    return {
+      allWords: materialList,
+      needLearnWords: l2
+    }
+  }
+
+  /**
    * @description 增加单词的记忆时间
    * @param {string} text 单词string
    */

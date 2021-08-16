@@ -1,5 +1,6 @@
 interface HomeState {
   total: number
+  allWordsNumber: number
   wordType: 'list' | 'card'
   list: Word[]
   action: UtoolsAction | {}

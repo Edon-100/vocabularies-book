@@ -1110,6 +1110,7 @@ const mock =
 export default class App extends React.Component<any, HomeState> {
   state = {
     total: 0,
+    allWordsNumber:0,
     list: [],
     wordType: 'list',
     action: {
@@ -1131,18 +1132,23 @@ export default class App extends React.Component<any, HomeState> {
         this.updateWordsListToState()
       }
     })
+
+    /* mock */
+    // this.updateWordsListToState();
   }
 
   updateWordsListToState = () => {
-    const list = window.services.wordModel.getNeedLearnList()
-    console.log('updateWordsListToState', list)
+    const {allWords, needLearnWords:list} = window.services.wordModel.getAllAndNeedList()
+    console.log('updateWordsListToState', list, allWords)
     const total = list?.length
+    const allWordsNumber = allWords?.length
     this.setState({
       total,
-      list
+      list,
+      allWordsNumber
     })
 
-
+    /* mock */
     // const list = mock.list;
     // const total = list?.length
     // this.setState({
@@ -1166,11 +1172,14 @@ export default class App extends React.Component<any, HomeState> {
           {/* <div onClick={() => this.switchWordType('card')}>卡</div> */}
         </div>
         {wordType === 'list' ? (
-          <WordList
-            list={this.state.list}
-            total={this.state.total}
-            updateList={this.updateWordsListToState}
-          />
+          <>
+            <div>单词总数:{this.state.allWordsNumber}</div>
+            <WordList
+              list={this.state.list}
+              total={this.state.total}
+              updateList={this.updateWordsListToState}
+            />
+          </>
         ) : (
           <WordCard
             list={this.state.list}

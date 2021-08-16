@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import './list-item.less'
 
 export default function Card({ word, updateList = () => {} }: CardProps) {
-  const [showTranslate, setShowTranslate] = useState(true)
+  const [showTranslate, setShowTranslate] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
   const hanleShowTranslate = () => {

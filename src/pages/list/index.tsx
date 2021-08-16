@@ -12,7 +12,7 @@ class WordList extends React.Component<WordProps> {
         <div className="words-cards-wrapper">
           {!!list.length &&
             list.map((item: Word) => (
-              <Card word={item} updateList={updateList}></Card>
+              <Card word={item} updateList={updateList} key={item.text}></Card>
             ))}
         </div>
       </div>

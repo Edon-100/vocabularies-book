@@ -16,4 +16,5 @@ type LetterState = 'normal' | 'correct' | 'wrong'
 interface LetterProps {
   letter: string
   visible: boolean
+  mode: 'hidden' | 'visible'
 }

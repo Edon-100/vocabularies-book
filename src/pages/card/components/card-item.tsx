@@ -35,10 +35,12 @@ const Card = (props: CardProps) => {
 
   const audioRef = useRef<HTMLAudioElement>(null)
   const [inputWord, setInputWord] = useState('')
+  const inputWordRef = useRef({input:''});
   const [hasWrong, setHasWrong] = useState(false)
   const [isFinish, setIsFinish] = useState(false)
   const [statesList, setStatesList] = useState<LetterState[]>([])
   const keyEvent = (e: any) => {
+    if (hasWrong) return;
     const char = e.key
     if (isLegal(char) && !e.altKey && !e.ctrlKey && !e.metaKey) {
       setInputWord(inputWord => inputWord+=char)
@@ -69,12 +71,13 @@ const Card = (props: CardProps) => {
   }, [])
 
   useLayoutEffect(() => {
+    inputWordRef.current.input = inputWord;
     let hasWrong = false,
       wordLength = word?.text.length || 0,
       inputWordLength = inputWord.length
     const statesList: LetterState[] = []
     if (!wordLength) return
-
+    console.log('inputWord', inputWordRef.current.input)
     for (let i = 0; i < wordLength && i < inputWordLength; i++) {
       if (word?.text[i] === inputWord[i]) {
         statesList.push('correct')
@@ -136,6 +139,8 @@ const Card = (props: CardProps) => {
         <div className={` letter_wrapper ${hasWrong ? 'wrong' : ''}`}>
           {word?.text.split('').map((l, index) => (
             <Letter
+              key={index}
+              mode="visible"
               letter={l}
               visible={statesList[index] === 'correct' ? true : false}
             ></Letter>

@@ -5,8 +5,8 @@ import WordCard from './pages/card'
 import './index.less'
 import ErrorBoundary from './components/ErrorBoundaries'
 import dayjs from 'dayjs'
+import 'rc-tooltip/assets/bootstrap.css'
 
-(window as any).dayjs = dayjs;
 
 const mock =
 {
@@ -1110,9 +1110,11 @@ const mock =
 export default class App extends React.Component<any, HomeState> {
   state = {
     total: 0,
-    allWordsNumber:0,
+    allWordsNumber: 0,
+    doneTotal: 0,
     list: [],
-    wordType: 'list',
+    allWords: [],
+    wordType: 'card',
     action: {
       code: '',
       type: '',
@@ -1138,14 +1140,17 @@ export default class App extends React.Component<any, HomeState> {
   }
 
   updateWordsListToState = () => {
-    const {allWords, needLearnWords:list} = window.services.wordModel.getAllAndNeedList()
+    const {allWords, needLearnWords:list, doneList} = window.services.wordModel.getAllAndNeedList()
     console.log('updateWordsListToState', list, allWords)
     const total = list?.length
     const allWordsNumber = allWords?.length
     this.setState({
       total,
+      allWords,
       list,
-      allWordsNumber
+      // list: allWords,
+      allWordsNumber,
+      doneTotal: doneList.length
     })
 
     /* mock */
@@ -1157,9 +1162,11 @@ export default class App extends React.Component<any, HomeState> {
     //   list
     // })
   }
-  switchWordType = () => {
+  switchWordType = (type: 'list' | 'card') => {
+    if (this.state.wordType === type) return;
+    this.updateWordsListToState()
     this.setState({
-      wordType: this.state.wordType === 'list' ? 'card' : 'list'
+      wordType: type
     })
   }
 
@@ -1167,26 +1174,50 @@ export default class App extends React.Component<any, HomeState> {
     const { wordType } = this.state
     return (
       <ErrorBoundary>
-        <div className="home_header">
-          <div className="switch_btn" onClick={() => this.switchWordType()}>{wordType === 'list' ? '卡' : '列'}</div>
-          {/* <div onClick={() => this.switchWordType('card')}>卡</div> */}
+        <div className="home">
+          <div className="home_header">
+          </div>
+          <div className="home_body">
+            {wordType === 'list' ? (
+              <>
+                <div></div>
+                <WordList
+                  list={this.state.list}
+                  total={this.state.total}
+                  updateList={this.updateWordsListToState}
+                />
+              </>
+            ) : (
+              <WordCard
+                allWords={this.state.allWords}
+                list={this.state.list}
+                total={this.state.total}
+                updateList={this.updateWordsListToState}
+              />
+            )}
+          </div>
+          <div className="home_footer">
+            <div>
+              <span>
+                单词总数: {this.state.allWordsNumber}
+              </span>
+              <span>
+                待复习: {this.state.total}
+              </span>
+              <span>
+                已记完: {this.state.doneTotal}
+              </span>
+            </div>
+            <div>
+              <i
+                onClick={() => this.switchWordType('list')}
+                className={`iconfont icon-list ${wordType === 'list' ? 'active' : ''}`} />
+              <i
+                onClick={() => this.switchWordType('card')}
+                className={`iconfont icon-card ${wordType === 'card' ? 'active' : ''}`} />
+            </div>
+          </div>
         </div>
-        {wordType === 'list' ? (
-          <>
-            <div>单词总数:{this.state.allWordsNumber}</div>
-            <WordList
-              list={this.state.list}
-              total={this.state.total}
-              updateList={this.updateWordsListToState}
-            />
-          </>
-        ) : (
-          <WordCard
-            list={this.state.list}
-            total={this.state.total}
-            updateList={this.updateWordsListToState}
-          />
-        )}
       </ErrorBoundary>
     )
   }

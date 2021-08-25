@@ -1,53 +1,146 @@
-.list-card {
+.list-item {
+  border-radius: 4px;
+  border: 1px solid #ebeef5;
+  background-color: #fff;
+  overflow: hidden;
+  color: #303133;
+  transition: 0.3s;
   position: relative;
-  padding: 4px 8px;
-  margin-top: 20px;
-  width: 40%;
-	max-width: 40%;
-	min-width: 40%;
-	flex: 1;
-  background: #e6f7ff;
-  border: 1px solid #ccc;
-  .operate_btn {
-    cursor: pointer;
-    color: #b37feb;
-    margin-right: 10px;
+  width: 45%;
+  padding: 16px;
+  margin-bottom: 16px;
+  &:hover {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   }
-  .card-header {
-    position: relative;
+  .word {
     display: flex;
     align-items: center;
-    height: 45px;
-    span {
-      margin-left: 12px;
+    font-size: 26px;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 8px;
+    .phonetic {
+      color: #999;
+      margin-left: 16px;
+      font-size: 16px;
     }
-    .btn_groups {
-      position: absolute;
-      right: 10px;
-      i {
-        margin-left: 4px;
-        cursor: pointer;
-      }
-      .showTranslate {
-        color: #d48806;
-      }
-      .delete {
-        color: #ff7875;
-      }
-    }
-    // .play {
-    //   margin-left: 10px;
-    // }
   }
-  .delete_btn {
+  .level {
+    color: #999;
     position: absolute;
-    bottom: 10px;
-    right: 0;
-    width: 40px;
-    height: 30px;
-    color: red;
+    top: 16px;
+    right: 16px;
+    .iconfont {
+      font-size: 18px;
+      // &.icon-level-1 {
+      //   color: #ffcdd2
+      // }
+      // &.icon-level-2 {
+      //   color: #ef9a9a;
+      // }
+      // &.icon-level-3 {
+      //   color: #e57373;
+      // }
+      // &.icon-level-4 {
+      //   color: #ef5350;
+      // }
+      // &.icon-level-5 {
+      //   color: #f44336;
+      // }
+      // &.icon-level-6 {
+      //   color: #e53935;
+      // }
+      // &.icon-level-7 {
+      //   color: #d32f2f;
+      // }
+      // &.icon-level-8 {
+      //   color: #c62828;
+      // }
+      // &.icon-level-9 {
+      //   color: #b71c1c;
+      // }
+      // &.icon-level-10 {
+      //   color: #b71c1c;
+      // }
+      // &.icon-level-1 {
+      //   color: #227e3c;
+      // }
+      &.icon-level-1 {
+        color: #adb5bd;
+      }
+      &.icon-level-2 {
+        color: #ff6b6b;
+      }
+      &.icon-level-3 {
+        color: #f06595;
+      }
+      &.icon-level-4 {
+        color: #cc5de8;
+      }
+      &.icon-level-5 {
+        color: #845ef7;
+      }
+      &.icon-level-6 {
+        color: #5c7cfa;
+      }
+      &.icon-level-7 {
+        color: #339af0;
+      }
+      &.icon-level-8 {
+        color: #22b8cf;
+      }
+      &.icon-level-9 {
+        color: #20c997;
+      }
+      // &.icon-level-1 {
+      //   color: #227e3c;
+      // }
+      // &.icon-level-2 {
+      //   color: #36B444;
+      // }
+      // &.icon-level-3 {
+      //   color: #56C138;
+      // }
+      // &.icon-level-4 {
+      //   color: #ACD91D;
+      // }
+      // &.icon-level-5 {
+      //   color: #D7E40C;
+      // }
+      // &.icon-level-6 {
+      //   color: #fce300;
+      // }
+      // &.icon-level-7 {
+      //   color: #F9C00C;
+      // }
+      // &.icon-level-8 {
+      //   color: #f08706;
+      // }
+      // &.icon-level-9 {
+      //   color: #E82F38;
+      // }
+    }
   }
-  .translation {
-    padding-right: 30px;
+  .time {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 16px;
+  }
+  .operate {
+    cursor: pointer;
+    font-size: 18px;
+    color: #409eff;
+    display: flex;
+    justify-content: space-between;
+    i {
+      & + i {
+        margin-left: 16px;
+      }
+      &.icon-delete,
+      &.icon-close {
+        color: #f56c6c;
+      }
+    }
   }
 }

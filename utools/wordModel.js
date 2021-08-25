@@ -91,8 +91,13 @@ class WordModel {
    */
   getAllAndNeedList() {
     const materialList = this.getMaterials()
+    const doneList = []
     console.log('materialList', materialList)
-    const l2 = materialList.filter(({ learn, ctime }) => {
+    const l2 = materialList.filter((word) => {
+      const {learn, ctime} = word
+      if (learn.done) {
+        doneList.push(word)
+      }
       return (
         (dayjs().format() > learn.learnDate && !learn.done) ||
         dayjs().unix() - dayjs(ctime).unix() < 5
@@ -100,7 +105,8 @@ class WordModel {
     })
     return {
       allWords: materialList,
-      needLearnWords: l2
+      needLearnWords: l2,
+      doneList
     }
   }
 

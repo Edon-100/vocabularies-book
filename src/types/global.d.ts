@@ -12,7 +12,7 @@ interface Window {
       deleteMaterialObj: (text: string) => Promise<DbReturn>
       getMaterials: () => Word[]
       getNeedLearnList: () => Word[]
-      getAllAndNeedList: () => {allWords: Word[], needLearnWords: Word[]}
+      getAllAndNeedList: () => {allWords: Word[], needLearnWords: Word[], doneList:Word[]}
       addWordToNextLevel: (text: string) => void
       addWordBackPreviousLevel: (text: string) => void
     }

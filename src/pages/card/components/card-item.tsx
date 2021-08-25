@@ -3,75 +3,74 @@ import React, {
   useRef,
   useState,
   useCallback,
-  useLayoutEffect
+  useLayoutEffect,
+  useImperativeHandle,
+  forwardRef
 } from 'react'
 import Letter from './letter'
 import useKeySound from '../../../hooks/useSounds'
 import { isLegal, playWordPronunciation } from 'src/utils'
 import './card-item.less'
 
-/* 
-      if (80 == e.keyCode && e.shiftKey) {
-        changeWord('prev')
-      }
-      if (78 == e.keyCode && e.shiftKey) {
-        changeWord('next')
-      }
-      if (82 == e.keyCode && e.shiftKey) {
-        audioRef?.current?.play()
-      }
-      if (73 == e.keyCode && e.shiftKey) {
-        setShowInput(!showInput)
-        setTimeout(() => {
-          inputRef?.current?.focus()
-        }, 0)
-      }
-
-*/
-
-const Card = (props: CardProps) => {
-  const { word, changeWord = () => {} } = props
+const PKey = 80
+const RKey = 82
+const NKey = 78
+const DelKey = 8
+// const PKey = 82
+const Card = (props: CardProps, cRef) => {
+  const { word, changeWord = () => {}, showTranslate, mode } = props
   const { playKeySound, playBeepSound, playSuccessSound } = useKeySound()
 
   const audioRef = useRef<HTMLAudioElement>(null)
   const [inputWord, setInputWord] = useState('')
-  const inputWordRef = useRef({input:''});
+  const inputWordRef = useRef({ input: '' })
   const [hasWrong, setHasWrong] = useState(false)
   const [isFinish, setIsFinish] = useState(false)
   const [statesList, setStatesList] = useState<LetterState[]>([])
+  const [banOnInput, setBanOnInput] = useState(false)
   const keyEvent = (e: any) => {
-    if (hasWrong) return;
+    if (banOnInput) return
     const char = e.key
     if (isLegal(char) && !e.altKey && !e.ctrlKey && !e.metaKey) {
-      setInputWord(inputWord => inputWord+=char)
+      setInputWord((inputWord) => (inputWord += char))
       playKeySound()
     }
-    if (e.keyCode === 8) {
+    if (e.keyCode === DelKey) {
       setInputWord((value) => {
         return value.substr(0, value.length - 1)
       })
       playKeySound()
     }
-    if (80 == e.keyCode && e.shiftKey) {
+    if (PKey == e.keyCode && e.shiftKey) {
       changeWord('prev')
     }
-    if (78 == e.keyCode && e.shiftKey) {
+    if (NKey == e.keyCode && e.shiftKey) {
       changeWord('next')
     }
-    if (82 == e.keyCode && e.shiftKey) {
+    if (RKey == e.keyCode && e.shiftKey) {
       audioRef?.current?.play()
     }
   }
+  useEffect(() => {
+    audioRef?.current?.play()
+    // playWordPronunciation(word?.text)
+  }, [word])
+
+  useImperativeHandle(cRef, () => ({
+    playWordSound: () => {
+      audioRef?.current?.play()
+    }
+  }));
 
   useEffect(() => {
     document.addEventListener('keydown', keyEvent)
     return () => {
       document.removeEventListener('keydown', keyEvent)
     }
-  }, [])
+  }, [word])
 
   useLayoutEffect(() => {
-    inputWordRef.current.input = inputWord;
+    inputWordRef.current.input = inputWord
     let hasWrong = false,
       wordLength = word?.text.length || 0,
       inputWordLength = inputWord.length
@@ -79,7 +78,7 @@ const Card = (props: CardProps) => {
     if (!wordLength) return
     console.log('inputWord', inputWordRef.current.input)
     for (let i = 0; i < wordLength && i < inputWordLength; i++) {
-      if (word?.text[i] === inputWord[i]) {
+      if (word?.text == '' || word?.text[i].toUpperCase() === inputWord[i].toUpperCase()) {
         statesList.push('correct')
       } else {
         hasWrong = true
@@ -95,23 +94,21 @@ const Card = (props: CardProps) => {
   }, [inputWord])
 
   useEffect(() => {
-    audioRef?.current?.play()
-    // playWordPronunciation(word?.text)
-  }, [word])
-
-  useEffect(() => {
     if (isFinish) {
       setTimeout(() => {
         playSuccessSound()
         changeWord('next')
         setIsFinish(false)
-        setInputWord(word => {
-          window.services.wordModel.addWordBackPreviousLevel(word)
+        setInputWord('')
+        setInputWord((inputWord) => {
+          if (word?.learn.level !== 'done') {
+            // window.services.wordModel.addWordBackPreviousLevel(inputWord)
+          }
           setStatesList([])
-          return word
+          return inputWord
         })
-      }, 1000)
-      
+      }, 600)
+
       // 要开启
       console.log('单词升做下一个等级')
       // window.services.wordModel.addWordToNextLevel(word!.text)
@@ -120,11 +117,14 @@ const Card = (props: CardProps) => {
   }, [isFinish])
 
   useEffect(() => {
+    if (banOnInput) return
     if (hasWrong) {
+      setBanOnInput(true)
       playBeepSound()
       setTimeout(() => {
         setInputWord('')
         setHasWrong(false)
+        setBanOnInput(false)
       }, 1000)
     }
   }, [hasWrong, isFinish, playBeepSound])
@@ -139,20 +139,23 @@ const Card = (props: CardProps) => {
         <div className={` letter_wrapper ${hasWrong ? 'wrong' : ''}`}>
           {word?.text.split('').map((l, index) => (
             <Letter
+              wrong={hasWrong}
               key={index}
-              mode="visible"
+              mode={mode}
               letter={l}
               visible={statesList[index] === 'correct' ? true : false}
             ></Letter>
           ))}
         </div>
-        <div
-          className="desc">
-          {word?.youdao.web[0].value.join('; ')}
-        </div>
+        {showTranslate && (
+          <div className="desc">
+            {word?.youdao?.basic?.explains?.map((text) => <div>{text}</div>) ||
+              word?.translation}
+          </div>
+        )}
       </div>
     </div>
   )
 }
 
-export default React.memo(Card)
+export default forwardRef(Card)

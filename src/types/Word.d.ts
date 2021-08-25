@@ -1,5 +1,5 @@
 interface Learn {
-  level: number
+  level: number | 'done'
   learnDate: Date
 }
 
@@ -45,6 +45,10 @@ interface Word {
 
 interface CardProps {
   word: Word | undefined
+  mode: 'visible' | 'hidden'
+  showTranslate?: boolean
   updateList?: (action?: UtoolsAction) => void
   changeWord?: (type: 'prev' | 'next') => void
+  // cRef?:any;
+  // playWordSound?: (word:any) => void
 }

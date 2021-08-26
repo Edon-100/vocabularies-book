@@ -2,13 +2,21 @@ class DB {
   constructor(tableName) {
     this.tableName = tableName
     utools.onPluginReady(() => {
-      this._db = utools.db.get(this.tableName) || {}
+      const db = utools.db.get(this.tableName)
+      if (db) {
+        this._db = db
+      } else {
+        this._db = utools.db.put({
+          _id: 'tableName',
+          data: {list:[]}
+        })
+      }
     })
   }
 
   addMaterialObj(material) {
     try {
-      this.getMaterials();
+      this.getMaterials()
       const list = this._db.list || []
       const existMaterial = list.find((it) => it.text === material.text)
       if (existMaterial) return
@@ -33,7 +41,7 @@ class DB {
 
   async deleteMaterialObj(text) {
     try {
-      this.getMaterials();
+      this.getMaterials()
       const list = this._db.list || []
       if (!list.length) return
       const newList = list.filter((item) => item.text !== text)

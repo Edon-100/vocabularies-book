@@ -1,7 +1,7 @@
 const { DB } = require('./db')
 const { forgettingCurve, tableNames } = require('./constant')
 const { searchWords } = require('./utils')
-const dayjs = require('dayjs')
+const dayjs = require('./dayjs.min.js')
 
 class WordModel {
   constructor() {
@@ -153,7 +153,6 @@ class WordModel {
 }
 
 const wordModel = new WordModel()
-
 module.exports = {
   wordModel
 }

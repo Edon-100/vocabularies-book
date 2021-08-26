@@ -1172,6 +1172,9 @@ export default class App extends React.Component<any, HomeState> {
 
   render() {
     const { wordType } = this.state
+    if (!this.state.list.length) {
+      return <div className="no_words_tips">暂无需要复习的单词</div>
+    }
     return (
       <ErrorBoundary>
         <div className="home">

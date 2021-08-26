@@ -1,5 +1,6 @@
 module.exports = {
   forgettingCurve: [
+    0,
     5,
     30,
     12 * 60,

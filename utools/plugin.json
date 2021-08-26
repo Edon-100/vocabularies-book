@@ -23,8 +23,8 @@
 			"explain": "开始记单词",
 			"cmds": [
 				{
-					"type": "window",
-					"label": "kill vocabularies"
+					"type": "text",
+					"label": "review vocabularies"
 				}
 			]
 		}		

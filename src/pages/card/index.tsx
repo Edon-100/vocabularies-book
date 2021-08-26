@@ -12,7 +12,7 @@ export default function WordCard(props: WordProps) {
   const [showTranslate, setShowTranslate] = useState(false)
   const [mode, setMode] = useState<'hidden' | 'visible'>('hidden')
   const [listType, setListType] = useState<'PART' | 'ALL'>('PART')
-  const [currentList, setCurrentList] = useState([])
+  const [currentList, setCurrentList] = useState<Word[]>([])
 
   const handleWordIndexChange = useCallback(
     (type: 'next' | 'prev') => {

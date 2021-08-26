@@ -17,7 +17,7 @@ const RKey = 82
 const NKey = 78
 const DelKey = 8
 // const PKey = 82
-const Card = (props: CardProps, cRef) => {
+const Card = (props: CardProps, cRef:any) => {
   const { word, changeWord = () => {}, showTranslate, mode } = props
   const { playKeySound, playBeepSound, playSuccessSound } = useKeySound()
 
@@ -141,7 +141,7 @@ const Card = (props: CardProps, cRef) => {
             <Letter
               wrong={hasWrong}
               key={index}
-              mode={mode}
+              mode={mode as 'visible' | 'hidden'}
               letter={l}
               visible={statesList[index] === 'correct' ? true : false}
             ></Letter>

@@ -2,9 +2,17 @@ const path = require('path')
 const outputPath = path.join(__dirname, 'dist')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
+const plugins = [
+  new CopyWebpackPlugin({ patterns: [{ from: 'public', to: outputPath }] })
+]
+if (process.env.NODE_ENV = 'development') {
+  plugins.push(new CopyWebpackPlugin({ patterns: [{ from: 'utools', to: outputPath }] }),)
+}
+
+console.log(111,process.env.NODE_FFFF)
 module.exports = {
   target: 'web',
-  mode: 'development',
+  mode: process.env.NODE_FFFF,
   entry: {
     index: './src/index.tsx',
   },
@@ -12,10 +20,7 @@ module.exports = {
     filename: '[name].js',
     path: outputPath
   },
-  plugins: [
-    // new CopyWebpackPlugin({ patterns: [{ from: 'utools', to: outputPath }] }),
-    new CopyWebpackPlugin({ patterns: [{ from: 'public', to: outputPath }] })
-  ],
+  plugins,
   performance: {
     hints: false
   },

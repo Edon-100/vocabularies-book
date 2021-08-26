@@ -21,12 +21,7 @@
 		{
 			"code": "review",
 			"explain": "开始记单词",
-			"cmds": [
-				{
-					"type": "text",
-					"label": "review vocabularies"
-				}
-			]
+			"cmds": ["review"]
 		}		
 	]
 }

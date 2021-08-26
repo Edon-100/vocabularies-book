@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "productName": "记单词",
   "scripts": {
-    "dev": "rm -rf dist && webpack -w",
-    "build": "rm -rf dist && webpack --mode production && cp utools/* ./dist",
-    "start": "webpack serve --open"
+    "dev": "rm -rf dist && cross-env NODE_FFFF=development webpack -w",
+    "build": "rm -rf dist && cross-env NODE_FFFF=production webpack --mode production&& cp utools/* ./dist",
+    "start": "webpack serve --open",
+    "test": "rm aaa.js && cross-env NODE_FFFF=production node test.js"
   },
   "dependencies": {
     "dayjs": "^1.10.5",
@@ -20,6 +21,7 @@
     "babel-loader": "^8.2.2",
     "babel-plugin-import": "^1.13.3",
     "copy-webpack-plugin": "^6.4.1",
+    "cross-env": "^7.0.3",
     "css-loader": "^5.0.1",
     "html-webpack-plugin": "^5.3.2",
     "less": "^3.13.1",

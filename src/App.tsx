@@ -1114,7 +1114,7 @@ export default class App extends React.Component<any, HomeState> {
     doneTotal: 0,
     list: [],
     allWords: [],
-    wordType: 'card',
+    wordType: 'list',
     action: {
       code: '',
       type: '',

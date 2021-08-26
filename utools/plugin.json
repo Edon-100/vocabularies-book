@@ -1,6 +1,6 @@
 {
-	"pluginName": "vocabularies killer",
-	"description": "vocabularies killer",
+	"pluginName": "vocabularies book",
+	"description": "vocabularies book",
 	"version": "0.0.1",
 	"logo": "logo.png",
 	"main": "index.html",
@@ -19,7 +19,7 @@
 			]
 		},
 		{
-			"code": "kill",
+			"code": "review",
 			"explain": "开始记单词",
 			"cmds": [
 				{

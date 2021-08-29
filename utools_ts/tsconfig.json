@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "baseUrl": "./",
+    "rootDir": "./",
+    "sourceMap": false, // 开启sourcemap
+    "module": "commonjs",
+    "target": "ES2020",
+    "allowJs": true,
+    "strict": true,
+    "types": [
+      "utools-api-types"
+    ],
+    "moduleResolution": "node",
+    "strictPropertyInitialization": false
+  }
+}

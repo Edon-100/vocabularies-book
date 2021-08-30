@@ -17,5 +17,9 @@
     "paths": {
       "src/*": ["src/*"]
     },
-  }
+  },
+  "exclude": [
+    "utools_ts",
+    "dist",
+  ],
 }

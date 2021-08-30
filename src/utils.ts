@@ -5,10 +5,7 @@ export const isLegal = (val: string): boolean =>
 export const playWordPronunciation = (text: string) => {
   console.log(`${window.services.constanst.audioBaseUrl}?audio=${text}`)
   audio.src = `${window.services.constanst.audioBaseUrl}?audio=${text}`
-  // audio.load = () => {
-    setTimeout(() => {
-      audio.play();
-    }, 50)
-    
-  // }
+  setTimeout(() => {
+    audio.play()
+  }, 50)
 }

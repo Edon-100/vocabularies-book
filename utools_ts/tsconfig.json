@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
+    "outDir": "../dist/utool",
     "baseUrl": "./",
     "rootDir": "./",
     "sourceMap": false, // 开启sourcemap
@@ -13,5 +13,12 @@
     ],
     "moduleResolution": "node",
     "strictPropertyInitialization": false
-  }
+  },
+  "include": [
+    "./**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+  ],  
 }

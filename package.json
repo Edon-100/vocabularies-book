@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "productName": "记单词",
   "scripts": {
-    "dev": "rm -rf dist && cross-env NODE_FFFF=development webpack -w",
+    "dev": "cross-env NODE_FFFF=development webpack -w",
     "build": "rm -rf dist && cross-env NODE_FFFF=production webpack --mode production&& cp utools/* ./dist",
     "start": "webpack serve --open",
-    "test": "rm aaa.js && cross-env NODE_FFFF=production node test.js"
+    "test": "rm aaa.js && cross-env NODE_FFFF=production node test.js",
+    "dev:ts": "concurrently \"npm run dev\" \"npx tsc -w -p ./utools_ts\" \"nodemon --delay 500ms --watch ./utools_ts/assets --exec node script/copy.js\"",
+    "dev:tt": "npx tsc -w -p ./utools_ts && nodemon --delay 500ms ./dist/utool --exec node script/copy.js"
   },
   "dependencies": {
     "dayjs": "^1.10.5",
@@ -20,9 +22,11 @@
     "@types/react-dom": "^17.0.8",
     "babel-loader": "^8.2.2",
     "babel-plugin-import": "^1.13.3",
+    "concurrently": "^6.2.1",
     "copy-webpack-plugin": "^6.4.1",
     "cross-env": "^7.0.3",
     "css-loader": "^5.0.1",
+    "fs-extra": "^10.0.0",
     "html-webpack-plugin": "^5.3.2",
     "less": "^3.13.1",
     "less-loader": "^7.1.0",

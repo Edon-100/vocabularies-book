@@ -4,7 +4,7 @@
 	"version": "0.0.1",
 	"logo": "logo.png",
 	"main": "index.html",
-	"preload":"preload.js",
+	"preload":"./utool/preload.js",
 	"features": [
 		{
 			"code": "add_vocabulary",

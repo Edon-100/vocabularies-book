@@ -15,7 +15,7 @@ export function Dialog(props: DialogProps) {
 	}
 	
   return (
-    <div className="dialog-wrapper">
+    <div className="delete-dialog-wrapper">
       <div className="dialog-body">
         <div className="dialog-header">
           <i className="iconfont icon-shanchu delete"></i>

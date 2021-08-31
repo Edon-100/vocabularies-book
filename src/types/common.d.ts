@@ -2,6 +2,8 @@ interface HomeState {
   total: number
   allWordsNumber: number
   doneTotal: number
+  showExport:boolean
+  showImport:boolean
   wordType: 'list' | 'card'
   list: Word[]
   allWords: Word[]

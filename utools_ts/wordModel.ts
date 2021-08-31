@@ -96,7 +96,7 @@ class WordModel {
   getAllAndNeedList(): AllTypeList {
     const allWords = this.getAllWords()
     const doneList = [] as Word[]
-    const needLearnWords = allWords.filter((word) => {
+    const needLearnWords = [...allWords].filter((word) => {
       const { learn, ctime } = word
       if (learn.done) {
         doneList.push(word)

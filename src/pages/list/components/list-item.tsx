@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Tooltip from 'rc-tooltip'
 import { Dialog } from 'src/components/dialog'
 import './list-item.less'
@@ -10,6 +10,12 @@ export default function Card({ word, updateList = () => {} }: CardProps) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
   const { playKeySound, playBeepSound, playSuccessSound } = useKeySound()
 
+  useEffect(() => {
+    (window as any).playBeepSound = playBeepSound;
+    (window as any).playKeySound = playKeySound;
+    (window as any).playSuccessSound = playSuccessSound;
+  }, [])
+
   const hanleShowTranslate = () => {
     setShowTranslate((showTranslate) => !showTranslate)
   }
@@ -20,7 +26,8 @@ export default function Card({ word, updateList = () => {} }: CardProps) {
 
   const handleDelete = async () => {
     console.log('删除')
-    await window.services.wordModel.deleteMaterialObj(word!.text)
+    await window.services.wordModel.deleteWrodObj(word!.text)
+    playBeepSound()
     updateList()
     setShowDeleteDialog(false)
   }
@@ -35,7 +42,7 @@ export default function Card({ word, updateList = () => {} }: CardProps) {
   const handleback = (text = '') => {
     console.log('降级')
     playBeepSound();
-    window.services.wordModel.addWordBackPreviousLevel(text)
+    window.services.wordModel.addWordToPreviousLevel(text)
     updateList()
   }
 

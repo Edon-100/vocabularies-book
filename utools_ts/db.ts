@@ -42,7 +42,6 @@ export class BaseDB {
         _rev: rev,
         list: wordList
       }
-      utools.shellBeep()
     } else {
       alert('更新数据库失败')
     }

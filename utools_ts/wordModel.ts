@@ -12,7 +12,7 @@ class WordModel {
   }
 
   /**
-   * @description 返回库中所有的单词
+   * @description 不加修饰，直接返回库中所有的单词
    * @returns {Word[]} wordList
    */
   public getAllWords() {
@@ -106,9 +106,9 @@ class WordModel {
         dayjs().unix() - dayjs(ctime).unix() < 5
       )
     })
-    console.log('allWords', allWords)
-    console.log('needLearnWords', needLearnWords)
-    console.log('doneList', doneList)
+    console.log('pre allWords', allWords)
+    console.log('pre needLearnWords', needLearnWords)
+    console.log('pre doneList', doneList)
     return {
       allWords,
       needLearnWords,
@@ -138,6 +138,22 @@ class WordModel {
       }
     }
     this.db.updateDataToDB(wordList)
+  }
+
+  /**
+   * @description 单词忘记了，回复到最原始的记忆level
+   * @param {*} text 单词
+   */
+  addWordToPreviousLevel(text:string) {
+    const wordList = this.getAllWords()
+    const word = wordList.find((it) => it.text === text)
+    if (word) {
+      word.learn = {
+        level: 0,
+        learnDate: dayjs().add(forgettingCurve[0], 'm').format()
+      }
+      this.db.updateDataToDB(wordList)
+    }
   }
 
   deleteWrodObj(text: string) {

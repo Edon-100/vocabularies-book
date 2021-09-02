@@ -9,3 +9,16 @@ export const playWordPronunciation = (text: string) => {
     audio.play()
   }, 50)
 }
+
+export async function read_file(file:File):Promise<string> {
+  const reader = new FileReader();
+  return new Promise((resolve) => {
+    reader.onloadend = () => {
+      resolve(reader.result as string);
+    };
+    reader.onerror = () => {
+      resolve('');
+    };
+    reader.readAsText(file);
+  });
+}

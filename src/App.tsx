@@ -7,6 +7,7 @@ import ErrorBoundary from './components/ErrorBoundaries'
 import dayjs from 'dayjs'
 import Tooltip from 'rc-tooltip'
 import 'rc-tooltip/assets/bootstrap.css'
+import { read_file } from './utils'
 
 const mock = {
   list: [
@@ -896,6 +897,12 @@ const mock = {
 }
 
 export default class App extends React.Component<any, HomeState> {
+  private uploadInput: React.RefObject<HTMLInputElement>
+  constructor(props: any) {
+    super(props)
+    this.uploadInput = React.createRef()
+  }
+
   state = {
     total: 0,
     allWordsNumber: 0,
@@ -965,28 +972,65 @@ export default class App extends React.Component<any, HomeState> {
   }
 
   handleDownloadTXT = () => {
-    const content = this.state.allWords.reduce((total,cur) => {
-      return total+= `${cur.text}\r\n`
+    const content = this.state.allWords.reduce((total, cur) => {
+      return (total += `${cur.text}\r\n`)
     }, '')
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
-    element.setAttribute('download', 'word.txt');
-    element.style.display = 'none';
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
+    var element = document.createElement('a')
+    element.setAttribute(
+      'href',
+      'data:text/plain;charset=utf-8,' + encodeURIComponent(content)
+    )
+    element.setAttribute('download', 'word.txt')
+    element.style.display = 'none'
+    document.body.appendChild(element)
+    element.click()
+    document.body.removeChild(element)
   }
 
   handleDownloadJson = () => {
     const data = JSON.stringify(this.state.allWords)
-    const blob = new Blob([data], {type: 'text/json'})
+    const blob = new Blob([data], { type: 'text/json' })
     const e = document.createEvent('MouseEvents')
     const a = document.createElement('a')
     a.download = 'word.json'
     a.href = window.URL.createObjectURL(blob)
     a.dataset.downloadurl = ['text/json', a.download, a.href].join(':')
-    e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+    e.initMouseEvent(
+      'click',
+      true,
+      false,
+      window,
+      0,
+      0,
+      0,
+      0,
+      0,
+      false,
+      false,
+      false,
+      false,
+      0,
+      null
+    )
     a.dispatchEvent(e)
+  }
+
+  loadFile = (e) => {
+    e.stopPropagation()
+    this.uploadInput.current?.click()
+  }
+
+  handleFileChange = async (e: any) => {
+    const file: File = e.target.files[0]
+    const fileResult = await read_file(file)
+    const type = file.name.indexOf('txt') > -1 ? 'txt' : 'json'
+
+    // const result = JSON.parse(fileResult)
+    console.log('handleFileChange', fileResult, type)
+  }
+
+  handleClickImport = () => {
+    this.setState({ showImport: true })
   }
 
   render() {
@@ -1016,15 +1060,53 @@ export default class App extends React.Component<any, HomeState> {
               />
             )}
           </div>
-          {
-            this.state.showExport && <div className="export-confirm-modal">
-              <div className="close" onClick={() => {this.setState({showExport: false})}}>X</div>
+          {this.state.showExport && (
+            <div className="export-confirm-modal">
+              <div
+                className="close"
+                onClick={() => {
+                  this.setState({ showExport: false })
+                }}
+              >
+                X
+              </div>
               <div className="export-group">
-                <div className="export-item" onClick={this.handleDownloadTXT}>导出txt</div>
-                <div className="export-item" onClick={this.handleDownloadJson}>导出Json</div>
+                <div className="export-item" onClick={this.handleDownloadTXT}>
+                  导出txt
+                </div>
+                <div className="export-item" onClick={this.handleDownloadJson}>
+                  导出Json
+                </div>
               </div>
             </div>
-          }
+          )}
+          {this.state.showImport && (
+            <div className="export-confirm-modal">
+              <div
+                className="close"
+                onClick={() => {
+                  this.setState({ showImport: false })
+                }}
+              >
+                X
+              </div>
+              <div className="export-group">
+                <div className="export-item" onClick={this.loadFile}>
+                  导入txt
+                </div>
+                <div className="export-item" onClick={this.loadFile}>
+                  导入Json
+                </div>
+              </div>
+            </div>
+          )}
+          <input
+            ref={this.uploadInput}
+            accept=".txt,.json"
+            type="file"
+            className="local-file-input"
+            onChange={this.handleFileChange}
+          />
           <div className="home_footer">
             <div>
               <span>单词总数: {this.state.allWordsNumber}</span>
@@ -1034,15 +1116,27 @@ export default class App extends React.Component<any, HomeState> {
             <div>
               {/* <div onClick={this.handleDownload}>导出</div> */}
               <Tooltip
+                overlay="导入"
+                overlayStyle={{ transform: 'scale(.8)' }}
+                placement="top"
+              >
+                <i
+                  onClick={this.handleClickImport}
+                  className="iconfont icon-import"
+                />
+              </Tooltip>
+              <Tooltip
                 overlay="导出"
                 overlayStyle={{ transform: 'scale(.8)' }}
                 placement="top"
               >
                 <i
-                    onClick={() => {this.setState({showExport: true})}}
-                    className="iconfont icon-export"
-                  />              
-              </Tooltip>              
+                  onClick={() => {
+                    this.setState({ showExport: true })
+                  }}
+                  className="iconfont icon-export"
+                />
+              </Tooltip>
               <Tooltip
                 overlay="列表模式"
                 overlayStyle={{ transform: 'scale(.8)' }}

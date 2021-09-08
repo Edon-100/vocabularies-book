@@ -1016,7 +1016,7 @@ export default class App extends React.Component<any, HomeState> {
     a.dispatchEvent(e)
   }
 
-  loadFile = (e) => {
+  loadFile = (e:any) => {
     e.stopPropagation()
     this.uploadInput.current?.click()
   }

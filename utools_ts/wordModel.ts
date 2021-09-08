@@ -156,6 +156,12 @@ class WordModel {
     }
   }
 
+  importWordList(importList:Word[]) {
+    const oldList = this.getAllWords()
+    const newList = oldList.concat(importList)
+    this.db.updateDataToDB(newList)
+  }
+
   deleteWrodObj(text: string) {
     this.db.deleteWord(text)
   }

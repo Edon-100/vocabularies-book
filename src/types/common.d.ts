@@ -4,7 +4,7 @@ interface HomeState {
   doneTotal: number
   showExport:boolean
   showImport:boolean
-  wordType: 'list' | 'card'
+  wordType: 'list' | 'card' | 'notebook'
   list: Word[]
   allWords: Word[]
   action: UtoolsAction | {}
@@ -17,6 +17,9 @@ interface WordProps {
   updateList?: (action?: UtoolsAction) => void
 }
 
+interface NoteBookProps {
+  allWords?: Word[]
+}
 type LetterState = 'normal' | 'correct' | 'wrong'
 
 interface LetterProps {

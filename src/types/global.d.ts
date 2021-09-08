@@ -13,6 +13,7 @@ interface Window {
       getAllAndNeedList: () => {allWords: Word[], needLearnWords: Word[], doneList:Word[]}
       addWordToNextLevel: (text: string) => void
       addWordToPreviousLevel: (text: string) => void
+      importWordList: (list:Word[]) => void
     }
   }
 }

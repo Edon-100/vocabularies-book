@@ -20,14 +20,14 @@ export default function WordCard(props: WordProps) {
       setIndex((prevCount) => {
         let newIndex
         if (type === 'next') {
-          newIndex = prevCount === list.length - 1 ? 0 : prevCount + 1
+          newIndex = prevCount === currentList.length - 1 ? 0 : prevCount + 1
         } else {
-          newIndex = prevCount === 0 ? list.length - 1 : prevCount - 1
+          newIndex = prevCount === 0 ? currentList.length - 1 : prevCount - 1
         }
         return newIndex
       })
     },
-    [index]
+    [index, currentList]
   )
 
   const keyEvent = (e: any) => {

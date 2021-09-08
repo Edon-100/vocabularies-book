@@ -2,6 +2,7 @@
 import React from 'react'
 import WordList from './pages/list'
 import WordCard from './pages/card'
+import NoteBook from './pages/notebook'
 import './index.less'
 import ErrorBoundary from './components/ErrorBoundaries'
 import dayjs from 'dayjs'
@@ -963,7 +964,7 @@ export default class App extends React.Component<any, HomeState> {
     //   list
     // })
   }
-  switchWordType = (type: 'list' | 'card') => {
+  switchWordType = (type: 'list' | 'card' | 'notebook') => {
     if (this.state.wordType === type) return
     this.updateWordsListToState()
     this.setState({
@@ -988,7 +989,7 @@ export default class App extends React.Component<any, HomeState> {
   }
 
   handleDownloadJson = () => {
-    const data = JSON.stringify(this.state.allWords)
+    const data = JSON.stringify({list: this.state.allWords})
     const blob = new Blob([data], { type: 'text/json' })
     const e = document.createEvent('MouseEvents')
     const a = document.createElement('a')
@@ -1020,13 +1021,25 @@ export default class App extends React.Component<any, HomeState> {
     this.uploadInput.current?.click()
   }
 
+  /**
+   * @description 把json文件导入到db中
+   * @param {*} e
+   */
   handleFileChange = async (e: any) => {
     const file: File = e.target.files[0]
-    const fileResult = await read_file(file)
-    const type = file.name.indexOf('txt') > -1 ? 'txt' : 'json'
-
-    // const result = JSON.parse(fileResult)
-    console.log('handleFileChange', fileResult, type)
+    try {
+      const fileResult = await read_file(file)
+      const data = JSON.parse(fileResult)
+      if (data.list && data.list[0]?.text && data.list[0]?.youdao) {
+        window.services.wordModel.importWordList(data.list)
+        this.updateWordsListToState()
+      } else {
+        alert('导入失败，请检查数据格式')
+      }
+    } catch (error) {
+      console.log('3333', error);
+      alert('导入失败，请检查数据格式')
+    }
   }
 
   handleClickImport = () => {
@@ -1035,15 +1048,13 @@ export default class App extends React.Component<any, HomeState> {
 
   render() {
     const { wordType } = this.state
-    if (!this.state.list.length) {
-      return <div className="no_words_tips">暂无需要复习的单词</div>
-    }
     return (
       <ErrorBoundary>
         <div className="home">
           <div className="home_header"></div>
           <div className="home_body">
-            {wordType === 'list' ? (
+            {!this.state.list.length && this.state.wordType !== 'card' && <div className="no_words_tips">暂无需要复习的单词</div>}
+            {wordType === 'list' && (
               <>
                 <WordList
                   list={this.state.list}
@@ -1051,13 +1062,17 @@ export default class App extends React.Component<any, HomeState> {
                   updateList={this.updateWordsListToState}
                 />
               </>
-            ) : (
+            )}
+            {wordType === 'card' && (
               <WordCard
                 allWords={this.state.allWords}
                 list={this.state.list}
                 total={this.state.total}
                 updateList={this.updateWordsListToState}
               />
+            )}
+            {wordType === 'notebook' && (
+              <NoteBook allWords={this.state.allWords}></NoteBook>
             )}
           </div>
           {this.state.showExport && (
@@ -1090,19 +1105,19 @@ export default class App extends React.Component<any, HomeState> {
               >
                 X
               </div>
-              <div className="export-group">
+              {/* <div className="export-group">
                 <div className="export-item" onClick={this.loadFile}>
                   导入txt
                 </div>
                 <div className="export-item" onClick={this.loadFile}>
                   导入Json
                 </div>
-              </div>
+              </div> */}
             </div>
           )}
           <input
             ref={this.uploadInput}
-            accept=".txt,.json"
+            accept=".json"
             type="file"
             className="local-file-input"
             onChange={this.handleFileChange}
@@ -1120,10 +1135,7 @@ export default class App extends React.Component<any, HomeState> {
                 overlayStyle={{ transform: 'scale(.8)' }}
                 placement="top"
               >
-                <i
-                  onClick={this.handleClickImport}
-                  className="iconfont icon-import"
-                />
+                <i onClick={this.loadFile} className="iconfont icon-import" />
               </Tooltip>
               <Tooltip
                 overlay="导出"
@@ -1132,11 +1144,23 @@ export default class App extends React.Component<any, HomeState> {
               >
                 <i
                   onClick={() => {
-                    this.setState({ showExport: true })
+                    this.state.allWordsNumber && this.setState({ showExport: true })
                   }}
-                  className="iconfont icon-export"
+                  className={`iconfont icon-export ${!this.state.allWordsNumber ? 'active' : ''}`}
                 />
               </Tooltip>
+              {/* <Tooltip
+                overlay="单词本"
+                overlayStyle={{ transform: 'scale(.8)' }}
+                placement="top"
+              >
+                <i
+                  onClick={() => this.switchWordType('notebook')}
+                  className={`iconfont icon-notebook-1 ${
+                    wordType === 'notebook' ? 'active' : ''
+                  }`}                  
+                />
+              </Tooltip> */}
               <Tooltip
                 overlay="列表模式"
                 overlayStyle={{ transform: 'scale(.8)' }}
@@ -1155,9 +1179,9 @@ export default class App extends React.Component<any, HomeState> {
                 placement="top"
               >
                 <i
-                  onClick={() => this.switchWordType('card')}
+                  onClick={() => {this.state.allWordsNumber && this.switchWordType('card')}}
                   className={`iconfont icon-card ${
-                    wordType === 'card' ? 'active' : ''
+                    (wordType === 'card' || !this.state.allWordsNumber) ? 'active' : ''
                   }`}
                 />
               </Tooltip>

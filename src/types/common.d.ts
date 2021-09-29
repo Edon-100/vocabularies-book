@@ -32,10 +32,10 @@ interface LetterProps {
 
 interface IHomeFooter {
   allWordsNumber:number;
+  allWords: Word[]
   total:number;
   doneTotal:number;
   wordType: 'list' | 'card' | 'notebook'
   switchWordType: (type:'list' | 'card' | 'notebook') => void;
-  updateShowExport: (show:boolean) => void;
-  loadFile:(e:any) => void;
+  updateWordsListToState: () => void
 }

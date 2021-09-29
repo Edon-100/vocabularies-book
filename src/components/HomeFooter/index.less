@@ -33,3 +33,60 @@
 		}
 	}
 }
+
+
+.export-confirm-modal {
+  position: fixed;
+	z-index: 1000;
+  box-sizing: border-box;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+	width: 340px;
+	height: 140px;
+  background: #fff;
+	padding: 32px 32px 24px;
+	box-shadow: 0px 12px 8px -12px rgba(0, 0, 0, .4);
+  .close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    cursor: pointer;
+  }
+  .export-group {
+    margin-top: 28px;
+    display: flex;
+    justify-content: space-around;
+    .export-item {
+      background-image: none;
+      border: 1px solid transparent;
+      box-shadow: 0 2px #00000004;
+      cursor: pointer;
+      padding: 4px 15px;
+      border-radius: 2px;
+      color: #000000d9;
+      border-color: #d9d9d9;
+      background: #fbfbfb;
+      &:hover {
+        color: #40a9ff;
+        border-color: #40a9ff;
+      }
+    }
+  }
+}
+.local-file-input {
+  display: none;
+}
+// @font-face {
+//   font-family: "iconfont"; /* Project id 2652867 */
+//   src: url("//at.alicdn.com/t/font_2652867_6wsskcomfax.woff2?t=1625487342915")
+//       format("woff2"),
+//     url("//at.alicdn.com/t/font_2652867_6wsskcomfax.woff?t=1625487342915")
+//       format("woff"),
+//     url("//at.alicdn.com/t/font_2652867_6wsskcomfax.ttf?t=1625487342915")
+//       format("truetype");
+// }
+
+.rc-tooltip-inner {
+  min-height: 100% !important;
+}

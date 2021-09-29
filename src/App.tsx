@@ -8,7 +8,8 @@ import ErrorBoundary from './components/ErrorBoundaries'
 import dayjs from 'dayjs'
 import Tooltip from 'rc-tooltip'
 import 'rc-tooltip/assets/bootstrap.css'
-import { read_file } from './utils'
+import { downloadJsonByContent, downloadTXTByContent, read_file } from './utils'
+import { HomeFooter } from './components/HomeFooter'
 
 const mock = {
   list: [
@@ -922,47 +923,50 @@ export default class App extends React.Component<any, HomeState> {
   } as HomeState
 
   componentDidMount() {
-    utools.onPluginEnter((action) => {
-      if (action.code === 'add_vocabulary') {
-        window.services.wordModel.addVocabulary(action.payload).then((word) => {
-          this.updateWordsListToState()
-        })
-      } else {
-        console.log('else review', action);
-        this.updateWordsListToState()
-      }
-    })
+    // utools.onPluginEnter((action) => {
+    //   if (action.code === 'add_vocabulary') {
+    //     window.services.wordModel.addVocabulary(action.payload).then((word) => {
+    //       this.updateWordsListToState()
+    //     })
+    //   } else {
+    //     console.log('else review', action);
+    //     this.updateWordsListToState()
+    //   }
+    // })
 
     /* mock */
-    // this.updateWordsListToState();
+    this.updateWordsListToState()
   }
 
   updateWordsListToState = () => {
-    const {
-      allWords,
-      needLearnWords: list,
-      doneList
-    } = window.services.wordModel.getAllAndNeedList()
-    console.log('updateWordsListToState', list, allWords)
-    const total = list?.length
-    const allWordsNumber = allWords?.length
-    this.setState({
-      total,
-      allWords,
-      list,
-      // list: allWords,
-      allWordsNumber,
-      doneTotal: doneList.length
-    })
-
-    /* mock */
-    // const list = mock.list;
+    // const {
+    //   allWords,
+    //   needLearnWords: list,
+    //   doneList
+    // } = window.services.wordModel.getAllAndNeedList()
     // const total = list?.length
+    // const allWordsNumber = allWords?.length
     // this.setState({
     //   total,
-    //   // @ts-ignore
-    //   list
+    //   allWords,
+    //   list,
+    //   // list: allWords,
+    //   allWordsNumber,
+    //   doneTotal: doneList.length
     // })
+
+    /* mock */
+    const list = mock.list
+    const total = list?.length
+    const allWordsNumber = this.setState({
+      // @ts-ignore
+      allWords: list,
+      total,
+      allWordsNumber: total,
+      // @ts-ignore
+      list,
+      doneTotal: 99
+    })
   }
   switchWordType = (type: 'list' | 'card' | 'notebook') => {
     if (this.state.wordType === type) return
@@ -976,47 +980,15 @@ export default class App extends React.Component<any, HomeState> {
     const content = this.state.allWords.reduce((total, cur) => {
       return (total += `${cur.text}\r\n`)
     }, '')
-    var element = document.createElement('a')
-    element.setAttribute(
-      'href',
-      'data:text/plain;charset=utf-8,' + encodeURIComponent(content)
-    )
-    element.setAttribute('download', 'word.txt')
-    element.style.display = 'none'
-    document.body.appendChild(element)
-    element.click()
-    document.body.removeChild(element)
+    downloadTXTByContent(content)
   }
 
   handleDownloadJson = () => {
-    const data = JSON.stringify({list: this.state.allWords})
-    const blob = new Blob([data], { type: 'text/json' })
-    const e = document.createEvent('MouseEvents')
-    const a = document.createElement('a')
-    a.download = 'word.json'
-    a.href = window.URL.createObjectURL(blob)
-    a.dataset.downloadurl = ['text/json', a.download, a.href].join(':')
-    e.initMouseEvent(
-      'click',
-      true,
-      false,
-      window,
-      0,
-      0,
-      0,
-      0,
-      0,
-      false,
-      false,
-      false,
-      false,
-      0,
-      null
-    )
-    a.dispatchEvent(e)
+    const data = JSON.stringify({ list: this.state.allWords })
+    downloadJsonByContent(data)
   }
 
-  loadFile = (e:any) => {
+  loadFile = (e: any) => {
     e.stopPropagation()
     this.uploadInput.current?.click()
   }
@@ -1037,7 +1009,7 @@ export default class App extends React.Component<any, HomeState> {
         alert('导入失败，请检查数据格式')
       }
     } catch (error) {
-      console.log('3333', error);
+      console.log('3333', error)
       alert('导入失败，请检查数据格式')
     }
   }
@@ -1053,7 +1025,9 @@ export default class App extends React.Component<any, HomeState> {
         <div className="home">
           <div className="home_header"></div>
           <div className="home_body">
-            {!this.state.list.length && this.state.wordType !== 'card' && <div className="no_words_tips">暂无需要复习的单词</div>}
+            {!this.state.list.length && this.state.wordType !== 'card' && (
+              <div className="no_words_tips">暂无需要复习的单词</div>
+            )}
             {wordType === 'list' && (
               <>
                 <WordList
@@ -1105,14 +1079,6 @@ export default class App extends React.Component<any, HomeState> {
               >
                 X
               </div>
-              {/* <div className="export-group">
-                <div className="export-item" onClick={this.loadFile}>
-                  导入txt
-                </div>
-                <div className="export-item" onClick={this.loadFile}>
-                  导入Json
-                </div>
-              </div> */}
             </div>
           )}
           <input
@@ -1122,71 +1088,17 @@ export default class App extends React.Component<any, HomeState> {
             className="local-file-input"
             onChange={this.handleFileChange}
           />
-          <div className="home_footer">
-            <div>
-              <span>单词总数: {this.state.allWordsNumber}</span>
-              <span>待复习: {this.state.total}</span>
-              <span>已记完: {this.state.doneTotal}</span>
-            </div>
-            <div>
-              {/* <div onClick={this.handleDownload}>导出</div> */}
-              <Tooltip
-                overlay="导入"
-                overlayStyle={{ transform: 'scale(.8)' }}
-                placement="top"
-              >
-                <i onClick={this.loadFile} className="iconfont icon-import" />
-              </Tooltip>
-              <Tooltip
-                overlay="导出"
-                overlayStyle={{ transform: 'scale(.8)' }}
-                placement="top"
-              >
-                <i
-                  onClick={() => {
-                    this.state.allWordsNumber && this.setState({ showExport: true })
-                  }}
-                  className={`iconfont icon-export ${!this.state.allWordsNumber ? 'active' : ''}`}
-                />
-              </Tooltip>
-              {/* <Tooltip
-                overlay="单词本"
-                overlayStyle={{ transform: 'scale(.8)' }}
-                placement="top"
-              >
-                <i
-                  onClick={() => this.switchWordType('notebook')}
-                  className={`iconfont icon-notebook-1 ${
-                    wordType === 'notebook' ? 'active' : ''
-                  }`}                  
-                />
-              </Tooltip> */}
-              <Tooltip
-                overlay="列表模式"
-                overlayStyle={{ transform: 'scale(.8)' }}
-                placement="top"
-              >
-                <i
-                  onClick={() => this.switchWordType('list')}
-                  className={`iconfont icon-list ${
-                    wordType === 'list' ? 'active' : ''
-                  }`}
-                />
-              </Tooltip>
-              <Tooltip
-                overlay="听写模式"
-                overlayStyle={{ transform: 'scale(.8)' }}
-                placement="top"
-              >
-                <i
-                  onClick={() => {this.state.allWordsNumber && this.switchWordType('card')}}
-                  className={`iconfont icon-card ${
-                    (wordType === 'card' || !this.state.allWordsNumber) ? 'active' : ''
-                  }`}
-                />
-              </Tooltip>
-            </div>
-          </div>
+          <HomeFooter
+            allWordsNumber={this.state.allWordsNumber}
+            total={this.state.total}
+            doneTotal={this.state.doneTotal}
+            wordType={this.state.wordType}
+            switchWordType={this.switchWordType}
+            loadFile={this.loadFile}
+            updateShowExport={(showExport) => {
+              this.setState({ showExport })
+            }}
+          />
         </div>
       </ErrorBoundary>
     )

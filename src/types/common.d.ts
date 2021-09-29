@@ -1,3 +1,4 @@
+type WordType = 'list' | 'card' | 'notebook'
 interface HomeState {
   total: number
   allWordsNumber: number
@@ -27,4 +28,14 @@ interface LetterProps {
   visible: boolean
   wrong: boolean
   mode: 'hidden' | 'visible'
+}
+
+interface IHomeFooter {
+  allWordsNumber:number;
+  total:number;
+  doneTotal:number;
+  wordType: 'list' | 'card' | 'notebook'
+  switchWordType: (type:'list' | 'card' | 'notebook') => void;
+  updateShowExport: (show:boolean) => void;
+  loadFile:(e:any) => void;
 }

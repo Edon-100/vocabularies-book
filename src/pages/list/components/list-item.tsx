@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import Tooltip from 'rc-tooltip'
+// import Tooltip from 'rc-tooltip'
 import { Dialog } from 'src/components/dialog'
 import './list-item.less'
 import useKeySound from 'src/hooks/useSounds'
@@ -71,59 +71,59 @@ export default function Card({ word, updateList = () => {} }: CardProps) {
             : ''}
         </span>
       </p>
-      <Tooltip overlay={`遗忘曲线等级: ${(word?.learn.level as number) + 1}`} overlayStyle={{ transform: 'scale(.8)' }} placement="top">
+      {/* <Tooltip overlay={`遗忘曲线等级: ${(word?.learn.level as number) + 1}`} overlayStyle={{ transform: 'scale(.8)' }} placement="top"> */}
         <div className="level">
           <i className={`iconfont icon-level-${(word?.learn.level as number) + 1}`}></i>
           {/* &nbsp;{word?.learn.level} */}
         </div>
-      </Tooltip>
+      {/* </Tooltip> */}
       {/* <div className="time">
         <i className="iconfont icon-time"></i>&nbsp;{dayjs(word?.learn.learnDate).format('YYYY-MM-DD hh:mm:ss')}
       </div> */}
       <div className="operate">
         <div>
-          <Tooltip overlay="播放" overlayStyle={{ transform: 'scale(.8)' }}>
+          {/* <Tooltip overlay="播放" overlayStyle={{ transform: 'scale(.8)' }}> */}
             <i className="iconfont icon-player" onClick={handleAudioPlay}></i>
-          </Tooltip>
-          <Tooltip
+          {/* </Tooltip> */}
+          {/* <Tooltip
             placement="left"
             overlay="显示/隐藏 翻译"
             overlayStyle={{ transform: 'scale(.8)' }}
-          >
+          > */}
             <i
               className="iconfont icon-translate"
               onClick={hanleShowTranslate}
             ></i>
-          </Tooltip>
+          {/* </Tooltip> */}
         </div>
         <div>
-          <Tooltip
+          {/* <Tooltip
             placement="left"
             overlay="记得"
             overlayStyle={{ transform: 'scale(.8)' }}
-          >
+          > */}
             <i
               className="iconfont icon-check"
               onClick={() => handleLevelUp(word?.text)}
             ></i>
-          </Tooltip>
+          {/* </Tooltip>
           <Tooltip
             placement="left"
             overlay="忘记"
             overlayStyle={{ transform: 'scale(.8)' }}
-          >
+          > */}
             <i
               className="iconfont icon-close"
               onClick={() => handleback(word!.text)}
             ></i>
-          </Tooltip>
-          <Tooltip
+          {/* </Tooltip> */}
+          {/* <Tooltip
             placement="left"
             overlay="删除"
             overlayStyle={{ transform: 'scale(.8)' }}
-          >
+          > */}
             <i className="iconfont icon-delete" onClick={showDeleteModal}></i>
-          </Tooltip>
+          {/* </Tooltip> */}
         </div>
       </div>
       {showTranslate && (

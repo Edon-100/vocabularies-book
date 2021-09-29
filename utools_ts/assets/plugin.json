@@ -11,10 +11,9 @@
 			"explain": "add vocabulary",
 			"cmds": [
 				{
-					"type": "over",
+					"type": "regex",
 					"label": "加入单词簿",
-					"exclude": "/xxx/i",
-					"minLength": 1
+					"match": "/[a-zA-Z]/"
 			}
 			]
 		},

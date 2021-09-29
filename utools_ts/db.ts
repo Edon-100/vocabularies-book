@@ -55,7 +55,7 @@ export class BaseDB {
     const list = this._db.list as Word[]
     const isExistWord = this.isExistWord(word.text)
     if (isExistWord) return
-    this.updateDataToDB([...list, word])
+    this.updateDataToDB([word, ...list])
   }
 
   /**

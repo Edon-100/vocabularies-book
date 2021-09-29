@@ -6,7 +6,7 @@ import NoteBook from './pages/notebook'
 import { HomeFooter } from './components/HomeFooter'
 import './index.less'
 import ErrorBoundary from './components/ErrorBoundaries'
-import { mock } from './mock' // TODO: 上线前删除掉
+// import { mock } from './mock' // TODO: 上线前删除掉
 import { HomeHeader } from './components/HomeHeader'
 export default class App extends React.Component<any, HomeState> {
   constructor(props: any) {
@@ -31,50 +31,50 @@ export default class App extends React.Component<any, HomeState> {
   } as HomeState
 
   componentDidMount() {
-    // utools.onPluginEnter((action) => {
-    //   if (action.code === 'add_vocabulary') {
-    //     window.services.wordModel.addVocabulary(action.payload).then((word) => {
-    //       this.updateWordsListToState()
-    //     })
-    //   } else {
-    //     console.log('else review', action);
-    //     this.updateWordsListToState()
-    //   }
-    // })
+    utools.onPluginEnter((action) => {
+      if (action.code === 'add_vocabulary') {
+        window.services.wordModel.addVocabulary(action.payload).then((word) => {
+          this.updateWordsListToState()
+        })
+      } else {
+        console.log('else review', action);
+        this.updateWordsListToState()
+      }
+    })
 
     /* mock */
-    this.updateWordsListToState()
+    // this.updateWordsListToState()
   }
 
   updateWordsListToState = () => {
-    // const {
-    //   allWords,
-    //   needLearnWords: list,
-    //   doneList
-    // } = window.services.wordModel.getAllAndNeedList()
-    // const total = list?.length
-    // const allWordsNumber = allWords?.length
-    // this.setState({
-    //   total,
-    //   allWords,
-    //   list,
-    //   // list: allWords,
-    //   allWordsNumber,
-    //   doneTotal: doneList.length
-    // })
+    const {
+      allWords,
+      needLearnWords: list,
+      doneList
+    } = window.services.wordModel.getAllAndNeedList()
+    const total = list?.length
+    const allWordsNumber = allWords?.length
+    this.setState({
+      total,
+      allWords,
+      list,
+      // list: allWords,
+      allWordsNumber,
+      doneTotal: doneList.length
+    })
 
     /* mock */
-    const list = mock.list
-    const total = list?.length
-    const allWordsNumber = this.setState({
-      // @ts-ignore
-      allWords: list,
-      total,
-      allWordsNumber: total,
-      // @ts-ignore
-      list,
-      doneTotal: 99
-    })
+    // const list = mock.list
+    // const total = list?.length
+    // const allWordsNumber = this.setState({
+    //   // @ts-ignore
+    //   allWords: list,
+    //   total,
+    //   allWordsNumber: total,
+    //   // @ts-ignore
+    //   list,
+    //   doneTotal: 99
+    // })
   }
   switchWordType = (type: 'list' | 'card' | 'notebook') => {
     if (this.state.wordType === type) return
@@ -90,7 +90,7 @@ export default class App extends React.Component<any, HomeState> {
       <ErrorBoundary>
         <div className="home">
           <div className="home_header">
-            <HomeHeader />
+            {!!this.state.list.length && <HomeHeader />}
           </div>
           <div className="home_body">
             {!this.state.list.length && this.state.wordType !== 'card' && (

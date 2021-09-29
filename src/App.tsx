@@ -924,11 +924,11 @@ export default class App extends React.Component<any, HomeState> {
   componentDidMount() {
     utools.onPluginEnter((action) => {
       if (action.code === 'add_vocabulary') {
-        window.services.wordModel.addVocabulary().then((word) => {
-          console.log('then', word)
+        window.services.wordModel.addVocabulary(action.payload).then((word) => {
           this.updateWordsListToState()
         })
       } else {
+        console.log('else review', action);
         this.updateWordsListToState()
       }
     })

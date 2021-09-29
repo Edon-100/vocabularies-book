@@ -54,18 +54,24 @@ class WordModel {
    *
    * @description 把组合的查询结果入库
    */
-  async addVocabulary() {
+  async addVocabulary(text?:string) {
     try {
-      // const { clipboard } = require('electron')
-      let text = clipboard.readText()
-      const index = text.indexOf('摘')
-      text = index > 0 ? text.slice(0, text.indexOf('摘')) : text // 兼容苹果book
-      text = text.replaceAll('\n', '')
-      let regRes = text.match(/^\“(.*)\”$/)
-      text = regRes ? regRes[1] : text
-      const { content } = await searchWords(text)
-      const word = this._createWordObj(text, content)
-      this.db.addNewWordToDb(word)
+      if (text) {
+        const { content } = await searchWords(text)
+        const word = this._createWordObj(text, content)
+        this.db.addNewWordToDb(word)
+      } else {
+        // 从剪切板中加入单词
+        let text = clipboard.readText()
+        const index = text.indexOf('摘')
+        text = index > 0 ? text.slice(0, text.indexOf('摘')) : text // 兼容苹果book
+        text = text.replaceAll('\n', '')
+        let regRes = text.match(/^\“(.*)\”$/)
+        text = regRes ? regRes[1] : text
+        const { content } = await searchWords(text)
+        const word = this._createWordObj(text, content)
+        this.db.addNewWordToDb(word)
+      }
       return text
     } catch (error) {
       console.log(error)

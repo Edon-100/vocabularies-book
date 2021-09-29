@@ -1,7 +1,7 @@
 import React from 'react'
 import './index.less'
 
-export const HomeHeader = (props) => {
+export const HomeHeader = (props:any) => {
   console.log(props)
   return (
     <div className="home-header-wrapper">

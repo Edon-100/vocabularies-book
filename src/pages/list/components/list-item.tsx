@@ -83,7 +83,7 @@ export default function Card({ word, updateList = () => {} }: CardProps) {
       <div className="operate">
         <div>
           {/* <Tooltip overlay="播放" overlayStyle={{ transform: 'scale(.8)' }}> */}
-            <i className="iconfont icon-player" onClick={handleAudioPlay}></i>
+            <i className="iconfont icon-player iconHover" onClick={handleAudioPlay}></i>
           {/* </Tooltip> */}
           {/* <Tooltip
             placement="left"
@@ -91,7 +91,7 @@ export default function Card({ word, updateList = () => {} }: CardProps) {
             overlayStyle={{ transform: 'scale(.8)' }}
           > */}
             <i
-              className="iconfont icon-translate"
+              className="iconfont icon-translate iconHover"
               onClick={hanleShowTranslate}
             ></i>
           {/* </Tooltip> */}
@@ -103,7 +103,7 @@ export default function Card({ word, updateList = () => {} }: CardProps) {
             overlayStyle={{ transform: 'scale(.8)' }}
           > */}
             <i
-              className="iconfont icon-check"
+              className="iconfont icon-check iconHover"
               onClick={() => handleLevelUp(word?.text)}
             ></i>
           {/* </Tooltip>
@@ -113,7 +113,7 @@ export default function Card({ word, updateList = () => {} }: CardProps) {
             overlayStyle={{ transform: 'scale(.8)' }}
           > */}
             <i
-              className="iconfont icon-close"
+              className="iconfont icon-close iconHover"
               onClick={() => handleback(word!.text)}
             ></i>
           {/* </Tooltip> */}
@@ -122,7 +122,7 @@ export default function Card({ word, updateList = () => {} }: CardProps) {
             overlay="删除"
             overlayStyle={{ transform: 'scale(.8)' }}
           > */}
-            <i className="iconfont icon-delete" onClick={showDeleteModal}></i>
+            <i className="iconfont icon-delete iconHover" onClick={showDeleteModal}></i>
           {/* </Tooltip> */}
         </div>
       </div>

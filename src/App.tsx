@@ -6,14 +6,11 @@ import NoteBook from './pages/notebook'
 import { HomeFooter } from './components/HomeFooter'
 import './index.less'
 import ErrorBoundary from './components/ErrorBoundaries'
-import 'rc-tooltip/assets/bootstrap.css'
-import { downloadJsonByContent, downloadTXTByContent, read_file } from './utils'
 import { mock } from './mock' // TODO: 上线前删除掉
+import { HomeHeader } from './components/HomeHeader'
 export default class App extends React.Component<any, HomeState> {
-  private uploadInput: React.RefObject<HTMLInputElement>
   constructor(props: any) {
     super(props)
-    this.uploadInput = React.createRef()
   }
 
   state = {
@@ -92,7 +89,9 @@ export default class App extends React.Component<any, HomeState> {
     return (
       <ErrorBoundary>
         <div className="home">
-          <div className="home_header"></div>
+          <div className="home_header">
+            <HomeHeader />
+          </div>
           <div className="home_body">
             {!this.state.list.length && this.state.wordType !== 'card' && (
               <div className="no_words_tips">暂无需要复习的单词</div>

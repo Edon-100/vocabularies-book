@@ -56,11 +56,7 @@ class WordModel {
    */
   async addVocabulary(text?:string) {
     try {
-      if (text) {
-        const { content } = await searchWords(text)
-        const word = this._createWordObj(text, content)
-        this.db.addNewWordToDb(word)
-      } else {
+      if (!text) {
         // 从剪切板中加入单词
         let text = clipboard.readText()
         const index = text.indexOf('摘')
@@ -68,11 +64,11 @@ class WordModel {
         text = text.replaceAll('\n', '')
         let regRes = text.match(/^\“(.*)\”$/)
         text = regRes ? regRes[1] : text
-        const { content } = await searchWords(text)
-        const word = this._createWordObj(text, content)
-        this.db.addNewWordToDb(word)
       }
-      return text
+      const { content } = await searchWords(text!)
+      const word = this._createWordObj(text!, content)
+      this.db.addNewWordToDb(word)
+      return word
     } catch (error) {
       console.log(error)
     }

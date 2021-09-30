@@ -7,7 +7,9 @@ export const HomeHeader = (props:any) => {
     <div className="home-header-wrapper">
       <div className="icons">
         
-      
+        {/* <div className="levels">
+
+        </div> */}
 
         <div className="icon-desc">
           <span>

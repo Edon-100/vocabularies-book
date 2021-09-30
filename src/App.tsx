@@ -31,14 +31,19 @@ export default class App extends React.Component<any, HomeState> {
   } as HomeState
 
   componentDidMount() {
-    utools.onPluginEnter((action) => {
+    utools.onPluginEnter(async (action) => {
+      this.updateWordsListToState()
       if (action.code === 'add_vocabulary') {
-        window.services.wordModel.addVocabulary(action.payload).then((word) => {
-          this.updateWordsListToState()
+        const word = await window.services.wordModel.addVocabulary(
+          action.payload
+        )
+        console.log('add word', word);
+        this.setState({
+          total: this.state.total + 1,
+          allWords: [word, ...this.state.allWords],
+          list: [word, ...this.state.list],
+          allWordsNumber: this.state.allWordsNumber + 1
         })
-      } else {
-        console.log('else review', action);
-        this.updateWordsListToState()
       }
     })
 
@@ -90,7 +95,7 @@ export default class App extends React.Component<any, HomeState> {
       <ErrorBoundary>
         <div className="home">
           <div className="home_header">
-            {!!this.state.list.length && <HomeHeader />}
+            {!!this.state.list.length && wordType === 'list' && <HomeHeader />}
           </div>
           <div className="home_body">
             {!this.state.list.length && this.state.wordType !== 'card' && (

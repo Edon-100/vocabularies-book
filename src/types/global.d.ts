@@ -6,7 +6,7 @@ interface Window {
       tableName: ''
     }
     wordModel: {
-      addVocabulary: (text?:string) => Promise<boolean>
+      addVocabulary: (text?:string) => Promise<Word>
       deleteWrodObj: (text: string) => Promise<DbReturn>
       getAllWords: () => Word[]
       getNeedLearnList: () => Word[]

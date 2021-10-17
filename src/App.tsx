@@ -33,7 +33,8 @@ export default class App extends React.Component<any, HomeState> {
   componentDidMount() {
     utools.onPluginEnter(async (action) => {
       this.updateWordsListToState()
-      if (action.code === 'add_vocabulary') {
+      console.log('action', action)
+      if (action.code === 'add vocabulary') {
         const word = await window.services.wordModel.addVocabulary(
           action.payload
         )

@@ -32,6 +32,8 @@ export default class App extends React.Component<any, HomeState> {
 
   componentDidMount() {
     utools.onPluginEnter(async (action) => {
+      // window.services.utils.minimizeWordDb()
+      window.services.wordModel.minimizeDbSize()
       this.updateWordsListToState()
       console.log('action', action)
       if (action.code === 'add vocabulary') {

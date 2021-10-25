@@ -14,7 +14,11 @@ interface Window {
       addWordToNextLevel: (text: string) => void
       addWordToPreviousLevel: (text: string) => void
       importWordList: (list:Word[]) => void
+      minimizeDbSize: Function
     }
+    // utils: {
+    //   minimizeWordDb: Function
+    // }
   }
 }
 

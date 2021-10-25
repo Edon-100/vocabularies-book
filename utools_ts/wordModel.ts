@@ -25,27 +25,16 @@ class WordModel {
    * @description 结合有道云查询结果，生成符合入库格式的对象
    */
   private _createWordObj(text: string, youdao: Youdao) {
-    // 单词增加
-    let t = text
-    let textExts = []
-    if (youdao.returnPhrase) {
-      t = youdao.returnPhrase[0]
-      if (t.toLowerCase() !== text.toLowerCase()) {
-        textExts.push(text)
-      }
-    }
     const word = {
-      text: t,
-      textExts,
-      translation: youdao.translation[0],
+      text,
+      isWord: youdao.isWord,
+      explains: youdao.explains,
+      phonetic: youdao.phonetic,
       ctime: dayjs().format(),
       learn: {
         level: 0,
         learnDate: dayjs().add(forgettingCurve[0], 'm').format()
-      },
-      // 保留完整数据，后面可能会使用
-      youdao
-      // addFrom: location.href
+      }
     }
     return word
   }
@@ -54,7 +43,7 @@ class WordModel {
    *
    * @description 把组合的查询结果入库
    */
-  async addVocabulary(text?:string) {
+  async addVocabulary(text?: string) {
     try {
       if (!text) {
         // 从剪切板中加入单词
@@ -65,8 +54,9 @@ class WordModel {
         let regRes = text.match(/^\“(.*)\”$/)
         text = regRes ? regRes[1] : text
       }
-      const { content } = await searchWords(text!)
+      const content = await searchWords(text!)
       const word = this._createWordObj(text!, content)
+      console.log('_createWordObj', word)
       this.db.addNewWordToDb(word)
       return word
     } catch (error) {
@@ -108,9 +98,6 @@ class WordModel {
         dayjs().unix() - dayjs(ctime).unix() < 5
       )
     })
-    console.log('pre allWords', allWords)
-    console.log('pre needLearnWords', needLearnWords)
-    console.log('pre doneList', doneList)
     return {
       allWords,
       needLearnWords,
@@ -146,7 +133,7 @@ class WordModel {
    * @description 单词忘记了，回复到最原始的记忆level
    * @param {*} text 单词
    */
-  addWordToPreviousLevel(text:string) {
+  addWordToPreviousLevel(text: string) {
     const wordList = this.getAllWords()
     const word = wordList.find((it) => it.text === text)
     if (word) {
@@ -158,7 +145,7 @@ class WordModel {
     }
   }
 
-  importWordList(importList:Word[]) {
+  importWordList(importList: Word[]) {
     const oldList = this.getAllWords()
     const newList = oldList.concat(importList)
     this.db.updateDataToDB(newList)
@@ -166,6 +153,14 @@ class WordModel {
 
   deleteWrodObj(text: string) {
     this.db.deleteWord(text)
+  }
+
+  minimizeDbSize() {
+    const { isMinimize } = utools.db.get('ifMinimize') as any
+    console.log('isMinimize', isMinimize)
+    if (isMinimize) return
+    const list = this.db.getWordList()
+    console.log('list', list)
   }
 }
 

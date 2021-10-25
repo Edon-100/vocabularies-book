@@ -27,26 +27,18 @@ interface YoudaoBasic {
 }
 
 interface Youdao {
-  returnPhrase: string[]
-  query: string
-  errorCode: number
-  l: string
-  tSpeakUrl: string
-  web: WebItem[]
-  requestId: string
-  translation: string[]
-  dict: string
-  webdict: string
-  basic: YoudaoBasic
+  isWord:boolean; // 是否是一个单词
+  explains:string[]; // 中文解析翻译
+  phonetic:string; // 音标
 }
 
 interface Word {
   text: string
-  textExts: Array<any>
-  translation: string
+  isWord:boolean; // 是否是一个单词
+  explains:string[]; // 中文解析翻译
+  phonetic:string; // 音标
   ctime: string
   learn: Learn
-  youdao: Youdao
 }
 
 type MyDbDoc = {

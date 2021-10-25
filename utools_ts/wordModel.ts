@@ -157,8 +157,9 @@ class WordModel {
     try {
       const data = utools.db.get('ifMinimize') as any
       if (data?.isMinimize) return // 不需要优化，直接退出
-      console.log('需要优化单词本')
       let list = this.db.getWordList()
+      if (!list.length) return;
+      console.log('需要优化单词本')
       list = list.map((word) => {
         const newWord = word.explains
         if (newWord) {

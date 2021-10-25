@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react'
 import Card from './components/card-item'
 import './index.less'
 import Tooltip from 'rc-tooltip'
+import { playWordPronunciation } from 'src/utils'
 
 const TKey = 84
 
@@ -36,8 +37,6 @@ export default function WordCard(props: WordProps) {
     }
   }
 
-  const childRef = useRef({ playWordSound: () => {} })
-
   useEffect(() => {
     console.log(currentList, index);
     setWord(currentList[index])
@@ -59,7 +58,7 @@ export default function WordCard(props: WordProps) {
   }, [word])
 
   const playWordSound = () => {
-    childRef.current.playWordSound()
+    playWordPronunciation(word!.text)
   }
 
   const switchMode = () => {
@@ -165,7 +164,6 @@ export default function WordCard(props: WordProps) {
       </div>
       <Card
         mode={mode}
-        ref={childRef}
         word={word}
         changeWord={handleWordIndexChange}
         showTranslate={showTranslate}

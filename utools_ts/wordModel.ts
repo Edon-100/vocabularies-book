@@ -56,7 +56,6 @@ class WordModel {
       }
       const content = await searchWords(text!)
       const word = this._createWordObj(text!, content)
-      console.log('_createWordObj', word)
       this.db.addNewWordToDb(word)
       return word
     } catch (error) {
@@ -71,7 +70,6 @@ class WordModel {
    */
   getNeedLearnList(): Word[] {
     const wordList = this.getAllWords()
-    console.log('wordList', wordList)
     const l2 = wordList.filter(({ learn, ctime }) => {
       return (
         (dayjs().format() > learn.learnDate && !learn.done) || // 够时间复习的
@@ -156,11 +154,37 @@ class WordModel {
   }
 
   minimizeDbSize() {
-    const { isMinimize } = utools.db.get('ifMinimize') as any
-    console.log('isMinimize', isMinimize)
-    if (isMinimize) return
-    const list = this.db.getWordList()
-    console.log('list', list)
+    try {
+      const data = utools.db.get('ifMinimize') as any
+      if (data?.isMinimize) return // 不需要优化，直接退出
+      console.log('需要优化单词本')
+      let list = this.db.getWordList()
+      list = list.map((word) => {
+        const newWord = word.explains
+        if (newWord) {
+          return word
+        } else {
+          return {
+            text: word.text,
+            // @ts-ignore
+            isWord: word?.youdao?.isWord,
+            // @ts-ignore
+            explains: word?.youdao?.basic?.explains,
+            // @ts-ignore
+            phonetic: word?.youdao?.basic?.phonetic,
+            ctime: word.ctime,
+            learn: word.learn
+          }
+        }
+      })
+      this.db.updateDataToDB(list)
+      utools.db.put({
+        _id: 'ifMinimize',
+        isMinimize: true
+      })
+    } catch (error) {
+      console.log('minimizeDbSize err', error)
+    }
   }
 }
 

@@ -10,18 +10,9 @@ export async function searchWords(text: string): Promise<Youdao> {
     }
   )
   const { content } = await res.json()
-  console.log('searchWords', content)
   return {
     isWord: content?.isWord,
-    explains: content?.basic?.explains,
+    explains: content?.isWord ? content?.basic?.explains : content.translation,
     phonetic: content?.basic?.phonetic
   }
 }
-
-// export function minimizeWordDb() {
-//   const { isMinimize } = utools.db.get('ifMinimize') as any
-//   console.log('isMinimize', isMinimize)
-//   if (isMinimize) return
-//   const list = wordModel.getAllWords()
-//   console.log('list', list)
-// }

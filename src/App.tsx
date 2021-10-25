@@ -32,15 +32,12 @@ export default class App extends React.Component<any, HomeState> {
 
   componentDidMount() {
     utools.onPluginEnter(async (action) => {
-      // window.services.utils.minimizeWordDb()
-      window.services.wordModel.minimizeDbSize()
+      window.services.wordModel.minimizeDbSize(); // 以前的数据太大，所以需要优化一下
       this.updateWordsListToState()
-      console.log('action', action)
       if (action.code === 'add vocabulary') {
         const word = await window.services.wordModel.addVocabulary(
           action.payload
         )
-        console.log('add word', word);
         this.setState({
           total: this.state.total + 1,
           allWords: [word, ...this.state.allWords],

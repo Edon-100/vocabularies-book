@@ -2,13 +2,14 @@ import React, { useState, useRef, useEffect } from 'react'
 // import Tooltip from 'rc-tooltip'
 import { Dialog } from 'src/components/dialog'
 import './list-item.less'
-import useKeySound from 'src/hooks/useSounds'
+import {useKeySoudIns} from 'src/hooks/useSounds'
+import { playWordPronunciation } from 'src/utils'
 
 export default function Card({ word, updateList = () => {} }: CardProps) {
   const [showTranslate, setShowTranslate] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
-  const { playKeySound, playBeepSound, playSuccessSound } = useKeySound()
+  const { playKeySound, playBeepSound, playSuccessSound } = useKeySoudIns
 
   useEffect(() => {
     (window as any).playBeepSound = playBeepSound;
@@ -21,7 +22,7 @@ export default function Card({ word, updateList = () => {} }: CardProps) {
   }
 
   const handleAudioPlay = () => {
-    audioRef?.current?.play()
+    playWordPronunciation(word!.text)
   }
 
   const handleDelete = async () => {
@@ -59,15 +60,11 @@ export default function Card({ word, updateList = () => {} }: CardProps) {
           onCancel={() => setShowDeleteDialog(false)}
         ></Dialog>
       )}
-      <audio
-        src={`https://dict.youdao.com/dictvoice?audio=${word?.text}`}
-        ref={audioRef}
-      ></audio>
       <p className="word">
         {word?.text}
         <span className="phonetic">
-          {word?.youdao?.basic?.phonetic
-            ? `[${word?.youdao?.basic?.phonetic}]`
+          {word?.phonetic
+            ? `[${word?.phonetic}]`
             : ''}
         </span>
       </p>
@@ -128,8 +125,7 @@ export default function Card({ word, updateList = () => {} }: CardProps) {
       </div>
       {showTranslate && (
         <div className="translation">
-          {word?.youdao?.basic?.explains?.map((text) => <div>{text}</div>) ||
-            word?.translation}
+          {word?.explains?.map((text) => <div key={text}>{text}</div>)}
         </div>
       )}
     </div>

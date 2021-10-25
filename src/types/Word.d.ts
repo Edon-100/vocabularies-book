@@ -20,19 +20,19 @@ interface YoudaoBasic {
   phonetic: string
 }
 
-interface Youdao {
-  isWord:boolean; // 是否是一个单词
-  explains:string[]; // 中文解析翻译
-  phonetic:string; // 音标
-}
+// interface Youdao {
+//   isWord:boolean; // 是否是一个单词
+//   explains:string[]; // 中文解析翻译
+//   phonetic:string; // 音标
+// }
 
 interface Word {
+  text:string;
   isWord:boolean; // 是否是一个单词
   explains:string[]; // 中文解析翻译
   phonetic:string; // 音标
   ctime: string
   learn: Learn
-  youdao: Youdao
 }
 
 interface CardProps {

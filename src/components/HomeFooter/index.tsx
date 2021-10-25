@@ -21,7 +21,6 @@ export const HomeFooter = (props: IHomeFooter) => {
   const [showExport, setShowExport] = useState(false)
   const [showImport, setShowImport] = useState(false)
   const uploadInput = useRef<HTMLInputElement>(null)
-  console.log(props)
 
   const handleDownloadTXT = () => {
     const content = allWords.reduce((total, cur) => {

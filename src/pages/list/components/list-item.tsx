@@ -6,7 +6,7 @@ import {useKeySoudIns} from 'src/hooks/useSounds'
 import { playWordPronunciation } from 'src/utils'
 
 export default function Card({ word, updateList = () => {}, showFirstWordTranslate }: CardProps) {
-  const [showTranslate, setShowTranslate] = useState(true)
+  const [showTranslate, setShowTranslate] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
   const { playKeySound, playBeepSound, playSuccessSound } = useKeySoudIns

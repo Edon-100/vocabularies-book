@@ -5,8 +5,8 @@ import './list-item.less'
 import {useKeySoudIns} from 'src/hooks/useSounds'
 import { playWordPronunciation } from 'src/utils'
 
-export default function Card({ word, updateList = () => {} }: CardProps) {
-  const [showTranslate, setShowTranslate] = useState(false)
+export default function Card({ word, updateList = () => {}, showFirstWordTranslate }: CardProps) {
+  const [showTranslate, setShowTranslate] = useState(true)
   const audioRef = useRef<HTMLAudioElement>(null)
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
   const { playKeySound, playBeepSound, playSuccessSound } = useKeySoudIns
@@ -16,6 +16,10 @@ export default function Card({ word, updateList = () => {} }: CardProps) {
     (window as any).playKeySound = playKeySound;
     (window as any).playSuccessSound = playSuccessSound;
   }, [])
+
+  useEffect(() => {
+    setShowTranslate(!!showFirstWordTranslate)
+  }, [showFirstWordTranslate])
 
   const hanleShowTranslate = () => {
     setShowTranslate((showTranslate) => !showTranslate)

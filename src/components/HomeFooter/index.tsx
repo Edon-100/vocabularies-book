@@ -48,7 +48,7 @@ export const HomeFooter = (props: IHomeFooter) => {
     try {
       const fileResult = await read_file(file)
       const data = JSON.parse(fileResult)
-      if (data.list && data.list[0]?.text && data.list[0]?.youdao) {
+      if (data.list && data.list[0]?.text) {
 				debugger;
         window.services.wordModel.importWordList(data.list)
         updateWordsListToState()

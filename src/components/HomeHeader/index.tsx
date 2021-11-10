@@ -1,16 +1,12 @@
 import React from 'react'
 import './index.less'
 
-export const HomeHeader = (props:any) => {
+export const HomeHeader = (props: any) => {
   return (
     <div className="home-header-wrapper">
       <div className="icons">
-        
-        {/* <div className="levels">
-
-        </div> */}
-
         <div className="icon-desc">
+          Tips:
           <span>
             <i className="iconfont icon-player iconHover" />
             <span className="desc">播放</span>
@@ -31,8 +27,11 @@ export const HomeHeader = (props:any) => {
             <i className="iconfont icon-delete iconHover" />
             <span className="desc">删除</span>
           </span>
-        </div>
 
+          <span className="shortcut_tips">Shift + [R/F]【记得/忘记】第一个单词</span>
+          <span className="shortcut_tips">Shift + P 播放第一个单词发音</span>
+          <span className="shortcut_tips">Shift + T 翻译第一个单词</span>
+        </div>
       </div>
     </div>
   )

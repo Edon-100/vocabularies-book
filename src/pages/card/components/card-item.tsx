@@ -15,7 +15,7 @@ const NKey = 78
 const DelKey = 8
 // const PKey = 82
 const Card = (props: CardProps, cRef:any) => {
-  const { word, changeWord = () => {}, showTranslate, mode } = props
+  const { word, changeWord = () => {}, showTranslate, mode, updateList } = props
   const { playKeySound, playBeepSound, playSuccessSound } = useKeySoudIns
 
   // const audioRef = useRef<HTMLAudioElement>(null)
@@ -108,7 +108,8 @@ const Card = (props: CardProps, cRef:any) => {
 
       // 要开启
       console.log('单词升做下一个等级')
-      // window.services.wordModel.addWordToNextLevel(word!.text)
+      window.services.wordModel.addWordToNextLevel(word!.text)
+      updateList && updateList()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFinish])

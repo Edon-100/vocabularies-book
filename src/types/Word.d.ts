@@ -39,6 +39,7 @@ interface CardProps {
   word: Word | undefined
   mode?: 'visible' | 'hidden'
   showTranslate?: boolean
+  showFirstWordTranslate?: boolean;
   updateList?: (action?: UtoolsAction) => void
   changeWord?: (type: 'prev' | 'next') => void
   // cRef?:any;

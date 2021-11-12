@@ -32,17 +32,27 @@ export default class App extends React.Component<any, HomeState> {
 
   componentDidMount() {
     utools.onPluginEnter(async (action) => {
-      window.services.wordModel.minimizeDbSize(); // 以前的数据太大，所以需要优化一下
-      this.updateWordsListToState()
       if (action.code === 'add vocabulary') {
-        const word = await window.services.wordModel.addVocabulary(
-          action.payload
-        )
+        window.services.wordModel.addVocabulary(action.payload).then(() => {
+          if (!this.state.total) {
+            window.utools.outPlugin()
+          } else {
+            this.updateWordsListToState()
+          }
+        })
+        if (!this.state.total) {
+          window.utools.hideMainWindow()
+        }
+      }
+
+      if (action.code === 'review') {
+        window.services.wordModel.minimizeDbSize() // 以前的数据太大，所以需要优化一下
+        this.updateWordsListToState()
         this.setState({
-          total: this.state.total + 1,
-          allWords: [word, ...this.state.allWords],
-          list: [word, ...this.state.list],
-          allWordsNumber: this.state.allWordsNumber + 1
+          total: this.state.total,
+          allWords: this.state.allWords,
+          list: this.state.list,
+          allWordsNumber: this.state.allWordsNumber
         })
       }
     })

@@ -48,6 +48,7 @@ class WordModel {
       if (!text) {
         // 从剪切板中加入单词
         let text = clipboard.readText()
+        if (!text) return;
         const index = text.indexOf('摘')
         text = index > 0 ? text.slice(0, text.indexOf('摘')) : text // 兼容苹果book
         text = text.replaceAll('\n', '')
@@ -57,8 +58,12 @@ class WordModel {
       const content = await searchWords(text!)
       const word = this._createWordObj(text!, content)
       this.db.addNewWordToDb(word)
+      console.log('添加单词成功', word.text)
       return word
     } catch (error) {
+      new Notification('添加失败',{
+        body: `msg: ${JSON.stringify(error)}`
+      })
       console.log(error)
     }
   }

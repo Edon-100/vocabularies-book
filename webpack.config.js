@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const plugins = [
   new CopyWebpackPlugin({ patterns: [{ from: 'public', to: outputPath }] })
 ]
-if (process.env.NODE_ENV = 'development') {
+if (process.env.NODE_FFFF = 'development') {
   // plugins.push(new CopyWebpackPlugin({ patterns: [{ from: 'utools', to: outputPath }] }),)
 }
 
@@ -34,6 +34,7 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 9000,
+    open: true
   },
   module: {
     rules: [

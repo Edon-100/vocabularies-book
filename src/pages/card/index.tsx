@@ -6,7 +6,8 @@ import { playWordPronunciation } from 'src/utils'
 
 const TKey = 84
 
-export default function WordCard(props: WordProps) {
+// export default function WordCard(props: WordProps) {
+export default function WordCard(props: any) {
   const { list = [], total, updateList, allWords } = props
   const [index, setIndex] = useState(0)
   const [word, setWord] = useState<Word>()

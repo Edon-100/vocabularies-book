@@ -10,7 +10,8 @@ const KeyT = 84
 
 const { playBeepSound, playSuccessSound } = useKeySoudIns
 
-class WordList extends React.Component<WordProps> {
+// class WordList extends React.Component<WordProps> {
+class WordList extends React.Component<any> {
   state = {
     showFirstWordTranslate: false
   }
@@ -51,7 +52,7 @@ class WordList extends React.Component<WordProps> {
     return (
       <div className="words-cards-wrapper">
         {!!list.length &&
-          list.map((item: Word ,index) => (
+          list.map((item: Word ,index:any) => (
             <Card word={item} updateList={updateList} key={item.text} showFirstWordTranslate={index === 0 && this.state.showFirstWordTranslate}></Card>
           ))}
       </div>

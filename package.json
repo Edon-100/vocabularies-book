@@ -12,10 +12,13 @@
     "dev": "concurrently \"npm run dev:web\" \"npx tsc -w -p ./utools_ts\" \"nodemon --delay 500ms --watch ./utools_ts/assets --exec node script/copy.js\""
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.2",
     "dayjs": "^1.10.5",
     "rc-tooltip": "^5.1.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.0.2",
     "use-sound": "^4.0.0"
   },
   "devDependencies": {

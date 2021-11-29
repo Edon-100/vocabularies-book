@@ -1,5 +1,6 @@
 import Tooltip from 'rc-tooltip'
 import React, { useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import {
   downloadJsonByContent,
   downloadTXTByContent,
@@ -34,10 +35,10 @@ export const HomeFooter = (props: IHomeFooter) => {
     downloadJsonByContent(data)
   }
 
-	const loadFile = (e:any) => {
+  const loadFile = (e: any) => {
     e.stopPropagation()
     uploadInput.current?.click()
-	}
+  }
 
   /**
    * @description 把json文件导入到db中
@@ -49,7 +50,7 @@ export const HomeFooter = (props: IHomeFooter) => {
       const fileResult = await read_file(file)
       const data = JSON.parse(fileResult)
       if (data.list && data.list[0]?.text) {
-				debugger;
+        debugger
         window.services.wordModel.importWordList(data.list)
         updateWordsListToState()
       } else {
@@ -149,26 +150,40 @@ export const HomeFooter = (props: IHomeFooter) => {
             overlayStyle={{ transform: 'scale(.8)' }}
             placement="top"
           >
-            <i
+            {/* <i
               onClick={() => switchWordType('list')}
               className={`iconfont icon-list ${
                 wordType === 'list' ? 'active' : ''
               }`}
-            />
+            /> */}
+            <Link to="/list" style={{marginLeft: '16px'}}>
+              <i
+                className={`iconfont icon-list ${
+                  wordType === 'list' ? 'active' : ''
+                }`}
+              />
+            </Link>
           </Tooltip>
           <Tooltip
             overlay="听写模式"
             overlayStyle={{ transform: 'scale(.8)' }}
             placement="top"
           >
-            <i
+            {/* <i
               onClick={() => {
                 allWordsNumber && switchWordType('card')
               }}
               className={`iconfont icon-card ${
                 wordType === 'card' || !allWordsNumber ? 'active' : ''
               }`}
-            />
+            /> */}
+            <Link to="/typing" style={{marginLeft: '16px'}}>
+              <i
+                className={`iconfont icon-card ${
+                  wordType === 'card' || !allWordsNumber ? 'active' : ''
+                }`}
+              />
+            </Link>
           </Tooltip>
         </div>
       </div>

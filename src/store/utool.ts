@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAction, createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from './root'
+
 
 type CounterState = {
   value: number
@@ -12,6 +13,36 @@ const initialState: CounterState = {
   loading: 'idle',
   error: null
 }
+
+const getRandomInt = (max: number): number => {
+  return Math.floor(Math.random() * Math.floor(max))
+}
+
+
+const mockIncrement = (payload: number, timeout: number = 1000) => {
+  const randomInt = getRandomInt(9)
+
+  return new Promise<any>((resolve, reject) => {
+    setTimeout(() => {
+      randomInt > 1
+        ? resolve({ message: 'Mock increment API success!', data: payload })
+        : reject({ message: 'Mock increment API error', id: 111 })
+    }, timeout)
+  })
+}
+
+export const incrementByAmountAsync = createAsyncThunk(
+  'counter/incrementByAmount',
+  async (payload: number, { rejectWithValue }) => {
+    try {
+      const response = await mockIncrement(payload)
+      return response.data
+    } catch (err) {
+      return rejectWithValue(err)
+    }
+  }
+)
+
 
 export const counterSlice = createSlice({
   name: 'counter',
@@ -26,8 +57,21 @@ export const counterSlice = createSlice({
     incrementByAmount: (state, { payload }: PayloadAction<number>) => {
       state.value = state.value + payload
     },
-    reset: () => initialState
-  }
+    reset: () => initialState,
+  },
+  extraReducers: {
+    // [incrementByAmountAsync.pending.type]: (state) => {
+    //   state.loading = 'pending'
+    // },
+    [incrementByAmountAsync.fulfilled.type]: (state, { payload }: PayloadAction<number>) => {
+      state.loading = 'idle'
+      state.value = state.value + payload
+    },
+    // [incrementByAmountAsync.rejected.type]: (state, { payload }) => {
+    //   state.loading = 'idle'
+    //   state.error = payload
+    // },
+  },
 })
 
 export const { increment, decrement, incrementByAmount, reset } =

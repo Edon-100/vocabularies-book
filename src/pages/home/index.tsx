@@ -1,5 +1,5 @@
 // @ts-ignore
-import React from 'react'
+import React, { useEffect } from 'react'
 import WordList from '../list'
 import WordCard from '../card'
 import NoteBook from '../notebook'
@@ -8,10 +8,25 @@ import './index.less'
 import ErrorBoundary from '../../components/ErrorBoundaries'
 // import { mock } from './mock' // TODO: 上线前删除掉
 import { HomeHeader } from '../../components/HomeHeader'
-import { Outlet, Link, useRoutes, useParams } from "react-router-dom";
+import { Outlet, Link, useRoutes, useParams } from 'react-router-dom'
+import { addVocabularyAsync, selectWord } from 'src/store/word'
+import { useDispatch, useSelector } from 'react-redux'
 
+export const Home = () => {
+  const { reviewCount, doneCount } = useSelector(selectWord)
+  const dispatch = useDispatch()
+  useEffect(() => {}, [])
 
-export default class Home extends React.Component<any, HomeState> {
+  return (
+    <div>
+      <div>new Home</div>
+      <div>reviewCount:{reviewCount}</div>
+      <div>doneCount:{doneCount}</div>
+    </div>
+  )
+}
+
+export class Home2 extends React.Component<any, HomeState> {
   constructor(props: any) {
     super(props)
   }
@@ -115,7 +130,7 @@ export default class Home extends React.Component<any, HomeState> {
             {/* {!this.state.list.length && this.state.wordType !== 'card' && (
               <div className="no_words_tips">暂无需要复习的单词</div>
             )} */}
-            <Outlet />
+            {/* <Outlet /> */}
             {/* {wordType === 'list' && !!this.state.list.length && (
               <WordList
                 list={this.state.list}
@@ -135,7 +150,7 @@ export default class Home extends React.Component<any, HomeState> {
               <NoteBook allWords={this.state.allWords}></NoteBook>
             )} */}
           </div>
-          <HomeFooter
+          {/* <HomeFooter
             allWords={this.state.allWords}
             allWordsNumber={this.state.allWordsNumber}
             total={this.state.total}
@@ -143,7 +158,7 @@ export default class Home extends React.Component<any, HomeState> {
             wordType={this.state.wordType}
             switchWordType={this.switchWordType}
             updateWordsListToState={this.updateWordsListToState}
-          />
+          /> */}
         </div>
       </ErrorBoundary>
     )

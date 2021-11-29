@@ -9,7 +9,7 @@ export const Layout = (props: any) => {
   return (
     <>
       <div>Header</div>
-			<Link to="/">Home</Link>
+			{/* <Link to="/">Home</Link> */}
 			<Outlet />
       <div>Footer</div>
     </>

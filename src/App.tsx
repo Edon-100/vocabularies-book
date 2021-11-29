@@ -1,6 +1,6 @@
 // @ts-ignore
 import React from 'react'
-import type { RouteObject } from "react-router-dom";
+import type { RouteObject } from 'react-router-dom'
 import './index.less'
 import {
   BrowserRouter as Router,
@@ -9,26 +9,26 @@ import {
   useRoutes,
   Outlet,
   Link,
-  useParams
+  useParams,
+  Navigate
 } from 'react-router-dom'
 import WordList from './pages/list'
 import WordCard from './pages/card'
 import Home from './pages/home'
+import { HomePage } from './pages/home/indexNew'
+import { Layout } from './components/layout'
 
 function NoMatch() {
-  return (
-    <>
-    </>
-  )
+  return <>没有匹配到</>
 }
 
-
 export default function App() {
-  let routes = [
+  let routes: RouteObject[] = [
     {
       path: '/',
-      element: <Home />,
+      element: <Layout></Layout>,
       children: [
+        { index: true, element: <Home /> },
         {
           path: '/list',
           element: <WordList />
@@ -44,9 +44,5 @@ export default function App() {
 
   let element = useRoutes(routes)
 
-  return (
-    <div>
-      {element}
-    </div>
-  )
+  return <div>{element}</div>
 }

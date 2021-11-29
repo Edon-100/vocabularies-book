@@ -23,8 +23,8 @@ export default class Home extends React.Component<any, HomeState> {
     list: [],
     allWords: [],
     wordType: 'list',
-    showExport: false,
-    showImport: false,
+    showExport: false, // ui
+    showImport: false, // ui
     action: {
       code: '',
       type: '',

@@ -139,9 +139,10 @@ class WordModel {
   addWordToPreviousLevel(text: string) {
     const wordList = this.getAllWords()
     const word = wordList.find((it) => it.text === text)
+    const currentLevel = word!.learn.level! - 2 >= 0 ? word!.learn.level! - 2 : 0
     if (word) {
       word.learn = {
-        level: 0,
+        level: currentLevel,
         learnDate: dayjs().add(forgettingCurve[0], 'm').format()
       }
       this.db.updateDataToDB(wordList)

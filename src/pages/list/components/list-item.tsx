@@ -4,12 +4,15 @@ import { Dialog } from 'src/components/dialog'
 import './list-item.less'
 import { useKeySoudIns } from 'src/hooks/useSounds'
 import { playWordPronunciation } from 'src/utils'
+import { useDispatch } from 'react-redux'
+import { fetchWordList } from 'src/store/word'
 
 export default function Card({
   word,
-  updateList = () => {},
   showFirstWordTranslate
 }: CardProps) {
+  const dispatch = useDispatch()
+
   const [showTranslate, setShowTranslate] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
@@ -38,7 +41,7 @@ export default function Card({
     console.log('删除')
     await window.services.wordModel.deleteWrodObj(word!.text)
     playBeepSound()
-    updateList()
+    dispatch(fetchWordList())
     setShowDeleteDialog(false)
   }
 
@@ -46,14 +49,14 @@ export default function Card({
     console.log('升级')
     playSuccessSound()
     window.services.wordModel.addWordToNextLevel(text)
-    updateList()
+    dispatch(fetchWordList())
   }
 
   const handleback = (text = '') => {
     console.log('降级')
     playBeepSound()
     window.services.wordModel.addWordToPreviousLevel(text)
-    updateList()
+    dispatch(fetchWordList())
   }
 
   const showDeleteModal = () => {
@@ -143,7 +146,7 @@ export default function Card({
           {word?.explains?.map((text) => (
             <div key={text}>{text}</div>
           ))}
-          {translateEditable ? (
+          {/* {translateEditable ? (
             <i
               className="iconfont icon-check iconHover"
               onClick={() => {
@@ -157,7 +160,7 @@ export default function Card({
                 setTranslateEditable(true)
               }}
             />
-          )}
+          )} */}
         </div>
       )}
     </div>

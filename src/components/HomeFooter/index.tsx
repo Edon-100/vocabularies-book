@@ -1,6 +1,8 @@
 import Tooltip from 'rc-tooltip'
 import React, { useState, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { fetchWordList, selectWord } from 'src/store/word'
 import {
   downloadJsonByContent,
   downloadTXTByContent,
@@ -8,30 +10,24 @@ import {
 } from 'src/utils'
 import './index.less'
 
-export const HomeFooter = (props: IHomeFooter) => {
-  const {
-    allWordsNumber,
-    total,
-    doneTotal,
-    wordType,
-    switchWordType,
-    allWords,
-    updateWordsListToState
-  } = props
+export const HomeFooter = () => {
+  const { reviewCount, doneCount, reviewList, allWordList, allWordCount } = useSelector(selectWord)
+
+  const dispatch = useDispatch()
 
   const [showExport, setShowExport] = useState(false)
   const [showImport, setShowImport] = useState(false)
   const uploadInput = useRef<HTMLInputElement>(null)
 
   const handleDownloadTXT = () => {
-    const content = allWords.reduce((total, cur) => {
+    const content = allWordList.reduce((total, cur) => {
       return (total += `${cur.text}\r\n`)
     }, '')
     downloadTXTByContent(content)
   }
 
   const handleDownloadJson = () => {
-    const data = JSON.stringify({ list: allWords })
+    const data = JSON.stringify({ list: allWordList })
     downloadJsonByContent(data)
   }
 
@@ -52,7 +48,7 @@ export const HomeFooter = (props: IHomeFooter) => {
       if (data.list && data.list[0]?.text) {
         debugger
         window.services.wordModel.importWordList(data.list)
-        updateWordsListToState()
+        dispatch(fetchWordList())
       } else {
         alert('导入失败，请检查数据格式')
       }
@@ -106,9 +102,9 @@ export const HomeFooter = (props: IHomeFooter) => {
 
       <div className="home_footer">
         <div>
-          <span>单词总数: {allWordsNumber}</span>
-          <span>待复习: {total}</span>
-          <span>已记完: {doneTotal}</span>
+          <span>单词总数: {allWordCount}</span>
+          <span>待复习: {reviewCount}</span>
+          <span>已记完: {doneCount}</span>
         </div>
         <div>
           {/* <div onClick={this.handleDownload}>导出</div> */}
@@ -126,10 +122,10 @@ export const HomeFooter = (props: IHomeFooter) => {
           >
             <i
               onClick={() => {
-                allWordsNumber && setShowExport(true)
+                allWordCount && setShowExport(true)
               }}
               className={`iconfont icon-export ${
-                !allWordsNumber ? 'active' : ''
+                !allWordCount ? 'active' : ''
               }`}
             />
           </Tooltip>
@@ -158,9 +154,11 @@ export const HomeFooter = (props: IHomeFooter) => {
             /> */}
             <Link to="/list" style={{marginLeft: '16px'}}>
               <i
-                className={`iconfont icon-list ${
-                  wordType === 'list' ? 'active' : ''
-                }`}
+                className={`iconfont icon-list`}
+              // <i
+              //   className={`iconfont icon-list ${
+              //     wordType === 'list' ? 'active' : ''
+              //   }`}
               />
             </Link>
           </Tooltip>
@@ -178,10 +176,12 @@ export const HomeFooter = (props: IHomeFooter) => {
               }`}
             /> */}
             <Link to="/typing" style={{marginLeft: '16px'}}>
-              <i
+              {/* <i
                 className={`iconfont icon-card ${
-                  wordType === 'card' || !allWordsNumber ? 'active' : ''
-                }`}
+                  wordType === 'card' || !allWordCount ? 'active' : ''
+                }`} */}
+              <i
+                className={`iconfont icon-card`}
               />
             </Link>
           </Tooltip>

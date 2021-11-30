@@ -3,12 +3,14 @@ import Card from './components/card-item'
 import './index.less'
 import Tooltip from 'rc-tooltip'
 import { playWordPronunciation } from 'src/utils'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectWord } from 'src/store/word'
 
 const TKey = 84
 
-// export default function WordCard(props: WordProps) {
-export default function WordCard(props: any) {
-  const { list = [], total, updateList, allWords } = props
+export default function WordCard() {
+  const { reviewList, reviewCount, loading, allWordCount, allWordList } = useSelector(selectWord)
+  
   const [index, setIndex] = useState(0)
   const [word, setWord] = useState<Word>()
   const [showTranslate, setShowTranslate] = useState(false)
@@ -44,12 +46,12 @@ export default function WordCard(props: any) {
   }, [index, currentList])
 
   useEffect(() => {
-    if (list.length && allWords?.length) {
-      const current = listType === 'ALL' ? allWords : list 
+    if (reviewCount && allWordCount) {
+      const current = listType === 'ALL' ? allWordList : reviewList 
       setCurrentList(current)
       setIndex(0)
     }
-  }, [list, allWords, listType])
+  }, [reviewList, allWordList, listType])
 
   useEffect(() => {
     document.addEventListener('keydown', keyEvent)

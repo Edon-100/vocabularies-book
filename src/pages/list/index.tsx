@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import Card from './components/list-item'
 import { useKeySoudIns } from 'src/hooks/useSounds'
 import { playWordPronunciation } from 'src/utils'
 import './index.less'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchWordList, selectWord } from 'src/store/word'
 const KeyR = 82
 const KeyF = 70
 const KeyP = 80
@@ -10,54 +12,51 @@ const KeyT = 84
 
 const { playBeepSound, playSuccessSound } = useKeySoudIns
 
-// class WordList extends React.Component<WordProps> {
-class WordList extends React.Component<any> {
-  state = {
-    showFirstWordTranslate: false
-  }
+export const WordList = () => {
+  const { reviewList, reviewCount, loading } = useSelector(selectWord)
+  const dispatch = useDispatch()
+  const [showFirstWordTranslate, setShowFirstWordTranslate] = useState(false)
 
-  componentDidMount() {
-    document.addEventListener('keydown', this.keyEvent)
-  }
+  useEffect(() => {
+    document.addEventListener('keydown', keyEvent)
+    return () => {
+      document.removeEventListener('keydown', keyEvent)
+    }
+  }, [reviewList, reviewList])
 
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.keyEvent)
-  }
-
-  keyEvent = (e: any) => {
-    if (!this.props.list.length) return
+  const keyEvent = (e: any) => {
+    if (!reviewCount) return
     if (e.keyCode === KeyR && e.shiftKey) {
       playSuccessSound()
-      window.services.wordModel.addWordToNextLevel(this.props.list[0].text)
-      this.props.updateList!()
-      this.setState({ showFirstWordTranslate: false })
+      window.services.wordModel.addWordToNextLevel(reviewList[0].text)
+      dispatch(fetchWordList())
+      setShowFirstWordTranslate(false)
     }
     if (e.keyCode === KeyF && e.shiftKey) {
       playBeepSound()
-      window.services.wordModel.addWordToPreviousLevel(this.props.list[0].text)
-      this.setState({ showFirstWordTranslate: false })
-      this.props.updateList!()
+      window.services.wordModel.addWordToPreviousLevel(reviewList[0].text)
+      setShowFirstWordTranslate(true)
+      // this.props.updateList!()
+      dispatch(fetchWordList())
     }
     if (e.keyCode === KeyP && e.shiftKey) {
-      playWordPronunciation(this.props.list[0].text)
+      playWordPronunciation(reviewList[0].text)
     }
     if (e.keyCode === KeyT && e.shiftKey) {
-      console.log('true');
-      this.setState({ showFirstWordTranslate: !this.state.showFirstWordTranslate })
+      setShowFirstWordTranslate((show) => !show)
     }
   }
 
-  render() {
-    const { list, total, updateList = () => {} } = this.props
-    return (
-      <div className="words-cards-wrapper">
-        {!!list.length &&
-          list.map((item: Word ,index:any) => (
-            <Card word={item} updateList={updateList} key={item.text} showFirstWordTranslate={index === 0 && this.state.showFirstWordTranslate}></Card>
-          ))}
-      </div>
-    )
-  }
+  return (
+    <div className="words-cards-wrapper">
+      {!!reviewCount &&
+        reviewList.map((item: Word, index: any) => (
+          <Card
+            word={item}
+            key={item.text}
+            showFirstWordTranslate={index === 0 && showFirstWordTranslate}
+          ></Card>
+        ))}
+    </div>
+  )
 }
-
-export default WordList

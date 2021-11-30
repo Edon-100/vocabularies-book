@@ -18,3 +18,5 @@ export const tableNames = {
 export const requestBaseUrl =
   'https://service-pnrys8g3-1254074572.bj.apigw.tencentcs.com/release'
 export const audioBaseUrl = 'https://dict.youdao.com/dictvoice'
+
+export const APP_CONFIG = 'appConfig'

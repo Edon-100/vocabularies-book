@@ -39,3 +39,8 @@ interface IHomeFooter {
   switchWordType: (type:'list' | 'card' | 'notebook') => void;
   updateWordsListToState: () => void
 }
+
+
+interface AppConfig {
+  outAfterAddWord: boolean
+}

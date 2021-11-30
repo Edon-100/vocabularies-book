@@ -6,20 +6,26 @@ export interface WordState {
   reviewList: Word[] // list
   allWordList: Word[]
   doneCount: number
+  allWordCount: number
+  loading: boolean
 }
 
 const initialState: WordState = {
   reviewCount: 0,
   doneCount: 0,
   reviewList: [],
-  allWordList: []
+  allWordList: [],
+  allWordCount: 0,
+  loading: false
 }
 
 export const addVocabularyAsync = createAsyncThunk(
   'word/addVocabulary',
-  async (text: string, { rejectWithValue }) => {
+  async (payload: { text: string; cb?: Function }, { rejectWithValue }) => {
     try {
+      const { text, cb } = payload
       const word = await window.services.wordModel.addVocabulary(text)
+      cb && cb()
       return word
     } catch (err) {
       return rejectWithValue(err)
@@ -50,6 +56,12 @@ export const wordSlice = createSlice({
     }
   },
   extraReducers: {
+    [fetchWordList.pending.type]: (state) => {
+      state.loading = true
+    },
+    [fetchWordList.rejected.type]: (state) => {
+      state.loading = false
+    },
     [fetchWordList.fulfilled.type]: (
       state,
       {
@@ -64,7 +76,9 @@ export const wordSlice = createSlice({
       state.reviewCount = needLearnWords.length
       state.reviewList = needLearnWords
       state.allWordList = allWords
+      state.allWordCount = allWords.length
       state.doneCount = doneList.length
+      state.loading = false
     }
   }
 })

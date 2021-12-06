@@ -1,7 +1,8 @@
 import Tooltip from 'rc-tooltip'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { selectUi, updateShowSetting } from 'src/store/ui'
 import { fetchWordList, selectWord } from 'src/store/word'
 import {
   downloadJsonByContent,
@@ -11,8 +12,10 @@ import {
 import './index.less'
 
 export const HomeFooter = () => {
-  const { reviewCount, doneCount, reviewList, allWordList, allWordCount } = useSelector(selectWord)
-
+  const { reviewCount, doneCount, reviewList, allWordList, allWordCount } =
+    useSelector(selectWord)
+  const { showSetting } = useSelector(selectUi)
+  const location = useLocation()
   const dispatch = useDispatch()
 
   const [showExport, setShowExport] = useState(false)
@@ -34,6 +37,10 @@ export const HomeFooter = () => {
   const loadFile = (e: any) => {
     e.stopPropagation()
     uploadInput.current?.click()
+  }
+
+  const handleClickSetting = () => {
+    dispatch(updateShowSetting(!showSetting))
   }
 
   /**
@@ -109,6 +116,13 @@ export const HomeFooter = () => {
         <div>
           {/* <div onClick={this.handleDownload}>导出</div> */}
           <Tooltip
+            overlay="设置"
+            overlayStyle={{ transform: 'scale(.8)' }}
+            placement="top"
+          >
+            <i onClick={handleClickSetting} className="iconfont icon-setting" />
+          </Tooltip>
+          <Tooltip
             overlay="导入"
             overlayStyle={{ transform: 'scale(.8)' }}
             placement="top"
@@ -152,13 +166,13 @@ export const HomeFooter = () => {
                 wordType === 'list' ? 'active' : ''
               }`}
             /> */}
-            <Link to="/list" style={{marginLeft: '16px'}}>
+            <Link to="/list" style={{ marginLeft: '16px' }}>
+              {/* <i
+                className={`iconfont icon-list`} */}
               <i
-                className={`iconfont icon-list`}
-              // <i
-              //   className={`iconfont icon-list ${
-              //     wordType === 'list' ? 'active' : ''
-              //   }`}
+                className={`iconfont icon-list ${
+                  location.pathname === '/list' ? 'active' : ''
+                }`}
               />
             </Link>
           </Tooltip>
@@ -175,13 +189,15 @@ export const HomeFooter = () => {
                 wordType === 'card' || !allWordsNumber ? 'active' : ''
               }`}
             /> */}
-            <Link to="/typing" style={{marginLeft: '16px'}}>
-              {/* <i
-                className={`iconfont icon-card ${
-                  wordType === 'card' || !allWordCount ? 'active' : ''
-                }`} */}
+            <Link to="/typing" style={{ marginLeft: '16px' }}>
               <i
-                className={`iconfont icon-card`}
+                className={`iconfont icon-card ${
+                  location.pathname === '/typing' || !allWordCount
+                    ? 'active'
+                    : ''
+                }`}
+                // <i
+                //   className={`iconfont icon-card`}
               />
             </Link>
           </Tooltip>

@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addVocabularyAsync, fetchWordList, selectWord } from './store/word'
 
 function NoMatch() {
-  return <>没有匹配到</>
+  return <>路由未匹配</>
 }
 
 export default function App() {

@@ -11,7 +11,7 @@ export const Layout = (props: any) => {
   }, [])
   return (
     <div className="layout">
-      <HomeHeader />
+      {/* <HomeHeader /> */}
       {/* <div>Header</div> */}
       {/* <Link to="/">Home</Link> */}
       <Outlet />

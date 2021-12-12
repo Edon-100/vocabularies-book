@@ -8,6 +8,7 @@ import Letter from './letter'
 import { useKeySoudIns } from '../../../hooks/useSounds'
 import { isLegal, playWordPronunciation } from 'src/utils'
 import './card-item.less'
+import { LetterState } from 'src/types/common'
 
 const PKey = 80
 const RKey = 82
@@ -25,27 +26,26 @@ const Card = (props: CardProps, cRef:any) => {
   const [isFinish, setIsFinish] = useState(false)
   const [statesList, setStatesList] = useState<LetterState[]>([])
   const [banOnInput, setBanOnInput] = useState(false)
-  const keyEvent = (e: any) => {
+  const keyEvent = (e: KeyboardEvent) => {
     if (banOnInput) return
     const char = e.key
-    if (isLegal(char) && !e.altKey && !e.ctrlKey && !e.metaKey) {
+    if (isLegal(char) && !e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
       setInputWord((inputWord) => (inputWord += char))
       playKeySound()
     }
-    if (e.keyCode === DelKey) {
+    if (e.key === 'Backspace') {
       setInputWord((value) => {
         return value.substr(0, value.length - 1)
       })
       playKeySound()
     }
-    if (PKey == e.keyCode && e.shiftKey) {
+    if (e.shiftKey && e.key === '<') {
       changeWord('prev')
     }
-    if (NKey == e.keyCode && e.shiftKey) {
+    if (e.shiftKey && e.key === '>') {
       changeWord('next')
     }
-    if (RKey == e.keyCode && e.shiftKey) {
-      // audioRef?.current?.play()
+    if (e.shiftKey && e.key === 'P') {
       playWordPronunciation(word!.text)
     }
   }

@@ -15,7 +15,7 @@ export const UiSlice = createSlice({
   reducers: {
     updateShowSetting: (state, { payload }: PayloadAction<boolean>) => {
       state.showSetting = payload
-    }
+    },
   }
 })
 

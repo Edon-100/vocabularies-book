@@ -60,3 +60,12 @@ export function downloadJsonByContent(data: string) {
   )
   a.dispatchEvent(e)
 }
+
+
+export function isMac() {
+  return /macintosh|mac os x/i.test(navigator.userAgent); 
+}
+
+export function isWindows() {
+  return /windows|win32/i.test(navigator.userAgent);
+}

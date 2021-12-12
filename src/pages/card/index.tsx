@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react'
 import Card from './components/card-item'
 import './index.less'
 import Tooltip from 'rc-tooltip'
-import { playWordPronunciation } from 'src/utils'
+import { isMac, playWordPronunciation } from 'src/utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectWord } from 'src/store/word'
 
@@ -34,9 +34,12 @@ export default function WordCard() {
     [index, currentList]
   )
 
-  const keyEvent = (e: any) => {
-    if (TKey == e.keyCode && e.shiftKey) {
+  const keyEvent = (e: KeyboardEvent) => {
+    if ('T' === e.key && e.shiftKey) {
       setShowTranslate((showTranslate) => !showTranslate)
+    }
+    if ('M' === e.key && e.shiftKey) {
+      switchMode()
     }
   }
 

@@ -1,3 +1,5 @@
+// import { UtoolState } from "src/store/utool";
+
 interface Window {
   utools: UToolsApi
   services: {
@@ -15,10 +17,9 @@ interface Window {
       addWordToPreviousLevel: (text: string) => void
       importWordList: (list:Word[]) => void
       minimizeDbSize: Function
+      getUtoolsSetting: () => UtoolState
+      setUtoolsSetting: (setting: Partial<UtoolState>) => void
     }
-    // utils: {
-    //   minimizeWordDb: Function
-    // }
   }
 }
 
@@ -37,4 +38,8 @@ interface UtoolsAction {
   type: string
   payload: any
   optional: { type: string; payload: any }[]
+}
+
+interface UtoolState {
+  closeAfterAddWord: boolean
 }

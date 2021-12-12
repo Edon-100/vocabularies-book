@@ -48,7 +48,7 @@ class WordModel {
       if (!text) {
         // 从剪切板中加入单词
         let text = clipboard.readText()
-        if (!text) return;
+        if (!text) return
         const index = text.indexOf('摘')
         text = index > 0 ? text.slice(0, text.indexOf('摘')) : text // 兼容苹果book
         text = text.replaceAll('\n', '')
@@ -61,7 +61,7 @@ class WordModel {
       console.log('添加单词成功', word.text)
       return word
     } catch (error) {
-      new Notification('添加失败',{
+      new Notification('添加失败', {
         body: `msg: ${JSON.stringify(error)}`
       })
       console.log(error)
@@ -139,7 +139,8 @@ class WordModel {
   addWordToPreviousLevel(text: string) {
     const wordList = this.getAllWords()
     const word = wordList.find((it) => it.text === text)
-    const currentLevel = word!.learn.level! - 2 >= 0 ? word!.learn.level! - 2 : 0
+    const currentLevel =
+      word!.learn.level! - 2 >= 0 ? word!.learn.level! - 2 : 0
     if (word) {
       word.learn = {
         level: currentLevel,
@@ -164,7 +165,7 @@ class WordModel {
       const data = utools.db.get('ifMinimize') as any
       if (data?.isMinimize) return // 不需要优化，直接退出
       let list = this.db.getWordList()
-      if (!list.length) return;
+      if (!list.length) return
       console.log('需要优化单词本')
       list = list.map((word) => {
         const newWord = word.explains
@@ -191,6 +192,29 @@ class WordModel {
       })
     } catch (error) {
       console.log('minimizeDbSize err', error)
+    }
+  }
+
+  getUtoolsSetting() {
+    try {
+      return utools.db.get('setting') as any
+    } catch (error) {
+      console.log('error', error)
+      return null
+    }
+  }
+
+  setUtoolsSetting(newVal: Object) {
+    try {
+      const setting = (utools.db.get('setting') as any) || {}
+      const newSetting = Object.assign(setting, newVal)
+      utools.db.put({
+        _id: 'setting',
+        ...newSetting
+      })
+    } catch (error) {
+      console.log('error', error)
+      return null
     }
   }
 }

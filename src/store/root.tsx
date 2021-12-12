@@ -1,10 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit'
-import counterReducer from './utool'
+import utoolReducer from './utool'
 import wordReducer from './word'
 import UiReducer from './ui'
 
 const rootReducer = combineReducers({
-  counter: counterReducer,
+  utool: utoolReducer,
   word: wordReducer,
   ui:UiReducer
 })

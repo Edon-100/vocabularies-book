@@ -7,8 +7,6 @@ const destDir = path.resolve(__dirname, '../dist')
 fse.copy(srcDir, destDir, err => {
   if (err) return console.error(err)
   console.log(`
-    ***********
       静态资源文件assets已移至dist
-    ***********
   `)
 })

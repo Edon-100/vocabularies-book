@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from './root'
 
 export const initialUtoolState: UtoolState = {
-  closeAfterAddWord: true,
+  closeAfterAddWord: false,
 }
 
 export const UtoolSlice = createSlice({

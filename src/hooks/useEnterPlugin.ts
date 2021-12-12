@@ -30,11 +30,12 @@ export const useEnterPluginHook = () => {
 
 	const initUtoolSetting = () => {
     return new Promise((resolve) => {
-      const setting = window.services.wordModel.getUtoolsSetting() || initialUtoolState
-      dispatch(setUtoolSetting(setting)) // 同步到redux
+      let setting = window.services.wordModel.getUtoolsSetting()
       if (!setting) {
+        setting = initialUtoolState
         window.services.wordModel.setUtoolsSetting(setting)
       }
+      dispatch(setUtoolSetting(setting)) // 同步到redux
       console.log('UtoolSetting', setting)
       utoolsSettingRef.current = setting
       resolve(setting)

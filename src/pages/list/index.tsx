@@ -57,6 +57,7 @@ export const WordList = () => {
             showFirstWordTranslate={index === 0 && showFirstWordTranslate}
           ></Card>
         ))}
+        {!reviewCount && <h3>请先添加单词</h3>}
     </div>
   )
 }

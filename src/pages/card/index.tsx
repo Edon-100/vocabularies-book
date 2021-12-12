@@ -78,7 +78,12 @@ export default function WordCard() {
       <div className="setting">
         {/* <div className="setting-item translation">中</div> */}
         <Tooltip
-          overlay="模式切换"
+          overlay={
+            <>
+              <div>模式切换</div>
+              <div>shift + M</div>
+            </>
+          }          
           overlayStyle={{ transform: 'scale(.8)' }}
           placement="bottom"
         >
@@ -95,7 +100,7 @@ export default function WordCard() {
           overlay={
             <>
               <div>显示/隐藏 翻译</div>
-              <div>cmd + shift + T</div>
+              <div>shift + T</div>
             </>
           }
           overlayStyle={{ transform: 'scale(.8)' }}
@@ -113,7 +118,7 @@ export default function WordCard() {
           overlay={
             <>
               <div>播放声音</div>
-              <div>cmd + shift + R</div>
+              <div>shift + P</div>
             </>
           }
           overlayStyle={{ transform: 'scale(.8)' }}
@@ -128,7 +133,7 @@ export default function WordCard() {
           overlay={
             <>
               <div>下一个</div>
-              <div>cmd + shift + N</div>
+              <div>{'shift + >'}</div>
             </>
           }
           overlayStyle={{ transform: 'scale(.8)' }}
@@ -143,7 +148,7 @@ export default function WordCard() {
           overlay={
             <>
               <div>上一个</div>
-              <div>cmd + shift + P</div>
+              <div>{'shift + <'}</div>
             </>
           }
           overlayStyle={{ transform: 'scale(.8)' }}

@@ -3,16 +3,24 @@
   "version": "1.0.0",
   "productName": "记单词",
   "scripts": {
-    "dev": "rm -rf dist && cross-env NODE_FFFF=development webpack -w",
-    "build": "rm -rf dist && cross-env NODE_FFFF=production webpack --mode production&& cp utools/* ./dist",
+    "dev:web": "cross-env NODE_FFFF=development webpack -w",
+    "build": "npm run build:web && npm run build:ts",
+    "build:ts": "npx tsc -p ./utools_ts && node script/copy.js",
+    "build:web": "rm -rf dist && cross-env NODE_FFFF=production webpack --mode production",
     "start": "webpack serve --open",
-    "test": "rm aaa.js && cross-env NODE_FFFF=production node test.js"
+    "test": "rm aaa.js && cross-env NODE_FFFF=production node test.js",
+    "dev": "concurrently \"npm run dev:web\" \"npx tsc -w -p ./utools_ts\" \"nodemon --delay 500ms --watch ./utools_ts/assets --exec node script/copy.js\""
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.2",
     "dayjs": "^1.10.5",
+    "rc-drawer": "^4.4.3",
+    "rc-switch": "^3.2.2",
     "rc-tooltip": "^5.1.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.0.2",
     "use-sound": "^4.0.0"
   },
   "devDependencies": {
@@ -20,12 +28,15 @@
     "@types/react-dom": "^17.0.8",
     "babel-loader": "^8.2.2",
     "babel-plugin-import": "^1.13.3",
+    "concurrently": "^6.2.1",
     "copy-webpack-plugin": "^6.4.1",
     "cross-env": "^7.0.3",
     "css-loader": "^5.0.1",
+    "fs-extra": "^10.0.0",
     "html-webpack-plugin": "^5.3.2",
     "less": "^3.13.1",
     "less-loader": "^7.1.0",
+    "nodemon": "^2.0.12",
     "style-loader": "^2.0.0",
     "ts-loader": "^9.2.3",
     "typescript": "^4.3.4",

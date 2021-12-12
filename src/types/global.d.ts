@@ -1,3 +1,5 @@
+// import { UtoolState } from "src/store/utool";
+
 interface Window {
   utools: UToolsApi
   services: {
@@ -6,15 +8,17 @@ interface Window {
       tableName: ''
     }
     wordModel: {
-      addVocabulary: () => Promise<boolean>
-      staticaddMaterialObj: () => void
-      setMaterials: () => void
-      deleteMaterialObj: (text: string) => Promise<DbReturn>
-      getMaterials: () => Word[]
+      addVocabulary: (text?:string) => Promise<Word>
+      deleteWrodObj: (text: string) => Promise<DbReturn>
+      getAllWords: () => Word[]
       getNeedLearnList: () => Word[]
       getAllAndNeedList: () => {allWords: Word[], needLearnWords: Word[], doneList:Word[]}
       addWordToNextLevel: (text: string) => void
-      addWordBackPreviousLevel: (text: string) => void
+      addWordToPreviousLevel: (text: string) => void
+      importWordList: (list:Word[]) => void
+      minimizeDbSize: Function
+      getUtoolsSetting: () => UtoolState
+      setUtoolsSetting: (setting: Partial<UtoolState>) => void
     }
   }
 }
@@ -34,4 +38,8 @@ interface UtoolsAction {
   type: string
   payload: any
   optional: { type: string; payload: any }[]
+}
+
+interface UtoolState {
+  closeAfterAddWord: boolean
 }

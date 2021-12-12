@@ -4,24 +4,24 @@
 	"version": "0.0.1",
 	"logo": "logo.png",
 	"main": "index.html",
-	"preload":"preload.js",
+	"preload": "./utool/preload.js",
 	"features": [
 		{
-			"code": "add_vocabulary",
+			"code": "add vocabulary",
 			"explain": "add vocabulary",
 			"cmds": [
 				{
 					"type": "over",
-					"label": "加入单词簿",
-					"exclude": "/xxx/i",
-					"minLength": 1
-			}
+					"label": "加入单词簿"
+				}
 			]
 		},
 		{
 			"code": "review",
 			"explain": "开始记单词",
-			"cmds": ["review"]
-		}		
+			"cmds": [
+				"review"
+			]
+		}
 	]
 }

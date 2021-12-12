@@ -1,5 +1,11 @@
+
+// declare global {
+//   interface Window { MyNamespace: any; }
+// }
+
 interface Learn {
-  level: number | 'done'
+  level?: number
+  done?: boolean
   learnDate: Date
 }
 
@@ -20,14 +26,14 @@ interface YoudaoBasic {
   phonetic: string
 }
 
-// interface Youdao {
-//   isWord:boolean; // 是否是一个单词
-//   explains:string[]; // 中文解析翻译
-//   phonetic:string; // 音标
-// }
+interface Youdao {
+  isWord:boolean; // 是否是一个单词
+  explains:string[]; // 中文解析翻译
+  phonetic:string; // 音标
+}
 
 interface Word {
-  text:string;
+  text: string
   isWord:boolean; // 是否是一个单词
   explains:string[]; // 中文解析翻译
   phonetic:string; // 音标
@@ -35,13 +41,14 @@ interface Word {
   learn: Learn
 }
 
-interface CardProps {
-  word: Word | undefined
-  mode?: 'visible' | 'hidden'
-  showTranslate?: boolean
-  showFirstWordTranslate?: boolean;
-  updateList?: (action?: UtoolsAction) => void
-  changeWord?: (type: 'prev' | 'next') => void
-  // cRef?:any;
-  playWordSound?: (word:any) => void
+type MyDbDoc = {
+  _id: string
+  _rev?: string
+  list: Word[]
+}
+
+interface AllTypeList {
+  allWords: Word[]
+  needLearnWords: Word[]
+  doneList: Word[]
 }

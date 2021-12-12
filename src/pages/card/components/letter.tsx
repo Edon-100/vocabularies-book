@@ -1,4 +1,5 @@
 import React from 'react'
+import { LetterProps } from 'src/types/common'
 import './letter.less'
 
 export default function Letter({

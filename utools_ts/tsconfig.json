@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "outDir": "../dist/utool",
+    "baseUrl": "./",
+    "rootDir": "./",
+    "sourceMap": false, // 开启sourcemap
+    "module": "commonjs",
+    "target": "ES2020",
+    "allowJs": true,
+    "strict": true,
+    "types": [
+      "utools-api-types"
+    ],
+    "moduleResolution": "node",
+    "strictPropertyInitialization": false
+  },
+  "include": [
+    "./**/*"
+  ],
+  "exclude": [
+    "../node_modules",
+    "../dist",
+    "../src/**/*"
+  ],  
+}

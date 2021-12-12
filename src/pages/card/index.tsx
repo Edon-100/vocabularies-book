@@ -2,11 +2,15 @@ import React, { useState, useEffect, useCallback, useRef } from 'react'
 import Card from './components/card-item'
 import './index.less'
 import Tooltip from 'rc-tooltip'
+import { isMac, playWordPronunciation } from 'src/utils'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectWord } from 'src/store/word'
 
 const TKey = 84
 
-export default function WordCard(props: WordProps) {
-  const { list = [], total, updateList, allWords } = props
+export default function WordCard() {
+  const { reviewList, reviewCount, loading, allWordCount, allWordList } = useSelector(selectWord)
+  
   const [index, setIndex] = useState(0)
   const [word, setWord] = useState<Word>()
   const [showTranslate, setShowTranslate] = useState(false)
@@ -20,23 +24,24 @@ export default function WordCard(props: WordProps) {
       setIndex((prevCount) => {
         let newIndex
         if (type === 'next') {
-          newIndex = prevCount === list.length - 1 ? 0 : prevCount + 1
+          newIndex = prevCount === currentList.length - 1 ? 0 : prevCount + 1
         } else {
-          newIndex = prevCount === 0 ? list.length - 1 : prevCount - 1
+          newIndex = prevCount === 0 ? currentList.length - 1 : prevCount - 1
         }
         return newIndex
       })
     },
-    [index]
+    [index, currentList]
   )
 
-  const keyEvent = (e: any) => {
-    if (TKey == e.keyCode && e.shiftKey) {
+  const keyEvent = (e: KeyboardEvent) => {
+    if ('T' === e.key && e.shiftKey) {
       setShowTranslate((showTranslate) => !showTranslate)
     }
+    if ('M' === e.key && e.shiftKey) {
+      switchMode()
+    }
   }
-
-  const childRef = useRef({ playWordSound: () => {} })
 
   useEffect(() => {
     console.log(currentList, index);
@@ -44,12 +49,12 @@ export default function WordCard(props: WordProps) {
   }, [index, currentList])
 
   useEffect(() => {
-    if (list.length && allWords?.length) {
-      const current = listType === 'ALL' ? allWords : list 
+    if (reviewCount && allWordCount) {
+      const current = listType === 'ALL' ? allWordList : reviewList 
       setCurrentList(current)
       setIndex(0)
     }
-  }, [list, allWords, listType])
+  }, [reviewList, allWordList, listType])
 
   useEffect(() => {
     document.addEventListener('keydown', keyEvent)
@@ -59,7 +64,7 @@ export default function WordCard(props: WordProps) {
   }, [word])
 
   const playWordSound = () => {
-    childRef.current.playWordSound()
+    playWordPronunciation(word!.text)
   }
 
   const switchMode = () => {
@@ -73,7 +78,12 @@ export default function WordCard(props: WordProps) {
       <div className="setting">
         {/* <div className="setting-item translation">中</div> */}
         <Tooltip
-          overlay="模式切换"
+          overlay={
+            <>
+              <div>模式切换</div>
+              <div>shift + M</div>
+            </>
+          }          
           overlayStyle={{ transform: 'scale(.8)' }}
           placement="bottom"
         >
@@ -90,7 +100,7 @@ export default function WordCard(props: WordProps) {
           overlay={
             <>
               <div>显示/隐藏 翻译</div>
-              <div>cmd + shift + T</div>
+              <div>shift + T</div>
             </>
           }
           overlayStyle={{ transform: 'scale(.8)' }}
@@ -108,7 +118,7 @@ export default function WordCard(props: WordProps) {
           overlay={
             <>
               <div>播放声音</div>
-              <div>cmd + shift + R</div>
+              <div>shift + P</div>
             </>
           }
           overlayStyle={{ transform: 'scale(.8)' }}
@@ -123,7 +133,7 @@ export default function WordCard(props: WordProps) {
           overlay={
             <>
               <div>下一个</div>
-              <div>cmd + shift + N</div>
+              <div>{'shift + >'}</div>
             </>
           }
           overlayStyle={{ transform: 'scale(.8)' }}
@@ -138,7 +148,7 @@ export default function WordCard(props: WordProps) {
           overlay={
             <>
               <div>上一个</div>
-              <div>cmd + shift + P</div>
+              <div>{'shift + <'}</div>
             </>
           }
           overlayStyle={{ transform: 'scale(.8)' }}
@@ -165,7 +175,6 @@ export default function WordCard(props: WordProps) {
       </div>
       <Card
         mode={mode}
-        ref={childRef}
         word={word}
         changeWord={handleWordIndexChange}
         showTranslate={showTranslate}

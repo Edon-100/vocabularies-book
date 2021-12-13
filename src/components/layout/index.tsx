@@ -10,11 +10,6 @@ import { HomeHeader } from '../HomeHeader'
 import './index.less'
 
 export const Layout = (props: any) => {
-  let navigate = useNavigate()
-  useEffect(() => {
-    navigate('/list')
-  }, [])
-
   return (
     <div className="layout">
       <HomeDrawer />

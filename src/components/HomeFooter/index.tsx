@@ -166,12 +166,12 @@ export const HomeFooter = () => {
                 wordType === 'list' ? 'active' : ''
               }`}
             /> */}
-            <Link to="/list" style={{ marginLeft: '16px' }}>
+            <Link to="/home/list" style={{ marginLeft: '16px' }}>
               {/* <i
                 className={`iconfont icon-list`} */}
               <i
                 className={`iconfont icon-list ${
-                  location.pathname === '/list' ? 'active' : ''
+                  location.pathname === '/home/list' ? 'active' : ''
                 }`}
               />
             </Link>
@@ -189,10 +189,10 @@ export const HomeFooter = () => {
                 wordType === 'card' || !allWordsNumber ? 'active' : ''
               }`}
             /> */}
-            <Link to="/typing" style={{ marginLeft: '16px' }}>
+            <Link to="/home/typing" style={{ marginLeft: '16px' }}>
               <i
                 className={`iconfont icon-card ${
-                  location.pathname === '/typing' || !allWordCount
+                  location.pathname === '/home/typing' || !allWordCount
                     ? 'active'
                     : ''
                 }`}

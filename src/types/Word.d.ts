@@ -44,4 +44,17 @@ interface CardProps {
   changeWord?: (type: 'prev' | 'next') => void
   // cRef?:any;
   playWordSound?: (word:any) => void
+  setDicText:(text:string) => void;
 }
+
+interface CardProps2 {
+  word: Word | undefined
+  mode?: 'visible' | 'hidden'
+  showTranslate?: boolean
+  showFirstWordTranslate?: boolean;
+  updateList?: (action?: UtoolsAction) => void
+  changeWord?: (type: 'prev' | 'next') => void
+  // cRef?:any;
+  playWordSound?: (word:any) => void
+}
+

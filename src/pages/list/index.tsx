@@ -5,6 +5,8 @@ import { playWordPronunciation } from 'src/utils'
 import './index.less'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchWordList, selectWord } from 'src/store/word'
+import { selectUi } from 'src/store/ui'
+import { Dictionary } from 'src/components/Dictionary'
 const KeyR = 82
 const KeyF = 70
 const KeyP = 80
@@ -14,8 +16,10 @@ const { playBeepSound, playSuccessSound } = useKeySoudIns
 
 export const WordList = () => {
   const { reviewList, reviewCount, loading } = useSelector(selectWord)
+  // const { showDic } = useSelector(selectUi)
   const dispatch = useDispatch()
   const [showFirstWordTranslate, setShowFirstWordTranslate] = useState(false)
+  const [dicText, setDicText] = useState('')
 
   useEffect(() => {
     document.addEventListener('keydown', keyEvent)
@@ -55,9 +59,11 @@ export const WordList = () => {
             word={item}
             key={item.text}
             showFirstWordTranslate={index === 0 && showFirstWordTranslate}
+            setDicText={setDicText}
           ></Card>
         ))}
-        {!reviewCount && <h3>请先添加单词</h3>}
+      {!reviewCount && <h3>请先添加单词</h3>}
+      <Dictionary word={dicText} key={dicText}/>
     </div>
   )
 }

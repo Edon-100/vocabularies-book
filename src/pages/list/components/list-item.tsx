@@ -6,10 +6,12 @@ import { useKeySoudIns } from 'src/hooks/useSounds'
 import { playWordPronunciation } from 'src/utils'
 import { useDispatch } from 'react-redux'
 import { fetchWordList } from 'src/store/word'
+import { updateShowDic } from 'src/store/ui'
 
 export default function Card({
   word,
-  showFirstWordTranslate
+  showFirstWordTranslate,
+  setDicText
 }: CardProps) {
   const dispatch = useDispatch()
 
@@ -63,6 +65,11 @@ export default function Card({
     setShowDeleteDialog(true)
   }
 
+  const handleWordClick = () => {
+    dispatch(updateShowDic(true))
+    setDicText(word?.text!)
+  }
+
   return (
     <div className="list-item">
       {showDeleteDialog && (
@@ -73,7 +80,9 @@ export default function Card({
         ></Dialog>
       )}
       <p className="word">
-        {word?.text}
+        <span className="list-card-text" onClick={handleWordClick}>
+          {word?.text}
+        </span>
         <span className="phonetic">
           {word?.phonetic ? `[${word?.phonetic}]` : ''}
         </span>

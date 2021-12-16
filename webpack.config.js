@@ -39,7 +39,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(ttf|woff|png|jpg|gif|wav|mp3)$/i,
+        test: /\.(ttf|woff|png|jpg|gif|wav|svg|mp3)$/i,
         use: [
           {
             loader: 'url-loader',

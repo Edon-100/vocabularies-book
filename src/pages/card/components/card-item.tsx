@@ -15,7 +15,7 @@ const RKey = 82
 const NKey = 78
 const DelKey = 8
 // const PKey = 82
-const Card = (props: CardProps, cRef:any) => {
+const Card = (props: CardProps2, cRef:any) => {
   const { word, changeWord = () => {}, showTranslate, mode, updateList } = props
   const { playKeySound, playBeepSound, playSuccessSound } = useKeySoudIns
 

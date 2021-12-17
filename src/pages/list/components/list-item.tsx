@@ -6,6 +6,7 @@ import { useKeySoudIns } from 'src/hooks/useSounds'
 import { playWordPronunciation } from 'src/utils'
 import { useDispatch } from 'react-redux'
 import { fetchWordList } from 'src/store/word'
+import axios from 'axios'
 
 export default function Card({
   word,
@@ -14,6 +15,7 @@ export default function Card({
   const dispatch = useDispatch()
 
   const [showTranslate, setShowTranslate] = useState(false)
+  const [sentence, setSentence] = useState('')
   const audioRef = useRef<HTMLAudioElement>(null)
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
   const { playKeySound, playBeepSound, playSuccessSound } = useKeySoudIns
@@ -28,6 +30,12 @@ export default function Card({
   useEffect(() => {
     setShowTranslate(!!showFirstWordTranslate)
   }, [showFirstWordTranslate])
+
+  useEffect(() => {
+    if (showTranslate && !sentence) {
+      getEgSentence(word?.text!)
+    }
+  }, [showTranslate])
 
   const hanleShowTranslate = () => {
     setShowTranslate((showTranslate) => !showTranslate)
@@ -61,6 +69,19 @@ export default function Card({
 
   const showDeleteModal = () => {
     setShowDeleteDialog(true)
+  }
+
+
+  const getEgSentence = async (text: string) => {
+    const url = `https://apii.dict.cn/mini.php?q=${text}`
+    const res = await axios(url)
+    const html = res.data
+    const title = html.match(/<div class="t">((?!<\/div)(.|\n))+<\/div>/) || {}
+    const sentence = html.match(/<div id="s">((?!<\/div)(.|\n))+<\/div>/) || {}
+    if (title[0] && sentence[0]) {
+      let totalHtml = `${title[0]}${sentence[0]}`
+      setSentence(totalHtml)
+    }
   }
 
   return (
@@ -146,6 +167,7 @@ export default function Card({
           {word?.explains?.map((text) => (
             <div key={text}>{text}</div>
           ))}
+        <div dangerouslySetInnerHTML={{__html: sentence}}></div>
           {/* {translateEditable ? (
             <i
               className="iconfont icon-check iconHover"

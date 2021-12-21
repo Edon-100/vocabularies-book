@@ -8,12 +8,10 @@ import { useDispatch } from 'react-redux'
 import { fetchWordList } from 'src/store/word'
 import axios from 'axios'
 
-export default function Card({
-  word,
-  showFirstWordTranslate
-}: CardProps) {
+export default function Card({ word, showFirstWordTranslate }: CardProps) {
   const dispatch = useDispatch()
 
+  let sentences: string[] | null = null
   const [showTranslate, setShowTranslate] = useState(false)
   const [sentence, setSentence] = useState('')
   const audioRef = useRef<HTMLAudioElement>(null)
@@ -71,16 +69,44 @@ export default function Card({
     setShowDeleteDialog(true)
   }
 
-
   const getEgSentence = async (text: string) => {
     const url = `https://apii.dict.cn/mini.php?q=${text}`
     const res = await axios(url)
-    const html = res.data
+    let html = res.data
+    let reg = new RegExp(/<i>\d+<\/i>/, 'g')
+    let index = 0
+    html.replace(reg, (...args: any) => {
+      const iIndex = args[0]
+      html = html.replace(iIndex, `${iIndex}${getPlayIcon(index)}`)
+      index++
+    })
     const title = html.match(/<div class="t">((?!<\/div)(.|\n))+<\/div>/) || {}
     const sentence = html.match(/<div id="s">((?!<\/div)(.|\n))+<\/div>/) || {}
     if (title[0] && sentence[0]) {
       let totalHtml = `${title[0]}${sentence[0]}`
       setSentence(totalHtml)
+    }
+  }
+
+  const getPlayIcon = (index: number) => {
+    return `<i class="iconfont icon-player iconHover" style="position:absolute;right:14px" data-index=${index}></i>`
+  }
+
+  const handleIconClick = (e: any) => {
+    const ele = e.target
+    if (ele.tagName === 'I') {
+      const { index } = ele.dataset
+      if (!sentences) {
+        const transalteSrapper = document.querySelector(
+          `.sentence_wrapper.${word?.text!}`
+        )
+        const textContent = transalteSrapper?.textContent
+        sentences = textContent?.match(/\s([\w|\s]+)\./g) as any
+      }
+      console.log('获取句子', sentences && sentences[index])
+      if (sentences) {
+        playWordPronunciation(sentences[index])
+      }
     }
   }
 
@@ -163,11 +189,17 @@ export default function Card({
         </div>
       </div>
       {showTranslate && (
-        <div className="translation">
-          {word?.explains?.map((text) => (
-            <div key={text}>{text}</div>
-          ))}
-        <div dangerouslySetInnerHTML={{__html: sentence}}></div>
+        <div>
+          <div className="translation">
+            {word?.explains?.map((text) => (
+              <div key={text}>{text}</div>
+            ))}
+          </div>
+          <div
+            className={`sentence_wrapper ${word?.text!}`}
+            dangerouslySetInnerHTML={{ __html: sentence }}
+            onClick={handleIconClick}
+          ></div>
           {/* {translateEditable ? (
             <i
               className="iconfont icon-check iconHover"

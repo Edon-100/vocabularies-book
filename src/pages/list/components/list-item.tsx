@@ -11,7 +11,7 @@ import axios from 'axios'
 export default function Card({ word, showFirstWordTranslate }: CardProps) {
   const dispatch = useDispatch()
 
-  let sentences: string[] | null = null
+  let sentences: string[] = []
   const [showTranslate, setShowTranslate] = useState(false)
   const [sentence, setSentence] = useState('')
   const audioRef = useRef<HTMLAudioElement>(null)
@@ -70,6 +70,7 @@ export default function Card({ word, showFirstWordTranslate }: CardProps) {
   }
 
   const getEgSentence = async (text: string) => {
+    // getWordSentences(text)
     const url = `https://apii.dict.cn/mini.php?q=${text}`
     const res = await axios(url)
     let html = res.data
@@ -96,15 +97,23 @@ export default function Card({ word, showFirstWordTranslate }: CardProps) {
     const ele = e.target
     if (ele.tagName === 'I') {
       const { index } = ele.dataset
-      if (!sentences) {
+      if (!sentences.length) {
+        let tempArr = []
         const transalteSrapper = document.querySelector(
           `.sentence_wrapper.${word?.text!}`
         )
         const textContent = transalteSrapper?.textContent
-        sentences = textContent?.match(/\s([\w|\s]+)\./g) as any
+        console.log(textContent);
+        textContent?.replace(/\d+\.\s([\w|\s',，"“”]+)[\.\?\!\。\？\！]/g, (...args) => {
+          if (args[1]) {
+            console.log('args', args[1]);
+            sentences.push(args[1])
+          }
+          return ''
+        })
       }
       console.log('获取句子', sentences && sentences[index])
-      if (sentences) {
+      if (sentences.length) {
         playWordPronunciation(sentences[index])
       }
     }

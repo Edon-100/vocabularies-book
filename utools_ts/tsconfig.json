@@ -8,18 +8,11 @@
     "target": "ES2020",
     "allowJs": true,
     "strict": true,
-    "types": [
-      "utools-api-types"
-    ],
+    "typeRoots": ["node_modules/@types"],
+    "types": ["utools-api-types", "node"],
     "moduleResolution": "node",
     "strictPropertyInitialization": false
   },
-  "include": [
-    "./**/*"
-  ],
-  "exclude": [
-    "../node_modules",
-    "../dist",
-    "../src/**/*"
-  ],  
+  "include": ["./**/*"],
+  "exclude": ["../node_modules", "../dist", "../src/**/*"]
 }

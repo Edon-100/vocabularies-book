@@ -1,6 +1,6 @@
 {
   "name": "vocabularies_killer",
-  "version": "1.0.0",
+  "version": "1.0.11",
   "productName": "记单词",
   "scripts": {
     "dev:web": "cross-env NODE_FFFF=development webpack -w",
@@ -20,11 +20,13 @@
     "rc-tooltip": "^5.1.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-hooks-use-modal": "^2.1.0",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.0.2",
     "use-sound": "^4.0.0"
   },
   "devDependencies": {
+    "@types/node": "^17.0.4",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.8",
     "babel-loader": "^8.2.2",

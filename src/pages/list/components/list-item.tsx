@@ -104,7 +104,7 @@ export default function Card({ word, showFirstWordTranslate }: CardProps) {
         )
         const textContent = transalteSrapper?.textContent
         console.log(textContent);
-        textContent?.replace(/\d+\.\s([\w|\s',，"“”]+)[\.\?\!\。\？\！]/g, (...args) => {
+        textContent?.replace(/\d+\.\s([\w|\s\-%',，"“”]+)[\.\?\!\。\？\！]/g, (...args) => {
           if (args[1]) {
             console.log('args', args[1]);
             sentences.push(args[1])

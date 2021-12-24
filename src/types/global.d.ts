@@ -7,6 +7,7 @@ interface Window {
       audioBaseUrl: string
       tableName: ''
     }
+    getAppVerson: () => string;
     wordModel: {
       addVocabulary: (text?:string) => Promise<Word>
       deleteWrodObj: (text: string) => Promise<DbReturn>
@@ -19,6 +20,8 @@ interface Window {
       minimizeDbSize: Function
       getUtoolsSetting: () => UtoolState
       setUtoolsSetting: (setting: Partial<UtoolState>) => void
+      getAppVersionFromDb: () => {version:string}
+      setAppVerson: (verson:string) => void
     }
   }
 }

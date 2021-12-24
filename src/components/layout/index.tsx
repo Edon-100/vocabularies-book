@@ -6,12 +6,14 @@ import { selectUi, updateShowSetting } from 'src/store/ui'
 import { HomeDrawer } from '../HomeDrawer'
 import { HomeFooter } from '../HomeFooter'
 import { HomeHeader } from '../HomeHeader'
+import { NotificationModal } from '../NotificationModal'
 
 import './index.less'
 
 export const Layout = (props: any) => {
   return (
     <div className="layout">
+      <NotificationModal />
       <HomeDrawer />
       {/* <HomeHeader /> */}
       {/* <div>Header</div> */}

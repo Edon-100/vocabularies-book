@@ -217,6 +217,29 @@ class WordModel {
       return null
     }
   }
+
+  getAppVersionFromDb() {
+    try {
+      return utools.db.get('version') as any
+    } catch (error) {
+      console.log('error', error)
+      return null
+    }
+  }
+
+  setAppVerson(version: string) {
+    try {
+      const oldVersion = (utools.db.get('version') as any) || {}
+      const newVersion = Object.assign(oldVersion, {version})
+      utools.db.put({
+        _id: 'version',
+        ...newVersion
+      })
+    } catch (error) {
+      console.log('error', error)
+      return null
+    }
+  }
 }
 
 export const wordModel = new WordModel()

@@ -1,21 +1,35 @@
 import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateShowSetting } from 'src/store/ui'
-import { initialUtoolState, selectUtool, setUtoolSetting } from 'src/store/utool'
+import { updateShowSetting, updateshowNotification } from 'src/store/ui'
+import {
+  initialUtoolState,
+  selectUtool,
+  setUtoolSetting
+} from 'src/store/utool'
 import { addVocabularyAsync, fetchWordList, selectWord } from 'src/store/word'
 import { PluginEnterAction } from 'src/types/common'
 
 export const useEnterPluginHook = () => {
   const { reviewCount } = useSelector(selectWord)
   const dispatch = useDispatch()
-
   const utoolsSettingRef = useRef<UtoolState>()
 
   /* 根据打开plugin的方式，执行一些逻辑 */
   useEffect(() => {
     utools.onPluginEnter(async (action: PluginEnterAction) => {
+      const currentVerson = window.services.getAppVerson()
+      const previousVerson = window.services.wordModel.getAppVersionFromDb()
 
-			await initUtoolSetting()
+      if (
+        !previousVerson?.version ||
+        currentVerson !== previousVerson?.version
+      ) {
+        window.services.wordModel.setAppVerson(currentVerson)
+        dispatch(updateshowNotification(true))
+        console.log('新版，更新version', currentVerson)
+      }
+
+      await initUtoolSetting()
 
       if (action.code === 'add vocabulary') {
         handlePluginAddWord(action)
@@ -24,11 +38,10 @@ export const useEnterPluginHook = () => {
       if (action.code === 'review') {
         handlePluginReview()
       }
-			
     })
   }, [reviewCount])
 
-	const initUtoolSetting = () => {
+  const initUtoolSetting = () => {
     return new Promise((resolve) => {
       let setting = window.services.wordModel.getUtoolsSetting()
       if (!setting) {
@@ -40,8 +53,7 @@ export const useEnterPluginHook = () => {
       utoolsSettingRef.current = setting
       resolve(setting)
     })
-	}
-	
+  }
 
   const handlePluginAddWord = (action: PluginEnterAction) => {
     const needclose = !!utoolsSettingRef.current?.closeAfterAddWord
@@ -50,11 +62,11 @@ export const useEnterPluginHook = () => {
       addVocabularyAsync({
         text: action.payload,
         cb: () => {
-           if (needclose){
-             window.utools.outPlugin()
-           } else {
+          if (needclose) {
+            window.utools.outPlugin()
+          } else {
             dispatch(fetchWordList())
-           }
+          }
         }
       })
     )

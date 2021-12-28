@@ -1,7 +1,7 @@
 {
 	"pluginName": "vocabularies book",
 	"description": "vocabularies book",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"logo": "logo.png",
 	"main": "index.html",
 	"preload": "./utool/preload.js",

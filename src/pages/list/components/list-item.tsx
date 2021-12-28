@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react'
-// import Tooltip from 'rc-tooltip'
+import React, { useState, useRef, useEffect, memo } from 'react'
+import ContentEditable, { ContentEditableEvent } from 'react-contenteditable'
 import { Dialog } from 'src/components/dialog'
 import './list-item.less'
 import { useKeySoudIns } from 'src/hooks/useSounds'
@@ -8,16 +8,40 @@ import { useDispatch } from 'react-redux'
 import { fetchWordList } from 'src/store/word'
 import axios from 'axios'
 
-export default function Card({ word, showFirstWordTranslate }: CardProps) {
-  const dispatch = useDispatch()
+const TranslateItem = memo((props: TranslateItemProps) => {
+  const { transalteText, index, handleItemChange } = props
 
+  const editableRef = useRef<HTMLDivElement>(null)
+  const timerRef = useRef<{ timmer: ReturnType<typeof setTimeout> }>({
+    timmer: 0
+  })
+
+  const handleTranslateChange = (e: ContentEditableEvent) => {
+    if (timerRef.current.timmer) clearTimeout(timerRef.current.timmer)
+    timerRef.current.timmer = setTimeout(() => {
+      handleItemChange(index, editableRef.current?.textContent || transalteText)
+    }, 500)
+  }
+
+  return (
+    <>
+      <ContentEditable
+        className="translate-editable"
+        innerRef={editableRef}
+        html={transalteText}
+        onChange={handleTranslateChange}
+      ></ContentEditable>
+    </>
+  )
+})
+
+const ListItem = function ({ word, showFirstWordTranslate }: CardProps) {
+  const dispatch = useDispatch()
   let sentences: string[] = []
   const [showTranslate, setShowTranslate] = useState(false)
   const [sentence, setSentence] = useState('')
-  const audioRef = useRef<HTMLAudioElement>(null)
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
   const { playKeySound, playBeepSound, playSuccessSound } = useKeySoudIns
-  const [translateEditable, setTranslateEditable] = useState(false)
 
   useEffect(() => {
     ;(window as any).playBeepSound = playBeepSound
@@ -103,20 +127,29 @@ export default function Card({ word, showFirstWordTranslate }: CardProps) {
           `.sentence_wrapper.${word?.text!}`
         )
         const textContent = transalteSrapper?.textContent
-        console.log(textContent);
-        textContent?.replace(/\d+\.\s([\w|\s\-%',，"“”]+)[\.\?\!\。\？\！]/g, (...args) => {
-          if (args[1]) {
-            console.log('args', args[1]);
-            sentences.push(args[1])
+        console.log(textContent)
+        textContent?.replace(
+          /\d+\.\s([\w|\s\-%',，"“”]+)[\.\?\!\。\？\！]/g,
+          (...args) => {
+            if (args[1]) {
+              console.log('args', args[1])
+              sentences.push(args[1])
+            }
+            return ''
           }
-          return ''
-        })
+        )
       }
       console.log('获取句子', sentences && sentences[index])
       if (sentences.length) {
         playWordPronunciation(sentences[index])
       }
     }
+  }
+
+  const handleTranslateItemChange = (index: number, translateText: string) => {
+    const newExplains = [...word.explains]
+    newExplains[index] = translateText
+    window.services.wordModel.updateWordTranslate(word.text, newExplains)
   }
 
   return (
@@ -200,8 +233,13 @@ export default function Card({ word, showFirstWordTranslate }: CardProps) {
       {showTranslate && (
         <div>
           <div className="translation">
-            {word?.explains?.map((text) => (
-              <div key={text}>{text}</div>
+            {word?.explains?.map((text, index) => (
+              <TranslateItem
+                key={text}
+                index={index}
+                transalteText={text}
+                handleItemChange={handleTranslateItemChange}
+              />
             ))}
           </div>
           <div
@@ -229,3 +267,5 @@ export default function Card({ word, showFirstWordTranslate }: CardProps) {
     </div>
   )
 }
+
+export { ListItem }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import Card from './components/list-item'
+import { ListItem } from './components/list-item'
 import { useKeySoudIns } from 'src/hooks/useSounds'
 import { playWordPronunciation } from 'src/utils'
 import './index.less'
@@ -51,13 +51,13 @@ export const WordList = () => {
     <div className="words-cards-wrapper">
       {!!reviewCount &&
         reviewList.map((item: Word, index: any) => (
-          <Card
+          <ListItem
             word={item}
             key={item.text}
             showFirstWordTranslate={index === 0 && showFirstWordTranslate}
-          ></Card>
+          ></ListItem>
         ))}
-        {!reviewCount && <h3>请先添加单词</h3>}
+      {!reviewCount && <h3>请先添加单词</h3>}
     </div>
   )
 }

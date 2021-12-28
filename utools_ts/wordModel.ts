@@ -150,6 +150,16 @@ class WordModel {
     }
   }
 
+  /**
+   * @description 用户编辑翻译文本
+   */
+  updateWordTranslate(text:string, TranslateArr: string[]) {
+    const wordList = this.getAllWords()
+    const word = wordList.find((it) => it.text === text)
+    word!.explains = TranslateArr
+    this.db.updateDataToDB(wordList)
+  }
+
   importWordList(importList: Word[]) {
     const oldList = this.getAllWords()
     const newList = oldList.concat(importList)

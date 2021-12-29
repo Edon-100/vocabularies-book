@@ -175,7 +175,7 @@ export default function WordCard() {
       </div>
       <Card
         mode={mode}
-        word={word}
+        word={word!}
         changeWord={handleWordIndexChange}
         showTranslate={showTranslate}
         playWordSound={playWordSound}

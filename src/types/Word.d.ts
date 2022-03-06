@@ -36,7 +36,7 @@ interface Word {
 }
 
 interface CardProps {
-  word: Word | undefined
+  word: Word
   mode?: 'visible' | 'hidden'
   showTranslate?: boolean
   showFirstWordTranslate?: boolean;
@@ -44,4 +44,10 @@ interface CardProps {
   changeWord?: (type: 'prev' | 'next') => void
   // cRef?:any;
   playWordSound?: (word:any) => void
+}
+
+interface TranslateItemProps {
+  transalteText:string;
+  index:number;
+  handleItemChange: (index:number,html:string) => void
 }

@@ -22,6 +22,7 @@ interface Window {
       setUtoolsSetting: (setting: Partial<UtoolState>) => void
       getAppVersionFromDb: () => {version:string}
       setAppVerson: (verson:string) => void
+      updateWordTranslate: (word:string, explain: string[]) => void
     }
   }
 }

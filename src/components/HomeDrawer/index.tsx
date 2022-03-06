@@ -2,7 +2,7 @@ import React from 'react'
 import Drawer from 'rc-drawer'
 import Switch from 'rc-switch'
 import './index.less'
-import { selectUi, updateShowSetting } from 'src/store/ui'
+import { selectUi, updateshowNotification, updateShowSetting } from 'src/store/ui'
 import { useDispatch, useSelector } from 'react-redux'
 import { Divider } from '../Divider'
 import { selectUtool, updateCloseAfterAddWord } from 'src/store/utool'
@@ -113,6 +113,12 @@ export const HomeDrawer = () => {
               </div>
             )
           })}
+        </div>
+
+        <Divider />
+        <h4 className="header">其他</h4>
+        <div className="content">
+         <div className="view-version-btn" onClick={() => dispatch(updateshowNotification(true))}>查看版本说明</div>
         </div>
         {/* 快捷键模块 */}
       </Drawer>

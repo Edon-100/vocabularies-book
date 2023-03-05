@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { getWordList } from 'src/api/base'
+import { IWord } from 'src/types/Word'
 import { RootState } from './root'
 
 export interface WordState {
   reviewCount: number // total
-  reviewList: Word[] // list
-  allWordList: Word[]
+  reviewList: IWord[] // list
+  allWordList: IWord[]
   doneCount: number
   allWordCount: number
   loading: boolean
@@ -24,9 +26,11 @@ export const addVocabularyAsync = createAsyncThunk(
   async (payload: { text: string; cb?: Function }, { rejectWithValue }) => {
     try {
       const { text, cb } = payload
-      const word = await window.services.wordModel.addVocabulary(text)
+      // TODO: addVocabulary(text)
+      // const res = await getWordList()
+      // console.log(res)
       cb && cb()
-      return word
+      // return word
     } catch (err) {
       return rejectWithValue(err)
     }
@@ -37,9 +41,9 @@ export const fetchWordList = createAsyncThunk(
   'word/fetchWordList',
   async () => {
     try {
-      window.services.wordModel.minimizeDbSize()
-      const res = window.services.wordModel.getAllAndNeedList()
-      return res
+      // TODO: getAllAndNeedList()
+      const res = await getWordList()
+      return res?.data
     } catch (error) {
       console.log('error', error)
     }
@@ -50,9 +54,8 @@ export const wordSlice = createSlice({
   name: 'word',
   initialState,
   reducers: {
-    updateWordList: (state, word: PayloadAction<Word>) => {
-      // state.value = state.value + 1
-      // word.payload
+    updateWordList: (state, {payload}: PayloadAction<IWord>) => {
+      state.reviewList = [...state.reviewList].filter(w => w.id !== payload.id)
     }
   },
   extraReducers: {
@@ -67,17 +70,20 @@ export const wordSlice = createSlice({
       {
         payload
       }: PayloadAction<{
-        allWords: Word[]
-        needLearnWords: Word[]
-        doneList: Word[]
+        total: number
+        totalPage: number
+        words: IWord[]
       }>
     ) => {
-      const { allWords, needLearnWords, doneList } = payload
-      state.reviewCount = needLearnWords.length
-      state.reviewList = needLearnWords
-      state.allWordList = allWords
-      state.allWordCount = allWords.length
-      state.doneCount = doneList.length
+      // const { allWords, needLearnWords, doneList } = payload || {}
+      const {total, totalPage , words} = payload
+      state.reviewCount = total
+      state.reviewList = words
+      // TODO ?
+      state.allWordList = words
+      state.allWordCount = total
+      // TODO ?
+      state.doneCount = 100
       state.loading = false
     }
   }

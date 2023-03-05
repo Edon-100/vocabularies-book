@@ -9,6 +9,7 @@ import { useKeySoudIns } from '../../../hooks/useSounds'
 import { isLegal, playWordPronunciation } from 'src/utils'
 import './card-item.less'
 import { LetterState } from 'src/types/common'
+import { CardProps } from 'src/types/Word'
 
 const PKey = 80
 const RKey = 82
@@ -46,12 +47,12 @@ const Card = (props: CardProps, cRef:any) => {
       changeWord('next')
     }
     if (e.shiftKey && e.key === 'P') {
-      playWordPronunciation(word!.text)
+      playWordPronunciation(word?.affix.text)
     }
   }
   useEffect(() => {
     // audioRef?.current?.play()
-    word && playWordPronunciation(word!.text)
+    word && playWordPronunciation(word?.affix.text)
   }, [word])
 
   // useImperativeHandle(cRef, () => ({
@@ -70,12 +71,12 @@ const Card = (props: CardProps, cRef:any) => {
   useLayoutEffect(() => {
     inputWordRef.current.input = inputWord
     let hasWrong = false,
-      wordLength = word?.text.length || 0,
+      wordLength = word?.affix.text.length || 0,
       inputWordLength = inputWord.length
     const statesList: LetterState[] = []
     if (!wordLength) return
     for (let i = 0; i < wordLength && i < inputWordLength; i++) {
-      if (word?.text == '' || word?.text[i].toUpperCase() === inputWord[i].toUpperCase()) {
+      if (word?.affix.text == '' || word?.affix.text[i].toUpperCase() === inputWord[i].toUpperCase()) {
         statesList.push('correct')
       } else {
         hasWrong = true
@@ -98,9 +99,6 @@ const Card = (props: CardProps, cRef:any) => {
         setIsFinish(false)
         setInputWord('')
         setInputWord((inputWord) => {
-          if (word?.learn.level !== 'done') {
-            // window.services.wordModel.addWordBackPreviousLevel(inputWord)
-          }
           setStatesList([])
           return inputWord
         })
@@ -108,7 +106,7 @@ const Card = (props: CardProps, cRef:any) => {
 
       // 要开启
       console.log('单词升做下一个等级')
-      window.services.wordModel.addWordToNextLevel(word!.text)
+      //TODO: 单词升级到下一级 
       updateList && updateList()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -131,7 +129,7 @@ const Card = (props: CardProps, cRef:any) => {
     <div className="single_card_wrapper">
       <div className="card">
         <div className={` letter_wrapper ${hasWrong ? 'wrong' : ''}`}>
-          {word?.text.split('').map((l, index) => (
+          {word?.affix.text.split('').map((l, index) => (
             <Letter
               wrong={hasWrong}
               key={index}
@@ -143,7 +141,7 @@ const Card = (props: CardProps, cRef:any) => {
         </div>
         {showTranslate && (
           <div className="desc">
-            {word?.explains?.map((text) => <div key={text}>{text}</div>)}
+            {word?.affix.explains?.map((text) => <div key={text}>{text}</div>)}
           </div>
         )}
       </div>

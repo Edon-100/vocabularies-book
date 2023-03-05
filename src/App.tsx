@@ -23,36 +23,6 @@ function NoMatch() {
 
 export default function App() {
   useEnterPluginHook()
-  // let navigate = useNavigate()
-  // useEffect(() => {
-  //   console.log('111')
-  //   navigate('/home/list')
-  // }, [])
-
-  // let routes: RouteObject[] = [
-  //   {
-  //     path: '/',
-  //     element: <Layout></Layout>,
-  //     children: [
-  //       // { index: true, element: <Home /> },
-  //       {
-  //         index: true,
-  //         path: '/list',
-  //         element: <WordList />
-  //       },
-  //       {
-  //         path: '/typing',
-  //         element: <WordCard />
-  //       },
-  //       { path: '*', element: <NoMatch /> }
-  //     ]
-  //   }
-  // ]
-
-  // let element = useRoutes(routes)
-
-  // return <>{element}</>
-
   return (
     <HashRouter>
       <Routes>

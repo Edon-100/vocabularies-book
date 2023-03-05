@@ -1,9 +1,10 @@
 const audio = new Audio()
+const audioBaseUrl = 'https://dict.youdao.com/dictvoice'
 export const isLegal = (val: string): boolean =>
   /^[a-z_A-Z_._(_)_0-9\s'!,'?\-;[\]\\/]$/.test(val)
 
 export const playWordPronunciation = (text: string) => {
-  audio.src = `${window.services.constanst.audioBaseUrl}?audio=${text}`
+  audio.src = `${audioBaseUrl}?audio=${text}`
   audio.load()
   audio.play()
 }

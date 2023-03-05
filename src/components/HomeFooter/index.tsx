@@ -23,10 +23,10 @@ export const HomeFooter = () => {
   const uploadInput = useRef<HTMLInputElement>(null)
 
   const handleDownloadTXT = () => {
-    const content = allWordList.reduce((total, cur) => {
-      return (total += `${cur.text}\r\n`)
-    }, '')
-    downloadTXTByContent(content)
+    // const content = allWordList.reduce((total, cur) => {
+    //   return (total += `${cur.text}\r\n`)
+    // }, '')
+    // downloadTXTByContent(content)
   }
 
   const handleDownloadJson = () => {
@@ -48,21 +48,7 @@ export const HomeFooter = () => {
    * @param {*} e
    */
   const handleFileChange = async (e: any) => {
-    const file: File = e.target.files[0]
-    try {
-      const fileResult = await read_file(file)
-      const data = JSON.parse(fileResult)
-      if (data.list && data.list[0]?.text) {
-        debugger
-        window.services.wordModel.importWordList(data.list)
-        dispatch(fetchWordList())
-      } else {
-        alert('导入失败，请检查数据格式')
-      }
-    } catch (error) {
-      console.log('3333', error)
-      alert('导入失败，请检查数据格式')
-    }
+    alert('暂未实现')
   }
 
   return (

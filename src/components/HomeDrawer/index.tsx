@@ -37,9 +37,6 @@ export const HomeDrawer = () => {
 
   const onCloseAfterAddSwitchChange = (value:boolean) => {
     dispatch(updateCloseAfterAddWord(value))
-    window.services.wordModel.setUtoolsSetting({
-      closeAfterAddWord: value
-    })
   }
   
   return (

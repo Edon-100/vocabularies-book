@@ -26,17 +26,23 @@ interface YoudaoBasic {
 //   phonetic:string; // 音标
 // }
 
-interface Word {
-  text:string;
-  isWord:boolean; // 是否是一个单词
-  explains:string[]; // 中文解析翻译
+export interface IAffix {
   phonetic:string; // 音标
-  ctime: string
-  learn: Learn
+  explains:string[]; // 中文解析翻译
+  isWord:boolean; // 是否是一个单词
+  text:string;
+}
+
+interface IWord {
+  affix: IAffix
+  id:number
+  isDone:boolean
+  nextReviewDate: string
+  forgettingCurveLevel: number
 }
 
 interface CardProps {
-  word: Word
+  word: IWord
   mode?: 'visible' | 'hidden'
   showTranslate?: boolean
   showFirstWordTranslate?: boolean;

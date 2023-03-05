@@ -5,6 +5,7 @@ import Tooltip from 'rc-tooltip'
 import { isMac, playWordPronunciation } from 'src/utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectWord } from 'src/store/word'
+import { IWord } from 'src/types/Word'
 
 const TKey = 84
 
@@ -12,11 +13,11 @@ export default function WordCard() {
   const { reviewList, reviewCount, loading, allWordCount, allWordList } = useSelector(selectWord)
   
   const [index, setIndex] = useState(0)
-  const [word, setWord] = useState<Word>()
+  const [word, setWord] = useState<IWord>()
   const [showTranslate, setShowTranslate] = useState(false)
   const [mode, setMode] = useState<'hidden' | 'visible'>('hidden')
   const [listType, setListType] = useState<'PART' | 'ALL'>('PART')
-  const [currentList, setCurrentList] = useState<Word[]>([])
+  const [currentList, setCurrentList] = useState<IWord[]>([])
 
   const handleWordIndexChange = useCallback(
     (type: 'next' | 'prev') => {
@@ -64,7 +65,7 @@ export default function WordCard() {
   }, [word])
 
   const playWordSound = () => {
-    playWordPronunciation(word!.text)
+    word?.affix.text && playWordPronunciation(word?.affix.text)
   }
 
   const switchMode = () => {

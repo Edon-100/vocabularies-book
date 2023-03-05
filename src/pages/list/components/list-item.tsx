@@ -5,8 +5,10 @@ import './list-item.less'
 import { useKeySoudIns } from 'src/hooks/useSounds'
 import { playWordPronunciation } from 'src/utils'
 import { useDispatch } from 'react-redux'
-import { fetchWordList } from 'src/store/word'
+import { fetchWordList, wordSlice } from 'src/store/word'
 import axios from 'axios'
+import { CardProps, IWord, TranslateItemProps } from 'src/types/Word'
+import { deleteWord, updateWord } from 'src/api/base'
 
 const TranslateItem = memo((props: TranslateItemProps) => {
   const { transalteText, index, handleItemChange } = props
@@ -38,10 +40,12 @@ const TranslateItem = memo((props: TranslateItemProps) => {
 const ListItem = function ({ word, showFirstWordTranslate }: CardProps) {
   const dispatch = useDispatch()
   let sentences: string[] = []
+  const {updateWordList} = wordSlice.actions
   const [showTranslate, setShowTranslate] = useState(false)
   const [sentence, setSentence] = useState('')
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
   const { playKeySound, playBeepSound, playSuccessSound } = useKeySoudIns
+  
 
   useEffect(() => {
     ;(window as any).playBeepSound = playBeepSound
@@ -55,7 +59,7 @@ const ListItem = function ({ word, showFirstWordTranslate }: CardProps) {
 
   useEffect(() => {
     if (showTranslate && !sentence) {
-      getEgSentence(word?.text!)
+      getEgSentence(word?.affix.text!)
     }
   }, [showTranslate])
 
@@ -64,29 +68,42 @@ const ListItem = function ({ word, showFirstWordTranslate }: CardProps) {
   }
 
   const handleAudioPlay = () => {
-    playWordPronunciation(word!.text)
+    playWordPronunciation(word?.affix.text)
   }
 
-  const handleDelete = async () => {
+  const handleDelete = async (word:IWord) => {
     console.log('删除')
-    await window.services.wordModel.deleteWrodObj(word!.text)
+    // TODO: deleteWrodObj(word?.affix.text)
     playBeepSound()
-    dispatch(fetchWordList())
+    deleteWord(word.id).then((res) => {
+      dispatch(updateWordList(word))
+    })
+    // dispatch(fetchWordList())
     setShowDeleteDialog(false)
   }
 
-  const handleLevelUp = (text = '') => {
+  const handleLevelUp = (word:IWord) => {
     console.log('升级')
     playSuccessSound()
-    window.services.wordModel.addWordToNextLevel(text)
-    dispatch(fetchWordList())
+    // TODO: addWordToNextLevel(text)
+    updateWord(word.id, {
+      action: 'upgrade',
+    }).then(res => {
+      dispatch(updateWordList(word))
+    })
+    // dispatch(fetchWordList())
   }
-
-  const handleback = (text = '') => {
+  
+  const handleback = (word:IWord) => {
     console.log('降级')
     playBeepSound()
-    window.services.wordModel.addWordToPreviousLevel(text)
-    dispatch(fetchWordList())
+    updateWord(word.id, {
+      action: 'downgrade',
+    }).then(res => {
+      dispatch(updateWordList(word))
+    })
+    // TODO: addWordToPreviousLevel(text)
+    // dispatch(fetchWordList())
   }
 
   const showDeleteModal = () => {
@@ -94,11 +111,10 @@ const ListItem = function ({ word, showFirstWordTranslate }: CardProps) {
   }
 
   const getEgSentence = async (text: string) => {
-    // getWordSentences(text)
     const url = `https://apii.dict.cn/mini.php?q=${text}`
     const res = await axios(url)
     let html = res.data
-    let reg = new RegExp(/<i>\d+<\/i>/, 'g')
+    let reg = new RegExp(/<i>\d+<\/i>/, 'ig')
     let index = 0
     html.replace(reg, (...args: any) => {
       const iIndex = args[0]
@@ -124,12 +140,12 @@ const ListItem = function ({ word, showFirstWordTranslate }: CardProps) {
       if (!sentences.length) {
         let tempArr = []
         const transalteSrapper = document.querySelector(
-          `.sentence_wrapper.${word?.text!}`
+          `.sentence_wrapper.${word?.affix.text!}`
         )
         const textContent = transalteSrapper?.textContent
         console.log(textContent)
         textContent?.replace(
-          /\d+\.\s([\w|\s\-%',，"“”]+)[\.\?\!\。\？\！]/g,
+          /\d+\.\s([\w|\s\-%',，"“”]+)[\.\?\!\。\？\！]/ig,
           (...args) => {
             if (args[1]) {
               console.log('args', args[1])
@@ -147,9 +163,10 @@ const ListItem = function ({ word, showFirstWordTranslate }: CardProps) {
   }
 
   const handleTranslateItemChange = (index: number, translateText: string) => {
-    const newExplains = [...word.explains]
-    newExplains[index] = translateText
-    window.services.wordModel.updateWordTranslate(word.text, newExplains)
+    console.log('更新翻译内容，未实现')
+    // const newExplains = [...word.explains]
+    // newExplains[index] = translateText
+    // TODO: updateWordTranslate(word.text, newExplains)
   }
 
   return (
@@ -157,20 +174,20 @@ const ListItem = function ({ word, showFirstWordTranslate }: CardProps) {
       {showDeleteDialog && (
         <Dialog
           visible={showDeleteDialog}
-          onOk={() => handleDelete()}
+          onOk={() => handleDelete(word)}
           onCancel={() => setShowDeleteDialog(false)}
         ></Dialog>
       )}
       <p className="word">
-        {word?.text}
+        {word?.affix.text}
         <span className="phonetic">
-          {word?.phonetic ? `[${word?.phonetic}]` : ''}
+          {word?.affix.phonetic ? `[${word?.affix.phonetic}]` : ''}
         </span>
       </p>
       {/* <Tooltip overlay={`遗忘曲线等级: ${(word?.learn.level as number) + 1}`} overlayStyle={{ transform: 'scale(.8)' }} placement="top"> */}
       <div className="level">
         <i
-          className={`iconfont icon-level-${(word?.learn.level as number) + 1}`}
+          className={`iconfont icon-level-${(word?.forgettingCurveLevel as number) + 1}`}
         ></i>
         {/* &nbsp;{word?.learn.level} */}
       </div>
@@ -205,7 +222,7 @@ const ListItem = function ({ word, showFirstWordTranslate }: CardProps) {
           > */}
           <i
             className="iconfont icon-check iconHover"
-            onClick={() => handleLevelUp(word?.text)}
+            onClick={() => handleLevelUp(word)}
           ></i>
           {/* </Tooltip>
           <Tooltip
@@ -215,7 +232,7 @@ const ListItem = function ({ word, showFirstWordTranslate }: CardProps) {
           > */}
           <i
             className="iconfont icon-close iconHover"
-            onClick={() => handleback(word!.text)}
+            onClick={() => handleback(word)}
           ></i>
           {/* </Tooltip> */}
           {/* <Tooltip
@@ -233,7 +250,7 @@ const ListItem = function ({ word, showFirstWordTranslate }: CardProps) {
       {showTranslate && (
         <div>
           <div className="translation">
-            {word?.explains?.map((text, index) => (
+            {word?.affix.explains?.map((text, index) => (
               <TranslateItem
                 key={text}
                 index={index}
@@ -243,7 +260,7 @@ const ListItem = function ({ word, showFirstWordTranslate }: CardProps) {
             ))}
           </div>
           <div
-            className={`sentence_wrapper ${word?.text!}`}
+            className={`sentence_wrapper ${word?.affix.text!}`}
             dangerouslySetInnerHTML={{ __html: sentence }}
             onClick={handleIconClick}
           ></div>

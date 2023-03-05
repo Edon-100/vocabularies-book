@@ -4,7 +4,8 @@ import { useKeySoudIns } from 'src/hooks/useSounds'
 import { playWordPronunciation } from 'src/utils'
 import './index.less'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchWordList, selectWord } from 'src/store/word'
+import { fetchWordList, selectWord, wordSlice } from 'src/store/word'
+import { IWord } from 'src/types/Word'
 const KeyR = 82
 const KeyF = 70
 const KeyP = 80
@@ -28,32 +29,38 @@ export const WordList = () => {
     if (!reviewCount) return
     if (e.keyCode === KeyR && e.shiftKey) {
       playSuccessSound()
-      window.services.wordModel.addWordToNextLevel(reviewList[0].text)
+      // TODO: addWordToNextLevel(reviewList[0].text)
       dispatch(fetchWordList())
       setShowFirstWordTranslate(false)
     }
     if (e.keyCode === KeyF && e.shiftKey) {
       playBeepSound()
-      window.services.wordModel.addWordToPreviousLevel(reviewList[0].text)
+      // TODO: addWordToPreviousLevel(reviewList[0].text)
       setShowFirstWordTranslate(true)
       // this.props.updateList!()
       dispatch(fetchWordList())
     }
     if (e.keyCode === KeyP && e.shiftKey) {
-      playWordPronunciation(reviewList[0].text)
+      playWordPronunciation(reviewList[0].affix.text)
     }
     if (e.keyCode === KeyT && e.shiftKey) {
       setShowFirstWordTranslate((show) => !show)
     }
   }
 
+  if (loading)  {
+    return <div className="words-cards-wrapper" style={{height: '100vw', display: 'flex', alignItems: 'center'}}>
+      <h2>loading...</h2>
+    </div>
+  }
+
   return (
     <div className="words-cards-wrapper">
       {!!reviewCount &&
-        reviewList.map((item: Word, index: any) => (
+        reviewList.map((item: IWord, index: any) => (
           <ListItem
             word={item}
-            key={item.text}
+            key={item.affix.text}
             showFirstWordTranslate={index === 0 && showFirstWordTranslate}
           ></ListItem>
         ))}

@@ -1,9 +1,17 @@
 const path = require('path')
 const outputPath = path.join(__dirname, 'dist')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 
 const plugins = [
-  new CopyWebpackPlugin({ patterns: [{ from: 'public', to: outputPath }] })
+  new CopyWebpackPlugin({ patterns: [{ from: 'public', to: outputPath }] }),
+  new HtmlWebpackPlugin(
+    {
+      filename: 'index.html',
+      template: path.resolve(__dirname, './index.html')
+    }
+  )
 ]
 if (process.env.NODE_FFFF = 'development') {
   // plugins.push(new CopyWebpackPlugin({ patterns: [{ from: 'utools', to: outputPath }] }),)

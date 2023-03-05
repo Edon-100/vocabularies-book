@@ -27,6 +27,7 @@ const TranslateItem = memo((props: TranslateItemProps) => {
 
   return (
     <>
+    {/* @ts-ignore */}
       <ContentEditable
         className="translate-editable"
         innerRef={editableRef}

@@ -1,6 +1,6 @@
 import { createInstance } from "../utils/request"
 
-const bookBaseUrl = 'http://http://81.68.196.131:3000'
+const bookBaseUrl = 'http://81.68.196.131:3000'
 // const bookBaseUrl = 'http://localhost:3000'
 
 const bookApi = createInstance(bookBaseUrl)

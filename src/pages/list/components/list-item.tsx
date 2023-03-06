@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 import { fetchWordList, wordSlice } from 'src/store/word'
 import axios from 'axios'
 import { CardProps, IWord, TranslateItemProps } from 'src/types/Word'
-import { deleteWord, updateWord } from 'src/api/base'
+import { deleteWord, getWordSentences, updateWord } from 'src/api/base'
 
 const TranslateItem = memo((props: TranslateItemProps) => {
   const { transalteText, index, handleItemChange } = props
@@ -112,8 +112,9 @@ const ListItem = function ({ word, showFirstWordTranslate }: CardProps) {
   }
 
   const getEgSentence = async (text: string) => {
-    const url = `https://apii.dict.cn/mini.php?q=${text}`
-    const res = await axios(url)
+    // const url = `https://apii.dict.cn/mini.php?q=${text}`
+    // const url = `https://apii.dict.cn/mini.php?q=${text}`
+    const res = await getWordSentences(text)
     let html = res.data
     let reg = new RegExp(/<i>\d+<\/i>/, 'ig')
     let index = 0

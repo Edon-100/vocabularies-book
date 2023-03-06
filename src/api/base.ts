@@ -1,6 +1,7 @@
 import { createInstance } from "../utils/request"
 
-const bookBaseUrl = 'http://localhost:3000'
+const bookBaseUrl = 'http://http://81.68.196.131:3000'
+// const bookBaseUrl = 'http://localhost:3000'
 
 const bookApi = createInstance(bookBaseUrl)
 
@@ -34,6 +35,11 @@ export const getWordList = async (page = 1,limit = 200) => {
  export const deleteWord = async (id:number)  => {
   const res = await bookApi.delete(`word/${id}`)
   return res.data
+ }
+
+ export const getWordSentences = async (text:string) => {
+  const res = await bookApi.get(`/word/sentence/${text}`)
+  return res;
  }
 
 

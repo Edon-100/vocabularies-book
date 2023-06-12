@@ -28,7 +28,7 @@ export const NotificationModal = () => {
         <div style={modalStyle}>
           <h3>更新内容</h3>
           <div>
-            {`1、翻译支持自定义修改；翻译修改支持输入HTML标签(比如用<br>来换行，会在下次打开时生效)`}
+            {`1、修复加入单词错误问题`}
 					</div>
         </div>
       </Modal>

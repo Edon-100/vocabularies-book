@@ -13,7 +13,7 @@ const KeyT = 84
 const { playBeepSound, playSuccessSound } = useKeySoudIns
 
 export const WordList = () => {
-  const { reviewList, reviewCount, loading } = useSelector(selectWord)
+  const { reviewList, reviewCount, loading, allWordCount } = useSelector(selectWord)
   const dispatch = useDispatch()
   const [showFirstWordTranslate, setShowFirstWordTranslate] = useState(false)
 
@@ -23,6 +23,15 @@ export const WordList = () => {
       document.removeEventListener('keydown', keyEvent)
     }
   }, [reviewList, reviewList])
+
+  useEffect(() => {
+    window.posthog.capture('pageview', { user: utools?.getUser()?.nickname })
+  }, [])
+
+  useEffect(() => {
+    if (!allWordCount) return
+    window.posthog.capture('wordCount', { user: utools?.getUser()?.nickname, wordCount:allWordCount })
+  }, [loading, allWordCount])
 
   const keyEvent = (e: any) => {
     if (!reviewCount) return

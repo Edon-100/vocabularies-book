@@ -2,6 +2,7 @@
 
 interface Window {
   utools: UToolsApi
+  posthog: any
   services: {
     constanst: {
       audioBaseUrl: string

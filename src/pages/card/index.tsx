@@ -49,6 +49,10 @@ export default function WordCard() {
   }, [index, currentList])
 
   useEffect(() => {
+    window.posthog.capture('pageview', { user: utools?.getUser()?.nickname })
+  }, [])
+
+  useEffect(() => {
     if (reviewCount && allWordCount) {
       const current = listType === 'ALL' ? allWordList : reviewList 
       setCurrentList(current)

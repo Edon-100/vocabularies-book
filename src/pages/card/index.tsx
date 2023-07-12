@@ -10,7 +10,7 @@ const TKey = 84
 
 export default function WordCard() {
   const { reviewList, reviewCount, loading, allWordCount, allWordList } = useSelector(selectWord)
-  
+
   const [index, setIndex] = useState(0)
   const [word, setWord] = useState<Word>()
   const [showTranslate, setShowTranslate] = useState(false)
@@ -49,12 +49,13 @@ export default function WordCard() {
   }, [index, currentList])
 
   useEffect(() => {
-    window.posthog.capture('pageview', { user: utools?.getUser()?.nickname })
+//todo capture 有问题
+    // window.posthog.capture('pageview', { user: utools?.getUser()?.nickname })
   }, [])
 
   useEffect(() => {
     if (reviewCount && allWordCount) {
-      const current = listType === 'ALL' ? allWordList : reviewList 
+      const current = listType === 'ALL' ? allWordList : reviewList
       setCurrentList(current)
       setIndex(0)
     }
@@ -87,7 +88,7 @@ export default function WordCard() {
               <div>模式切换</div>
               <div>shift + M</div>
             </>
-          }          
+          }
           overlayStyle={{ transform: 'scale(.8)' }}
           placement="bottom"
         >

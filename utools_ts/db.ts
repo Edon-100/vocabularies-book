@@ -2,9 +2,17 @@ export class BaseDB {
   private _db: DbDoc
 
   constructor(private tableName: string) {
+    utools.onPluginEnter(({code, type, payload}) => {
+      console.log('用户进入插件应用', code, type, payload)
+    })
+
+
     // 确保了也定有this._db
-    utools.onPluginReady(() => {
+    // todo 原接口onPluginReader文档里已找不到，找到enter接口，发现不执行先注掉
+    // utools.onPluginEnter(() => {
+      console.log(1111)
       const db = utools.db.get(tableName)
+      console.log(db+'111111')
       if (db) {
         this._db = db
       } else {
@@ -14,7 +22,7 @@ export class BaseDB {
         })
         this._db = utools.db.get(tableName) as DbDoc
       }
-    })
+    // })
   }
 
   /**
@@ -23,7 +31,11 @@ export class BaseDB {
    */
   public getWordList() {
     this._db = utools.db.get(this.tableName)!
-    return this._db.list as Word[]
+
+    console.log(this._db+'222222')
+    const word =this._db.list as Word[]
+    console.log(word)
+    return word
   }
 
   /**

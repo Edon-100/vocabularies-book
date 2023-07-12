@@ -25,12 +25,16 @@ export const WordList = () => {
   }, [reviewList, reviewList])
 
   useEffect(() => {
-    window.posthog.capture('pageview', { user: utools?.getUser()?.nickname })
+    let userName = utools?.getUser()?.nickname;
+    //todo capture  有问题
+    // window.posthog.capture('pageview', { user: userName })
   }, [])
 
   useEffect(() => {
     if (!allWordCount) return
-    window.posthog.capture('wordCount', { user: utools?.getUser()?.nickname, wordCount:allWordCount })
+
+    // todo capture  有问题
+    // window.posthog.capture('wordCount', { user: utools?.getUser()?.nickname, wordCount:allWordCount })
   }, [loading, allWordCount])
 
   const keyEvent = (e: any) => {
